@@ -1,11 +1,16 @@
-export type Section = 'home' | 'sobre' | 'projetos' | 'contato'
+export type Section = 'home' | 'about' | 'projects' | 'contact'
 
-export interface SceneState {
+export type SectionI18n = {
+  id: Section
+  label: string
+}
+
+export type SceneState = {
   section: Section
   color: string
 }
 
-export interface Project {
+export type Project = {
   id: number
   title: string
   description: string
