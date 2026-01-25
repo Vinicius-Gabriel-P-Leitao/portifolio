@@ -57,11 +57,11 @@ float getDensity(vec3 samplePos) {
   if(radius < DISK_INNER || radius > DISK_OUTER || height > DISK_HEIGHT * 3.0)
     return 0.0;
 
-  // NOTE: Ruído rotativo
   float angle = atan(samplePos.z, samplePos.x);
   // NOTE: Necessário para não ter corte bruto no horizonte e na "fumaça"
   vec2 angleCoords = vec2(cos(angle), sin(angle));
-  vec3 noiseCoord = vec3(radius * 1.5, angleCoords.x * 4.0, angleCoords.y * 4.0) + vec3(0.0, 0.0, height * 4.0);
+  vec3 noiseCoord = vec3(radius * 1.5, angleCoords.x * 4.0 + uTime * 1.5,  /* animação horizontal */ 
+  angleCoords.y * 4.0 + height * 4.0 + uTime * 1.2 /* anima o vertical / rotativa */);
 
   float relativisticJets = fractalBrownianMotion(noiseCoord);
 
