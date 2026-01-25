@@ -1,7 +1,7 @@
 import { Float, Icosahedron, MeshTransmissionMaterial } from '@react-three/drei'
 
 export const HomeObject = () => (
-  <group position={[0, 0, 0]}>
+  <group position={[0, 0, 30]}>
     <Float speed={2} rotationIntensity={5} floatIntensity={0.5}>
       {/* NOTE: Núcleo */}
       <Icosahedron args={[1.5, 0]}>

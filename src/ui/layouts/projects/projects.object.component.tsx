@@ -1,7 +1,7 @@
 import { Float, Box } from '@react-three/drei'
 
 export const ProjectsObject = () => (
-  <group position={[0, 0, -6]} rotation={[0, Math.PI, 0]}>
+  <group position={[0, 0, -20]} rotation={[0, Math.PI, 0]}>
     <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
       <group>
         <Box args={[1.5, 2, 0.2]} position={[-2, 0, 0]}>

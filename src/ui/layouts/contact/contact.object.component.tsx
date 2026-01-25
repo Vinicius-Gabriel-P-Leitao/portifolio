@@ -1,29 +1,21 @@
-import { Float, Sphere } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
-import type * as THREE from 'three'
+import { Float, TorusKnot, Sphere } from '@react-three/drei'
 
-export const ContactObject = () => {
-  const ref = useRef<THREE.Mesh>(null!)
+export const ContactObject = () => (
+  <group position={[20, 10, 0]} rotation={[0, -Math.PI / 2, 0]}>
+    <Float speed={1} rotationIntensity={2} floatIntensity={1}>
+      <TorusKnot args={[1, 0.3, 100, 16]}>
+        <meshStandardMaterial color='#ec4899' roughness={0.2} metalness={0.8} />
+      </TorusKnot>
+    </Float>
 
-  useFrame(({ clock }) => {
-    const timer = clock.getElapsedTime()
-    const scale = 0.8 + Math.sin(timer * 2) * 0.15
-
-    ref.current.scale.setScalar(scale)
-  })
-
-  return (
-    <group position={[-10, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
-      <Float speed={4} rotationIntensity={1} floatIntensity={0.5}>
-        <Sphere args={[1.2, 32, 32]}>
-          <meshStandardMaterial color='#f59e0b' wireframe />
-        </Sphere>
-
-        <Sphere ref={ref} args={[0.8, 32, 32]}>
-          <meshStandardMaterial color='#f59e0b' emissive='#f59e0b' emissiveIntensity={2} />
+    {/* NOTE: Bolinhas em volta do objeto */}
+    {Array.from({ length: 30 }).map((_, index) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: Necessário para usar o index do array como key
+      <Float key={index} speed={0.5 + Math.random()} position={[(Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5]}>
+        <Sphere args={[0.05, 8, 8]}>
+          <meshBasicMaterial color='cyan' />
         </Sphere>
       </Float>
-    </group>
-  )
-}
+    ))}
+  </group>
+)

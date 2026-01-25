@@ -1,14 +1,13 @@
 uniform float uTime;
-uniform vec3 uCameraPosition;
-varying vec3 vPosition;
 varying vec3 vWorldPosition;
+uniform vec3 uCameraPosition;
 
-#define ITERATIONS 60
-#define STEP_SIZE 0.15
-#define BH_RADIUS 2.5
-#define DISK_INNER 3.5
-#define DISK_OUTER 12.0
-#define DISK_HEIGHT 0.8
+#define ITERATIONS 200   // antes 60
+#define STEP_SIZE 0.3    // antes 0.15
+#define BH_RADIUS 1.5          // Era 2.5 - buraco menor
+#define DISK_INNER 2.5         // Era 3.5 - disco mais perto
+#define DISK_OUTER 7.0         // Era 12.0 - disco menor
+#define DISK_HEIGHT 0.4        // Era 0.8 - mais fino
 
 float hash(float n) {
   return fract(sin(n) * 43758.5453123);
@@ -63,10 +62,9 @@ void main() {
 
   // Verificar se o raio intersecta a caixa do buraco negro
   float distToBH = length(ro);
-  if(distToBH > 50.0) {
-    discard; // Muito longe
-  }
-
+  if(distToBH > 200.0) // antes 100
+    discard;
+    
   vec3 col = vec3(0.0);
   float alpha = 0.0;
   vec3 p = ro;
@@ -78,17 +76,31 @@ void main() {
   for(int i = 0; i < ITERATIONS; i++) {
     float distToCenter = length(p);
 
-    // Horizonte de eventos - esfera preta
-    if(distToCenter < BH_RADIUS) {
+  // CONTORNO BRANCO SÓLIDO - antes do horizonte
+    float edgeDistance = abs(distToCenter - BH_RADIUS);
+    float edgeWidth = 0.08; // Espessura do anel
+
+    if(edgeDistance < edgeWidth) {
+    // Anel branco sólido e brilhante
+      vec3 edgeColor = vec3(5.0, 5.0, 5.0); // Branco super brilhante
+      float edgeIntensity = smoothstep(edgeWidth, 0.0, edgeDistance);
+
+      col = mix(col, edgeColor, edgeIntensity);
+      alpha = max(alpha, edgeIntensity * 0.95);
+    }
+
+  // Horizonte de eventos - esfera preta
+    if(distToCenter < BH_RADIUS - edgeWidth) {
       col = vec3(0.0);
       alpha = 1.0;
       break;
     }
 
-    // Lente gravitacional (simplificada)
+  // Lente gravitacional (simplificada)
     float gravity = 0.25 / (distToCenter * distToCenter + 0.1);
     vec3 gravityDir = -normalize(p);
     rd = normalize(rd + gravityDir * gravity * STEP_SIZE);
+  // ... resto continua igual
 
     // Avançar
     p += rd * STEP_SIZE;
