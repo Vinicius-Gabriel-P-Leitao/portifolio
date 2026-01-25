@@ -7,7 +7,9 @@ import vertex from './shaders/vertex.vert.glsl?raw'
 
 function GargantuaRing() {
   const materialRef = useRef<THREE.ShaderMaterial>(null!)
+  const lastUpdate = useRef(performance.now())
   const meshRef = useRef<THREE.Mesh>(null!)
+  const timeOffset = useRef(0)
 
   const uniforms = useMemo(
     () => ({
@@ -17,9 +19,16 @@ function GargantuaRing() {
     []
   )
 
-  useFrame(({ clock, camera }) => {
-    materialRef.current.uniforms.uTime.value = clock.elapsedTime * 0.5
+  useFrame(({ camera }) => {
+    const now = performance.now()
+    if (document.visibilityState === 'visible') {
+      const delta = (now - lastUpdate.current) / 1000
+      timeOffset.current += delta
+    }
+
+    materialRef.current.uniforms.uTime.value = timeOffset.current * 0.5
     materialRef.current.uniforms.uCameraPosition.value.copy(camera.position)
+    lastUpdate.current = now
   })
 
   return (
@@ -31,7 +40,7 @@ function GargantuaRing() {
         fragmentShader={fragment}
         uniforms={uniforms}
         transparent={false}
-        depthWrite={true} 
+        depthWrite={true}
         depthTest={true}
         side={THREE.DoubleSide}
         toneMapped={false}

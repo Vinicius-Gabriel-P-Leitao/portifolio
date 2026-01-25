@@ -1,146 +1,157 @@
+// NOTE: Referencia
+// https://www.shadertoy.com/view/lstSRS
 uniform float uTime;
 varying vec3 vWorldPosition;
 uniform vec3 uCameraPosition;
 
 #define ITERATIONS 200   
 #define STEP_SIZE 0.3    
-#define BH_RADIUS 1.5          // NOTE: Buraco menor
-#define DISK_INNER 2.5         // Era 3.5 - disco mais perto
-#define DISK_OUTER 7.0         // Era 12.0 - disco menor
-#define DISK_HEIGHT 0.4        // Era 0.8 - mais fino
+#define BH_RADIUS 1.5          // NOTE: Buraco menor, horizonte de eventos
+#define DISK_INNER 2.5         // NOTE: disco mais perto
+#define DISK_OUTER 7.0         // NOTE: disco menor
+#define DISK_HEIGHT 0.4        // NOTE: mais fino
 
-float hash(float n) {
-  return fract(sin(n) * 43758.5453123);
+float hash(float angle) {
+  return fract(sin(angle) * 43758.5453123);
 }
 
-float noise(vec3 x) {
-  vec3 p = floor(x);
-  vec3 f = fract(x);
-  f = f * f * (3.0 - 2.0 * f);
-  float n = p.x + p.y * 57.0 + 113.0 * p.z;
-  return mix(mix(mix(hash(n + 0.0), hash(n + 1.0), f.x), mix(hash(n + 57.0), hash(n + 58.0), f.x), f.y), mix(mix(hash(n + 113.0), hash(n + 114.0), f.x), mix(hash(n + 170.0), hash(n + 171.0), f.x), f.y), f.z);
+/*
+* - O espaço 3D é dividido em uma grelha de cubos (voxels).
+* - Para cada voxel, a função hash gera valores pseudo-aleatórios em cada canto.
+* - frac = posição dentro do voxel, usada para interpolar suavemente entre os valores nos cantos.
+* - mix(...) faz interpolações trilineares, criando transições suaves.
+*/
+float noise(vec3 pos) {
+  vec3 base = floor(pos);
+  vec3 frac = fract(pos);
+
+  frac = frac * frac * (3.0 - 2.0 * frac);
+  float n = base.x + base.y * 57.0 + 113.0 * base.z;
+
+  // NOTE: Separado em variável para não zuar na formatação 
+  float xy1 = mix(hash(n + 0.0), hash(n + 1.0), frac.x);
+  float xy2 = mix(hash(n + 57.0), hash(n + 58.0), frac.x);
+  float xy3 = mix(hash(n + 113.0), hash(n + 114.0), frac.x);
+  float xy4 = mix(hash(n + 170.0), hash(n + 171.0), frac.x);
+
+  return mix(mix(xy1, xy2, frac.y), mix(xy3, xy4, frac.y), frac.z);
 }
 
-float fbm(vec3 p) {
-  float f = 0.0;
-  float weight = 0.5;
-  for(int i = 0; i < 3; i++) {
-    f += weight * abs(noise(p));
-    p *= 2.0;
-    weight *= 0.5;
+float fractalBrownianMotion(vec3 pos) {
+  float sum = 0.0;
+  float amplitude = 0.5;
+
+  for(int octave = 0; octave < 3; octave++) {
+    sum += amplitude * abs(noise(pos));
+    pos *= 2.0;
+    amplitude *= 0.5;
   }
-  return f;
+
+  return sum;
 }
 
-float getDensity(vec3 p) {
-  float r = length(p.xz);
-  float h = abs(p.y);
+float getDensity(vec3 samplePos) {
+  float radius = length(samplePos.xz);
+  float height = abs(samplePos.y);
 
-  // Fora do disco
-  if(r < DISK_INNER || r > DISK_OUTER || h > DISK_HEIGHT * 3.0)
+  if(radius < DISK_INNER || radius > DISK_OUTER || height > DISK_HEIGHT * 3.0)
     return 0.0;
 
-  // Ruído rotativo
-  float angle = atan(p.z, p.x);
-  vec3 coord = vec3(r * 1.5, angle * 4.0 + uTime * 1.5 + (8.0 / r), h * 4.0);
+  // NOTE: Ruído rotativo
+  float angle = atan(samplePos.z, samplePos.x);
+  // NOTE: Necessário para não ter corte bruto no horizonte e na "fumaça"
+  vec2 angleCoords = vec2(cos(angle), sin(angle));
+  vec3 noiseCoord = vec3(radius * 1.5, angleCoords.x * 4.0, angleCoords.y * 4.0) + vec3(0.0, 0.0, height * 4.0);
 
-  float gas = fbm(coord);
+  float relativisticJets = fractalBrownianMotion(noiseCoord);
 
-  // Máscaras
-  float fadeR = smoothstep(DISK_INNER, DISK_INNER + 1.0, r) *
-    smoothstep(DISK_OUTER, DISK_OUTER - 3.0, r);
+  // NOTE: Máscaras
+  float fadeR = smoothstep(DISK_INNER, DISK_INNER + 1.0, radius) * smoothstep(DISK_OUTER, DISK_OUTER - 3.0, radius);
+  float fadeH = exp(-height * (6.0 + radius * 0.3));
 
-  float fadeH = exp(-h * (6.0 + r * 0.3));
-
-  return max(0.0, (gas - 0.3)) * fadeR * fadeH * 2.0;
+  return max(0.0, (relativisticJets - 0.2)) * fadeR * fadeH * 2.0;
 }
 
 void main() {
-  // Ray setup
-  vec3 ro = uCameraPosition;
-  vec3 rd = normalize(vWorldPosition - uCameraPosition);
+  vec3 rayOrigin = uCameraPosition;
+  vec3 rayDir = normalize(vWorldPosition - uCameraPosition);
 
-  // Verificar se o raio intersecta a caixa do buraco negro
-  float distToBH = length(ro);
-  if(distToBH > 200.0) // antes 100
+  // NOTE: Descarta fragmentos muito longe do buraco negro
+  float distanceFromOrigin = length(rayOrigin);
+  if(distanceFromOrigin > 200.0)
     discard;
 
-  vec3 col = vec3(0.0);
-  float alpha = 0.0;
-  vec3 p = ro;
+  vec3 finalColor = vec3(0.0);
+  float alphaAccum = 0.0;
+  vec3 samplePos = rayOrigin;   // NOTE: Posição atual do raio
 
-  // Dithering
   float dither = hash(dot(gl_FragCoord.xy, vec2(12.9898, 78.233)));
-  p += rd * dither * 0.2;
+  samplePos += rayDir * dither * 0.2;
 
-  for(int i = 0; i < ITERATIONS; i++) {
-    float distToCenter = length(p);
+  for(int step = 0; step < ITERATIONS; step++) {
+    float distanceToCenter = length(samplePos);
 
-  // CONTORNO BRANCO SÓLIDO - antes do horizonte
-    float edgeDistance = abs(distToCenter - BH_RADIUS);
-    float edgeWidth = 0.08; // Espessura do anel
+    // NOTE: Anel branco sólido antes do horizonte
+    float edgeDistance = abs(distanceToCenter - BH_RADIUS);
+    float edgeWidth = 0.04;
 
     if(edgeDistance < edgeWidth) {
-    // Anel branco sólido e brilhante
-      vec3 edgeColor = vec3(5.0, 5.0, 5.0); // Branco super brilhante
+      vec3 edgeColor = vec3(1.0); // NOTE: Cinza fraquinho
       float edgeIntensity = smoothstep(edgeWidth, 0.0, edgeDistance);
 
-      col = mix(col, edgeColor, edgeIntensity);
-      alpha = max(alpha, edgeIntensity * 0.95);
+      finalColor = mix(finalColor, edgeColor, edgeIntensity);
+      alphaAccum = max(alphaAccum, edgeIntensity * 0.95);
     }
 
-  // Horizonte de eventos - esfera preta
-    if(distToCenter < BH_RADIUS - edgeWidth) {
-      col = vec3(0.0);
-      alpha = 1.0;
+    // NOTE: Horizonte de eventos
+    if(distanceToCenter < BH_RADIUS - edgeWidth) {
+      finalColor = vec3(0.0);
+      alphaAccum = 1.0;
       break;
     }
 
-  // Lente gravitacional (simplificada)
-    float gravity = 0.25 / (distToCenter * distToCenter + 0.1);
-    vec3 gravityDir = -normalize(p);
-    rd = normalize(rd + gravityDir * gravity * STEP_SIZE);
-  // ... resto continua igual
+    // NOTE: Lente gravitacional simplificada
+    float gravityStrength = 0.25 / (distanceToCenter * distanceToCenter + 0.1);
+    vec3 gravityDir = -normalize(samplePos);
+    rayDir = normalize(rayDir + gravityDir * gravityStrength * STEP_SIZE);
 
-    // Avançar
-    p += rd * STEP_SIZE;
+    samplePos += rayDir * STEP_SIZE;
 
-    // Disco de acreção
-    float density = getDensity(p);
+    // NOTE: "FUMAÇA" em volta do buraco
+    float relativisticJets = getDensity(samplePos);
 
-    if(density > 0.01) {
-      float r = length(p.xz);
+    if(relativisticJets > 0.01) {
+      float radius = length(samplePos.xz);
 
-      // Cores baseadas na temperatura
-      float temp = smoothstep(DISK_OUTER, DISK_INNER, r);
-      temp = clamp(temp + density * 0.5, 0.0, 1.0);
+      // NOTE: Cores baseadas na "temperatura" do gás
+      float temp = smoothstep(DISK_OUTER, DISK_INNER, radius);
+      temp = clamp(temp + relativisticJets * 0.5, 0.0, 1.0);
 
-      vec3 coldColor = vec3(0.6, 0.1, 0.0);   // Vermelho escuro
-      vec3 midColor = vec3(2.0, 0.8, 0.2);    // Laranja brilhante
-      vec3 hotColor = vec3(3.0, 2.5, 2.0);    // Branco quente
+      vec3 coldColor = vec3(0.6, 0.1, 0.0);
+      vec3 midColor = vec3(2.0, 0.8, 0.2);
+      vec3 hotColor = vec3(3.0, 2.5, 4.0);
 
       vec3 gasColor = mix(coldColor, midColor, smoothstep(0.0, 0.6, temp));
       gasColor = mix(gasColor, hotColor, smoothstep(0.6, 1.0, temp));
 
-      // Acumular cor
-      float contrib = density * 0.6;
-      col += gasColor * contrib * (1.0 - alpha);
-      alpha += contrib;
+      // NOTE: Acumula cor e alpha
+      float contribution = relativisticJets * 0.6;
+      finalColor += gasColor * contribution * (1.0 - alphaAccum);
+      alphaAccum += contribution;
 
-      if(alpha > 0.95)
+      if(alphaAccum > 0.95)
         break;
     }
 
-    // Parar se muito longe
-    if(distToCenter > 40.0)
+    // NOTE: Para se estiver muito longe
+    if(distanceToCenter > 40.0)
       break;
   }
 
-  // Tone mapping
-  col = col / (col + vec3(1.0)); // Reinhard
-  col = pow(col, vec3(0.8)); // Gamma
+  finalColor = finalColor / (finalColor + vec3(1.0));     // NOTE: Reinhard
+  finalColor = pow(finalColor, vec3(0.8));           // NOTE: Gamma
 
-  alpha = clamp(alpha, 0.0, 1.0);
+  alphaAccum = clamp(alphaAccum, 0.0, 1.0);
 
-  gl_FragColor = vec4(col, alpha);
+  gl_FragColor = vec4(finalColor, alphaAccum);
 }
