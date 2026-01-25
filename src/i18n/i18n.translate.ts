@@ -4,16 +4,20 @@ import { initReactI18next } from 'react-i18next'
 const resources = {
   ptBR: {
     translation: {
-      'CREATIVE DEVELOPER': 'DESENVOLVEDOR<br/>CRIATIVO',
-      'CREATE IMMERSIVE': 'Criando experiências imersivas usando React e Java.',
-      'VIEW PROJECT': 'Ver projetos'
+      home: {
+        'creative_developer': 'DESENVOLVEDOR<br/>CRIATIVO',
+        'creating_immersive': 'Criando experiências imersivas usando React e Java.',
+        'view_projects': 'Ver projetos'
+      }
     }
   },
   en: {
     translation: {
-      'CREATIVE DEVELOPER': 'CREATIVE<br/>DEVELOPER',
-      'CREATE IMMERSIVE': 'Creating immersive experiences using React and Java.',
-      'VIEW PROJECT': 'View projects'
+      home: {
+        'creative_developer': 'CREATIVE<br/>DEVELOPER',
+        'creating_immersive': 'Creating immersive experiences using React and Java.',
+        'view_projects': 'View projects'
+      }
     }
   }
 }

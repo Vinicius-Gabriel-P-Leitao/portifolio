@@ -64,11 +64,11 @@ export const Overlay: FC<OverlayProps> = ({ section, onNavigate }) => {
               className='text-center'
             >
               <h1 className='text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-linear-to-r from-indigo-300 via-white to-purple-300 mb-6 drop-shadow-2xl'>
-                <Trans i18nKey='CREATIVE DEVELOPER' />
+                <Trans i18nKey='home.creative_developer' />
               </h1>
 
               <p className='text-slate-400 text-lg md:text-xl max-w-xl mx-auto mb-8'>
-                <Trans i18nKey='CREATE IMMERSIVE' />
+                <Trans i18nKey='home.creating_immersive' />
               </p>
 
               <button
@@ -76,7 +76,7 @@ export const Overlay: FC<OverlayProps> = ({ section, onNavigate }) => {
                 onClick={() => onNavigate('projetos')}
                 className='px-8 py-3 bg-white text-black rounded-full font-bold hover:bg-indigo-50 transition-colors'
               >
-                <Trans i18nKey='VIEW PROJECT' />
+                <Trans i18nKey='home.view_projects' />
               </button>
             </motion.div>
           )}

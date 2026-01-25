@@ -5,6 +5,7 @@ import App from './app'
 
 const rootElement = document.getElementById('root')
 if (!rootElement) {
+  // TODO: Criar tratamento melhor
   throw new Error('Could not find root element to mount to')
 }
 

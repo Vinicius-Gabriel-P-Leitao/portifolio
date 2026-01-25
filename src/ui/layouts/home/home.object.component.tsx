@@ -2,7 +2,8 @@ import { Float, Icosahedron, MeshTransmissionMaterial } from '@react-three/drei'
 
 export const HomeObject = () => (
   <group position={[0, 0, 0]}>
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+    <Float speed={2} rotationIntensity={5} floatIntensity={0.5}>
+      {/* NOTE: Núcleo */}
       <Icosahedron args={[1.5, 0]}>
         <MeshTransmissionMaterial
           backside
@@ -21,9 +22,10 @@ export const HomeObject = () => (
       </Icosahedron>
     </Float>
 
-    <Float speed={1.5} rotationIntensity={1.5} floatIntensity={0.2}>
+    {/* NOTE: Anel */}
+    <Float speed={5} rotationIntensity={1.5} floatIntensity={0.2}>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.5, 0.02, 16, 100]} />
+        <torusGeometry args={[2.5, 0.02, 12, 100]} />
         <meshBasicMaterial color='#ffffff' transparent opacity={0.3} />
       </mesh>
     </Float>

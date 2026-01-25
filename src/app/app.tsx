@@ -1,9 +1,9 @@
 import { Overlay } from '@ui/layouts/overlay/overlay.object.component'
 import { Scene } from '@ui/layouts/scene/scene.layout'
 import type { SceneState, Section } from '@ui/types'
-import { useCallback, useState } from 'react'
+import { type FC, useCallback, useState } from 'react'
 
-const App: React.FC = () => {
+const App: FC = () => {
   const [sceneState, setSceneState] = useState<SceneState>({
     section: 'home',
     color: '#6366f1'
