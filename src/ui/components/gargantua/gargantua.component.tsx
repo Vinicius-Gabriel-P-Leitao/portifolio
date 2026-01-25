@@ -31,7 +31,7 @@ function GargantuaRing() {
         fragmentShader={fragment}
         uniforms={uniforms}
         transparent={false}
-        depthWrite={true} // bloqueia objetos atrás
+        depthWrite={true} 
         depthTest={true}
         side={THREE.DoubleSide}
         toneMapped={false}

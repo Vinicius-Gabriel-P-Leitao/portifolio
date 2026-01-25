@@ -2,9 +2,9 @@ uniform float uTime;
 varying vec3 vWorldPosition;
 uniform vec3 uCameraPosition;
 
-#define ITERATIONS 200   // antes 60
-#define STEP_SIZE 0.3    // antes 0.15
-#define BH_RADIUS 1.5          // Era 2.5 - buraco menor
+#define ITERATIONS 200   
+#define STEP_SIZE 0.3    
+#define BH_RADIUS 1.5          // NOTE: Buraco menor
 #define DISK_INNER 2.5         // Era 3.5 - disco mais perto
 #define DISK_OUTER 7.0         // Era 12.0 - disco menor
 #define DISK_HEIGHT 0.4        // Era 0.8 - mais fino
@@ -64,7 +64,7 @@ void main() {
   float distToBH = length(ro);
   if(distToBH > 200.0) // antes 100
     discard;
-    
+
   vec3 col = vec3(0.0);
   float alpha = 0.0;
   vec3 p = ro;
