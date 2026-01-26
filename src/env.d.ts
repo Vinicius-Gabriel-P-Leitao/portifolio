@@ -1,5 +1,3 @@
-/// <reference types="vite/client" />
-
 declare module '*.svg?react' {
   import type FC from 'react'
 

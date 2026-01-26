@@ -21,7 +21,9 @@
       "@ui/*": ["src/ui/*"],
       "@app/*": ["src/app/*"],
       "@i18n/*": ["src/i18n/*"],
+      "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
+      "@config/*": ["src/config/*"],
       "@composable/*": ["src/composable/*"]
     }
   }
