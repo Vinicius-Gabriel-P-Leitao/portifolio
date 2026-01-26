@@ -1,7 +1,9 @@
 import { Box, Float } from '@react-three/drei'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import { animateVariants } from '../../layouts/overlay/overlay.object.variants'
 import { Card } from '@ui/components/card/card.component'
+import type { Project } from './projects.type'
 
 export const ProjectsObject = () => (
   <group position={[0, 0, -20]} rotation={[0, Math.PI, 0]}>
@@ -24,35 +26,56 @@ export const ProjectsObject = () => (
 )
 
 const ProjectsComponent = () => {
+  const projects = useMemo<Project[]>(
+    () => [
+      {
+        title: 'Acerola',
+        preview: '/assets/gargantua.png',
+        desc: 'App android feito com intuito de ler mangás/quadrinhos no formato cbz e cbr.',
+        tech: ['Kotlin', 'Jetpack compose', 'Hilt']
+      },
+      {
+        title: 'Arch sticker',
+        preview: '/assets/gargantua.png',
+        desc: 'App android feito com intuito de aprender stacks antigas do android.',
+        tech: ['Java', 'Xml', 'C++']
+      },
+      {
+        title: 'Python rsa',
+        preview: '/assets/gargantua.png',
+        desc: 'Projeto com intuito de aprender criptografia assimétrica.',
+        tech: ['Python']
+      }
+    ],
+    []
+  )
+
   return (
     <motion.div
+      exit='exit'
       key='projects'
-      variants={animateVariants}
       initial='initial'
       animate='animate'
-      exit='exit'
+      variants={animateVariants}
       className='grid grid-cols-1 md:grid-cols-3 gap-6'
     >
-      {/* TODO: Trocar isso por um valor mais fácil de mudar */}
-      {[
-        {
-          title: 'Acerola',
-          desc: 'App android feito com intuito de ler mangás/quadrinhos no formato cbz e cbr.',
-          tech: 'Kotlin, Jetpack compose, Hilt'
-        },
-        { title: 'Arch sticker', desc: 'App android feito com intuito de aprender stacks antigas do android.', tech: 'Java, Xml, C++' },
-        { title: 'Python rsa', desc: 'Projeto com intuito de aprender criptografia assimétrica.', tech: 'Python' }
-      ].map((project, _) => (
+      {projects.map((project) => (
         <Card.Root key={project.title} width='sm' height='lg' onClick={() => console.log('clicou')}>
           <Card.Header>
-            <Card.Image src='/assets/gargantua.png' />
+            <Card.Image src={project.preview} />
             <Card.Title>{project.title}</Card.Title>
           </Card.Header>
 
           <Card.Content className='flex flex-col'>
             <span>{project.desc}</span>
 
-            <div className='inline-block px-2 py-1 bg-white/10 rounded text-xs text-white mt-2'>{project.tech}</div>
+            <div className='flex flex-wrap gap-2 mt-2'>
+              {project.tech.map((tech) => (
+                <div key={tech} className='inline-block px-2 py-1 bg-white/10 rounded text-xs text-white'>
+                  {tech}
+                </div>
+              ))}
+            </div>
           </Card.Content>
         </Card.Root>
       ))}

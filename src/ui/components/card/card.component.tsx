@@ -35,10 +35,4 @@ const Content: FC<CardContentProps> = ({ children, className, ...props }) => (
   </div>
 )
 
-export const Card = {
-  Root,
-  Header,
-  Image,
-  Title,
-  Content
-}
+export const Card = { Root, Header, Image, Title, Content }
