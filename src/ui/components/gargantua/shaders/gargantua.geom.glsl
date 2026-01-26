@@ -7,8 +7,8 @@ uniform vec3 uCameraPosition;
 #define ITERATIONS 200   
 #define STEP_SIZE 0.3    
 #define BH_RADIUS 1.5          // NOTE: Buraco menor, horizonte de eventos
-#define DISK_INNER 2.5         // NOTE: disco mais perto
-#define DISK_OUTER 7.0         // NOTE: disco menor
+#define DISK_INNER 1.8         // NOTE: disco mais perto
+#define DISK_OUTER 8.0         // NOTE: disco menor
 #define DISK_HEIGHT 0.4        // NOTE: mais fino
 
 float hash(float angle) {
@@ -26,13 +26,13 @@ float noise(vec3 pos) {
   vec3 frac = fract(pos);
 
   frac = frac * frac * (3.0 - 2.0 * frac);
-  float n = base.x + base.y * 57.0 + 113.0 * base.z;
+  float angle = base.x + base.y * 57.0 + 113.0 * base.z;
 
   // NOTE: Separado em variável para não zuar na formatação 
-  float xy1 = mix(hash(n + 0.0), hash(n + 1.0), frac.x);
-  float xy2 = mix(hash(n + 57.0), hash(n + 58.0), frac.x);
-  float xy3 = mix(hash(n + 113.0), hash(n + 114.0), frac.x);
-  float xy4 = mix(hash(n + 170.0), hash(n + 171.0), frac.x);
+  float xy1 = mix(hash(angle + 0.0), hash(angle + 1.0), frac.x);
+  float xy2 = mix(hash(angle + 57.0), hash(angle + 58.0), frac.x);
+  float xy3 = mix(hash(angle + 113.0), hash(angle + 114.0), frac.x);
+  float xy4 = mix(hash(angle + 170.0), hash(angle + 171.0), frac.x);
 
   return mix(mix(xy1, xy2, frac.y), mix(xy3, xy4, frac.y), frac.z);
 }
@@ -111,7 +111,7 @@ void main() {
     }
 
     // NOTE: Lente gravitacional simplificada
-    float gravityStrength = 0.25 / (distanceToCenter * distanceToCenter + 0.1);
+    float gravityStrength = 1.0 / (distanceToCenter * distanceToCenter + 0.1);
     vec3 gravityDir = -normalize(samplePos);
     rayDir = normalize(rayDir + gravityDir * gravityStrength * STEP_SIZE);
 
@@ -134,8 +134,8 @@ void main() {
       vec3 gasColor = mix(coldColor, midColor, smoothstep(0.0, 0.6, temp));
       gasColor = mix(gasColor, hotColor, smoothstep(0.6, 1.0, temp));
 
-      // NOTE: Acumula cor e alpha
-      float contribution = relativisticJets * 0.6;
+      // NOTE: Acumula cor e alpha do jato
+      float contribution = relativisticJets * 1.5;
       finalColor += gasColor * contribution * (1.0 - alphaAccum);
       alphaAccum += contribution;
 
