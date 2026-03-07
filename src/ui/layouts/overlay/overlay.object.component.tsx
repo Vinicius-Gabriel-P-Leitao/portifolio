@@ -1,12 +1,11 @@
+import { Button } from '@ui/components/button/button.component'
 import { Select } from '@ui/components/select/select.component'
 import type { SelectValue } from '@ui/components/select/select.type'
+import type { SectionI18n } from '@ui/types'
 import { AnimatePresence } from 'framer-motion'
-import { useEffect, useMemo, useState, type FC, lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useState, type FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import type { Section, SectionI18n } from '../../types'
 import type { OverlayProps } from './domain/overlay.object.type'
-import i18n from '../../../i18n/i18n.translate'
-import { Button } from '@ui/components/button/button.component'
 
 // Lazy loading dos módulos
 const HomeComponent = lazy(() => import('../../modules/home/home.object.component'))
@@ -37,7 +36,7 @@ export const Overlay: FC<OverlayProps> = ({ section, onNavigate }) => {
       {/* Navigation */}
       <nav className='absolute top-0 left-0 right-0 p-6 flex justify-between items-center pointer-events-auto'>
         <Button type='button' onClick={() => onNavigate('home')}>
-          VINICIUSGPL.DEV
+          VINICIUS-GPL.COM
         </Button>
 
         <div className='flex gap-6 text-sm text-slate-400 font-medium'>
@@ -51,7 +50,7 @@ export const Overlay: FC<OverlayProps> = ({ section, onNavigate }) => {
         </div>
       </nav>
 
-      <div className='w-full max-w-4xl pointer-events-auto'>
+      <div className='w-full max-w-6xl pointer-events-auto'>
         <AnimatePresence mode='wait'>
           <Suspense
             fallback={
