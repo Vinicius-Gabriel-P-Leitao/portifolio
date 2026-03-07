@@ -36,7 +36,7 @@ export const Overlay: FC<OverlayProps> = ({ section, onNavigate }) => {
       {/* Navigation */}
       <nav className='absolute top-0 left-0 right-0 p-6 flex justify-between items-center pointer-events-auto'>
         <Button type='button' onClick={() => onNavigate('home')}>
-          VINICIUS-GPL.COM
+          {t('site.name')}
         </Button>
 
         <div className='flex gap-6 text-sm text-slate-400 font-medium'>
@@ -46,7 +46,14 @@ export const Overlay: FC<OverlayProps> = ({ section, onNavigate }) => {
             </Button>
           ))}
 
-          <Select values={translationOptions} value={value} onChange={setValue} />
+          <Select
+            values={translationOptions.map((opt) => ({
+              ...opt,
+              label: t(`languages.${opt.value}`)
+            }))}
+            value={value}
+            onChange={setValue}
+          />
         </div>
       </nav>
 

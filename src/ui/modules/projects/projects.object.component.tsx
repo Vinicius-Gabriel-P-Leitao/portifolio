@@ -1,6 +1,7 @@
 import { Octahedron, MeshDistortMaterial, Float } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Card } from '@ui/components/card/card.component'
 import type { Project } from './projects.type'
 
@@ -8,15 +9,15 @@ export const ProjectsObject = () => (
   <group position={[0, 5, -10]} rotation={[0, Math.PI, 0]}>
     <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
       <group>
-        <Octahedron args={[0.9, 0]} position={[-9, 2, -2]}>
+        <Octahedron args={[0.9, 0]} position={[-7, 1, 0]}>
           <MeshDistortMaterial color='#f59e0b' speed={2} distort={0.4} roughness={0} metalness={1} />
         </Octahedron>
 
-        <Octahedron args={[1.2, 0]} position={[0, 4, 3]}>
+        <Octahedron args={[1.2, 0]} position={[0, 2, 2]}>
           <MeshDistortMaterial color='#fbbf24' speed={3} distort={0.5} roughness={0} metalness={1} />
         </Octahedron>
 
-        <Octahedron args={[1.0, 0]} position={[9, 1, -3]}>
+        <Octahedron args={[1.0, 0]} position={[7, 1, -1]}>
           <MeshDistortMaterial color='#fcd34d' speed={2.5} distort={0.3} roughness={0} metalness={1} />
         </Octahedron>
       </group>
@@ -38,29 +39,8 @@ const itemVariants = {
 }
 
 const ProjectsComponent = () => {
-  const projects = useMemo<Project[]>(
-    () => [
-      {
-        title: 'Acerola',
-        preview: '/assets/gargantua.png',
-        desc: 'App android feito com intuito de ler mangás/quadrinhos no formato cbz e cbr.',
-        tech: ['Kotlin', 'Jetpack compose', 'Hilt']
-      },
-      {
-        title: 'Arch sticker',
-        preview: '/assets/gargantua.png',
-        desc: 'App android feito com intuito de aprender stacks antigas do android.',
-        tech: ['Java', 'Xml', 'C++']
-      },
-      {
-        title: 'Auth server',
-        preview: '/assets/gargantua.png',
-        desc: 'Projeto de servidor de autenticação em java com spring security',
-        tech: ['Java', 'Spring', 'React', 'Jwt']
-      }
-    ],
-    []
-  )
+  const { t } = useTranslation()
+  const projects = useMemo<Project[]>(() => t('projects.items', { returnObjects: true }) as Project[], [t])
 
   return (
     <motion.div
@@ -73,9 +53,9 @@ const ProjectsComponent = () => {
     >
       {projects.map((project) => (
         <motion.div key={project.title} variants={itemVariants}>
-          <Card.Root size='md' width='full' height='lg' onClick={() => console.log('clicou')}>
+          <Card.Root size='md' width='full' height='lg' onClick={() => console.log('clicked')}>
             <Card.Header>
-              <Card.Image src={project.preview} />
+              <Card.Image src={project.preview || '/assets/gargantua.png'} />
               <Card.Title className='font-display text-purple-glow text-nebula-purple'>{project.title}</Card.Title>
             </Card.Header>
 
@@ -86,7 +66,7 @@ const ProjectsComponent = () => {
                 {project.tech.map((tech) => (
                   <div
                     key={tech}
-                    className='inline-block px-3 py-1 bg-nebula-purple/10 border border-nebula-purple/20 rounded-full text-[10px] uppercase tracking-tighter text-white font-medium'
+                    className='inline-block px-3 py-1 bg-nebula-purple/10 border border-nebula-purple/20 rounded-full text-[10px] uppercase tracking-tighter text-nebula-violet font-medium'
                   >
                     {tech}
                   </div>

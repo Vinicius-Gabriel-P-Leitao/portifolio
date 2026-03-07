@@ -4,6 +4,13 @@ import { initReactI18next } from 'react-i18next'
 const resources = {
   ptBR: {
     translation: {
+      site: {
+        name: 'VINICIUS-GPL.COM'
+      },
+      languages: {
+        ptBR: 'Português',
+        en: 'English'
+      },
       loading: 'Carregando...',
       tabs: [
         {
@@ -41,6 +48,26 @@ const resources = {
         backend_list: ['Java', 'Kotlin', 'Nodejs', 'NestJs', 'SpringBoot'],
         db_list: ['PostgresSql', 'Sqlite3', 'Firebase']
       },
+      projects: {
+        title: 'Projetos',
+        items: [
+          {
+            title: 'Acerola',
+            desc: 'App android feito com intuito de ler mangás/quadrinhos no formato cbz e cbr.',
+            tech: ['Kotlin', 'Jetpack compose', 'Hilt']
+          },
+          {
+            title: 'Arch sticker',
+            desc: 'App android feito com intuito de aprender stacks antigas do android.',
+            tech: ['Java', 'Xml', 'C++']
+          },
+          {
+            title: 'Auth server',
+            desc: 'Projeto de servidor de autenticação em java com spring security',
+            tech: ['Java', 'Spring', 'React', 'Jwt']
+          }
+        ]
+      },
       contact: {
         title: 'Vamos Criar Juntos',
         modalTitle: 'Contato',
@@ -74,6 +101,13 @@ const resources = {
   },
   en: {
     translation: {
+      site: {
+        name: 'VINICIUS-GPL.COM'
+      },
+      languages: {
+        ptBR: 'Português',
+        en: 'English'
+      },
       loading: 'Loading...',
       tabs: [
         {
@@ -110,6 +144,26 @@ const resources = {
         frontend_list: ['TypeScript', 'Tailwind', 'React', 'Jetpack Compose', 'Material3'],
         backend_list: ['Java', 'Kotlin', 'Nodejs', 'NestJs', 'SpringBoot'],
         db_list: ['PostgresSql', 'Sqlite3', 'Firebase']
+      },
+      projects: {
+        title: 'Projects',
+        items: [
+          {
+            title: 'Acerola',
+            desc: 'Android app designed for reading manga/comics in cbz and cbr formats.',
+            tech: ['Kotlin', 'Jetpack compose', 'Hilt']
+          },
+          {
+            title: 'Arch sticker',
+            desc: 'Android app designed to learn legacy android stacks.',
+            tech: ['Java', 'Xml', 'C++']
+          },
+          {
+            title: 'Auth server',
+            desc: 'Authentication server project in Java with Spring Security.',
+            tech: ['Java', 'Spring', 'React', 'Jwt']
+          }
+        ]
       },
       contact: {
         title: "Let's Create Together",

@@ -96,7 +96,9 @@ const ContactComponent = () => {
         </a>
       </div>
 
-      <p className='mt-8 text-slate-400 font-sans text-sm tracking-widest'>{t('contact.email') || 'vinicius.gabriel.p.leitao@gmail.com'}</p>
+      <p className='mt-8 text-slate-400 font-sans text-sm tracking-widest'>
+        {t('contact.email', { defaultValue: 'vinicius.gabriel.p.leitao@gmail.com' })}
+      </p>
 
       <Modal.Root isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} size='md' position='center'>
         <Modal.Header onClose={() => setIsModalOpen(false)}>{t('contact.modalTitle')}</Modal.Header>
