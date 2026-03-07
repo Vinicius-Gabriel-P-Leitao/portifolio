@@ -1,5 +1,6 @@
 import { Overlay } from '@ui/layouts/overlay/overlay.object.component'
 import { Scene } from '@ui/layouts/scene/scene.layout'
+import { ToastContainer } from '@ui/components/toast/toast.component'
 import type { SceneState, Section } from '@ui/types'
 import { type FC, useCallback, useState } from 'react'
 
@@ -17,6 +18,7 @@ const App: FC = () => {
     <div className='relative w-full h-screen overflow-hidden bg-black selection:bg-indigo-500/30 selection:text-white'>
       <Scene sceneState={sceneState} />
       <Overlay section={sceneState.section} onNavigate={handleNavigate} />
+      <ToastContainer />
     </div>
   )
 }

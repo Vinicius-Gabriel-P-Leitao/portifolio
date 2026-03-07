@@ -22,7 +22,9 @@ export default defineConfig(({ mode }) => {
         '@ui': path.resolve(__dirname, 'src/ui'),
         '@app': path.resolve(__dirname, 'src/app'),
         '@i18n': path.resolve(__dirname, 'src/i18n'),
+        '@utils': path.resolve(__dirname, 'src/utils'),
         '@assets': path.resolve(__dirname, 'src/assets'),
+        '@config': path.resolve(__dirname, 'src/config'),
         '@composable': path.resolve(__dirname, 'src/composable')
       }
     }

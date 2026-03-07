@@ -6,8 +6,8 @@ import fragment from './shaders/gargantua.geom.glsl?raw'
 import vertex from './shaders/vertex.vert.glsl?raw'
 
 function GargantuaRing() {
-  const materialRef = useRef<THREE.ShaderMaterial>(null!)
-  const meshRef = useRef<THREE.Mesh>(null!)
+  const materialRef = useRef<THREE.ShaderMaterial>(null)
+  const meshRef = useRef<THREE.Mesh>(null)
 
   const uniforms = useMemo(
     () => ({
@@ -19,13 +19,15 @@ function GargantuaRing() {
 
   useFrame(({ camera }) => {
     const realTime = performance.now() / 1000
-    materialRef.current.uniforms.uTime.value = realTime * 0.5
-    materialRef.current.uniforms.uCameraPosition.value.copy(camera.position)
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = realTime * 0.5
+      materialRef.current.uniforms.uCameraPosition.value.copy(camera.position)
+    }
   })
 
   return (
     <mesh ref={meshRef}>
-      <sphereGeometry args={[60, 64, 64]} />
+      <sphereGeometry args={[12, 32, 32]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertex}
