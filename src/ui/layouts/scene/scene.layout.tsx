@@ -21,8 +21,7 @@ export const Scene: FC<SceneProps> = ({ sceneState }) => {
         <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={0.5} />
         <Environment preset='city' />
 
-        {/* <HomeObject /> */}
-        <Gargantua position={[0, 0, 0]} scale={5} />
+        <Gargantua position={[0, 0, -200]} scale={25} />
         <ContactObject />
         <ProjectsObject />
         <AboutObject />

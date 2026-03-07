@@ -4,8 +4,8 @@ uniform float uTime;
 varying vec3 vWorldPosition;
 uniform vec3 uCameraPosition;
 
-#define ITERATIONS 200   
-#define STEP_SIZE 0.3    
+#define ITERATIONS 80   
+#define STEP_SIZE 0.45    
 #define BH_RADIUS 1.5          // NOTE: Buraco menor, horizonte de eventos
 #define DISK_INNER 1.8         // NOTE: disco mais perto
 #define DISK_OUTER 8.0         // NOTE: disco menor
@@ -28,20 +28,28 @@ float noise(vec3 pos) {
   frac = frac * frac * (3.0 - 2.0 * frac);
   float angle = base.x + base.y * 57.0 + 113.0 * base.z;
 
-  // NOTE: Separado em variável para não zuar na formatação 
-  float xy1 = mix(hash(angle + 0.0), hash(angle + 1.0), frac.x);
-  float xy2 = mix(hash(angle + 57.0), hash(angle + 58.0), frac.x);
-  float xy3 = mix(hash(angle + 113.0), hash(angle + 114.0), frac.x);
-  float xy4 = mix(hash(angle + 170.0), hash(angle + 171.0), frac.x);
+  // Optimizing hash and mix sequence
+  float h000 = hash(angle + 0.0);
+  float h100 = hash(angle + 1.0);
+  float h010 = hash(angle + 57.0);
+  float h110 = hash(angle + 58.0);
+  float h001 = hash(angle + 113.0);
+  float h101 = hash(angle + 114.0);
+  float h011 = hash(angle + 170.0);
+  float h111 = hash(angle + 171.0);
 
-  return mix(mix(xy1, xy2, frac.y), mix(xy3, xy4, frac.y), frac.z);
+  return mix(
+    mix(mix(h000, h100, frac.x), mix(h010, h110, frac.x), frac.y),
+    mix(mix(h001, h101, frac.x), mix(h011, h111, frac.x), frac.y),
+    frac.z
+  );
 }
 
 float fractalBrownianMotion(vec3 pos) {
   float sum = 0.0;
   float amplitude = 0.5;
 
-  for(int octave = 0; octave < 3; octave++) {
+  for(int octave = 0; octave < 2; octave++) {
     sum += amplitude * abs(noise(pos));
     pos *= 2.0;
     amplitude *= 0.5;
@@ -86,7 +94,10 @@ void main() {
   vec3 samplePos = rayOrigin;   // NOTE: Posição atual do raio
 
   float dither = hash(dot(gl_FragCoord.xy, vec2(12.9898, 78.233)));
-  samplePos += rayDir * dither * 0.2;
+  samplePos += rayDir * dither * 0.5;
+
+  // Faster bounding check: the effect is mostly contained within DISK_OUTER + margin
+  float maxRadius = DISK_OUTER * 1.5;
 
   for(int step = 0; step < ITERATIONS; step++) {
     float distanceToCenter = length(samplePos);
@@ -115,7 +126,14 @@ void main() {
     vec3 gravityDir = -normalize(samplePos);
     rayDir = normalize(rayDir + gravityDir * gravityStrength * STEP_SIZE);
 
-    samplePos += rayDir * STEP_SIZE;
+    // Dynamic step: larger steps when far from the disk
+    float diskZone = smoothstep(DISK_OUTER * 1.2, DISK_OUTER, distanceToCenter);
+    float dynamicStep = mix(STEP_SIZE * 2.0, STEP_SIZE, diskZone);
+    
+    samplePos += rayDir * dynamicStep;
+
+    if(distanceToCenter > maxRadius && dot(rayDir, samplePos) > 0.0)
+      break;
 
     // NOTE: "FUMAÇA" em volta do buraco
     float relativisticJets = getDensity(samplePos);
