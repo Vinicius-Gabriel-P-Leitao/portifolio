@@ -62,10 +62,9 @@ const HomeComponent: FC<OverlayProps> = ({ onNavigate }) => {
       <div className='flex justify-center'>
         <Button
           type='button'
-          variant='primary'
+          variant='cta'
           onClick={() => onNavigate('projects')}
-          icon={<ChevronRight className='h-4 w-4' />}
-          className='px-8 py-3 bg-indigo-50 text-black rounded-full font-bold hover:bg-indigo-200 transition-colors'
+          icon={<ChevronRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />}
         >
           <Trans i18nKey='home.view_projects' />
         </Button>

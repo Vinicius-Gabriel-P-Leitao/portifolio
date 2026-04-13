@@ -34,14 +34,20 @@ export const Overlay: FC<OverlayProps> = ({ section, onNavigate }) => {
   return (
     <div className='absolute inset-0 z-10 pointer-events-none flex flex-col items-center justify-center p-4 md:p-10'>
       {/* Navigation */}
-      <nav className='absolute top-0 left-0 right-0 p-6 flex justify-between items-center pointer-events-auto'>
+      <nav className='absolute top-0 left-0 right-0 p-6 flex justify-between items-center pointer-events-auto w-full max-w-7xl mx-auto'>
         <Button type='button' onClick={() => onNavigate('home')}>
           {t('site.name')}
         </Button>
 
-        <div className='flex gap-6 text-sm text-slate-400 font-medium'>
+        <div className='flex items-center gap-8 text-sm font-medium'>
           {(t('tabs', { returnObjects: true }) as SectionI18n[]).map((tab) => (
-            <Button key={tab.id} type='button' onClick={() => onNavigate(tab.id)}>
+            <Button
+              key={tab.id}
+              type='button'
+              onClick={() => onNavigate(tab.id)}
+              active={section === tab.id}
+              className='hover:text-white transition-colors duration-300'
+            >
               {tab.label}
             </Button>
           ))}

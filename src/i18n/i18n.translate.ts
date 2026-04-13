@@ -32,29 +32,56 @@ const resources = {
       ],
       home: {
         creative_developer: 'DESENVOLVEDOR<br/>CRIATIVO',
-        creating_immersive: 'Criando experiências imersivas usando React e Java.',
+        creating_immersive: 'Sempre criando novos projetos.',
         view_projects: 'Ver projetos'
       },
       about: {
         title: 'Sobre mim',
         description1:
-          'Sou Vinícius, desenvolvedor full-stack gosto de criar web apps modernos e escaláveis. Tenho experiência em JavaScript/TypeScript, React, Node.js e no ecossistema frontend com CSS, Sass, Tailwind CSS. Também utilizo bancos de dados (SQL, PostgreSQL, SQLite3), versionamento com Git/GitHub junto ao git-flow e conteinerização via Docker.',
+          'Sou Vinícius, desenvolvedor gosto de criar web apps modernos e escaláveis. Tenho experiência em JavaScript/TypeScript, React, Node.js e no ecossistema frontend com CSS, Tailwind CSS. Também utilizo bancos de dados ( PostgreSQL, SQLite3, MongoDb), versionamento com Git/GitHub junto ao git-flow, conteinerização via Docker/Podman.',
         description2:
-          'Atualmente, estou expandindo meus conhecimentos em Spring Boot, Kotlin, Android e Jetty, explorando tecnologias que me permitem conectar o backend robusto com experiências mobile e cloud-ready. Estou explorando C, C++ e todo workspace nativo.',
+          'Atualmente, estou expandindo meus conhecimentos em Spring Boot, Kotlin, Android e Rust, explorando tecnologias que me permitem conectar o backend robusto com experiências mobile e cloud-ready.',
         frontend_title: 'Domínio de Front-end',
         backend_title: 'Domínio de Backend',
         db_title: 'Domínio de DB',
-        frontend_list: ['TypeScript', 'Tailwind', 'React', 'Jetpack Compose', 'Material3'],
-        backend_list: ['Java', 'Kotlin', 'Nodejs', 'NestJs', 'SpringBoot'],
-        db_list: ['PostgresSql', 'Sqlite3', 'Firebase']
+        frontend_list: ['Tailwind', 'React', 'Jetpack Compose'],
+        backend_list: ['Java', 'Kotlin', 'SpringBoot', 'Rust', 'NodeJs'],
+        db_list: ['PostgresSql', 'Sqlite3', 'Firebase', 'MongoDb']
       },
       projects: {
         title: 'Projetos',
         items: [
           {
             title: 'Acerola',
-            desc: 'App android feito com intuito de ler mangás/quadrinhos no formato cbz e cbr.',
-            tech: ['Kotlin', 'Jetpack compose', 'Hilt']
+            desc: 'App android feito com intuito de ler quadrinhos no formato cbz e cbr.',
+            tech: ['Kotlin', 'Jetpack compose', 'Hilt'],
+            preview: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png',
+            images: [
+              {
+                title: 'Home',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png'
+              },
+              {
+                title: 'Manga Settings',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-manga-screen.png'
+              },
+              {
+                title: 'General Settings',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-screen.png'
+              },
+              {
+                title: 'History',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/history-screen.png'
+              },
+              {
+                title: 'Reader Modes',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/reader-screen-modes.png'
+              },
+              {
+                title: 'Webtoon',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/webtom-reader-mode.png'
+              }
+            ]
           },
           {
             title: 'Arch sticker',
@@ -129,29 +156,56 @@ const resources = {
       ],
       home: {
         creative_developer: 'CREATIVE<br/>DEVELOPER',
-        creating_immersive: 'Creating immersive experiences using React and Java.',
+        creating_immersive: 'Always creating new projects.',
         view_projects: 'View projects'
       },
       about: {
         title: 'About me',
         description1:
-          "I'm Vinícius, a full-stack developer who enjoys creating modern and scalable web apps. I have experience in JavaScript/TypeScript, React, Node.js and the frontend ecosystem with CSS, Sass, Tailwind CSS. I also use databases (SQL, PostgreSQL, SQLite3), versioning with Git/GitHub along with git-flow and containerization via Docker.",
+          "I'm Vinícius, a developer who enjoys creating modern and scalable web apps. I have experience in JavaScript/TypeScript, React, Node.js and the frontend ecosystem with CSS, Tailwind CSS. I also use databases (PostgreSQL, SQLite3, MongoDB), versioning with Git/GitHub along with git-flow and containerization via Docker/Podman.",
         description2:
-          'Currently, I am expanding my knowledge in Spring Boot, Kotlin, Android and Jetty, exploring technologies that allow me to connect robust backend with mobile and cloud-ready experiences. I am exploring C, C++ and the entire native workspace.',
+          'Currently, I am expanding my knowledge in Spring Boot, Kotlin, Android and Rust, exploring technologies that allow me to connect robust backend with mobile and cloud-ready experiences.',
         frontend_title: 'Frontend Mastery',
         backend_title: 'Backend Mastery',
         db_title: 'DB Mastery',
-        frontend_list: ['TypeScript', 'Tailwind', 'React', 'Jetpack Compose', 'Material3'],
-        backend_list: ['Java', 'Kotlin', 'Nodejs', 'NestJs', 'SpringBoot'],
-        db_list: ['PostgresSql', 'Sqlite3', 'Firebase']
+        frontend_list: ['Tailwind', 'React', 'Jetpack Compose'],
+        backend_list: ['Java', 'Kotlin', 'SpringBoot', 'Rust', 'NodeJs'],
+        db_list: ['PostgresSql', 'Sqlite3', 'MongoDb', 'Firebase']
       },
       projects: {
         title: 'Projects',
         items: [
           {
             title: 'Acerola',
-            desc: 'Android app designed for reading manga/comics in cbz and cbr formats.',
-            tech: ['Kotlin', 'Jetpack compose', 'Hilt']
+            desc: 'Android app designed for reading comics in cbz and cbr formats.',
+            tech: ['Kotlin', 'Jetpack compose', 'Hilt'],
+            preview: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png',
+            images: [
+              {
+                title: 'Home',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png'
+              },
+              {
+                title: 'Manga Settings',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-manga-screen.png'
+              },
+              {
+                title: 'General Settings',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-screen.png'
+              },
+              {
+                title: 'History',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/history-screen.png'
+              },
+              {
+                title: 'Reader Modes',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/reader-screen-modes.png'
+              },
+              {
+                title: 'Webtoon',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/webtom-reader-mode.png'
+              }
+            ]
           },
           {
             title: 'Arch sticker',
