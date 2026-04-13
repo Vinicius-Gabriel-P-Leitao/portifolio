@@ -28,7 +28,6 @@ float noise(vec3 pos) {
   frac = frac * frac * (3.0 - 2.0 * frac);
   float angle = base.x + base.y * 57.0 + 113.0 * base.z;
 
-  // Optimizing hash and mix sequence
   float h000 = hash(angle + 0.0);
   float h100 = hash(angle + 1.0);
   float h010 = hash(angle + 57.0);
@@ -38,11 +37,7 @@ float noise(vec3 pos) {
   float h011 = hash(angle + 170.0);
   float h111 = hash(angle + 171.0);
 
-  return mix(
-    mix(mix(h000, h100, frac.x), mix(h010, h110, frac.x), frac.y),
-    mix(mix(h001, h101, frac.x), mix(h011, h111, frac.x), frac.y),
-    frac.z
-  );
+  return mix(mix(mix(h000, h100, frac.x), mix(h010, h110, frac.x), frac.y), mix(mix(h001, h101, frac.x), mix(h011, h111, frac.x), frac.y), frac.z);
 }
 
 float fractalBrownianMotion(vec3 pos) {
@@ -66,6 +61,7 @@ float getDensity(vec3 samplePos) {
     return 0.0;
 
   float angle = atan(samplePos.z, samplePos.x);
+
   // NOTE: Necessário para não ter corte bruto no horizonte e na "fumaça"
   vec2 angleCoords = vec2(cos(angle), sin(angle));
   vec3 noiseCoord = vec3(radius * 1.5, angleCoords.x * 4.0 + uTime * 1.5,  /* animação horizontal */ 
@@ -126,10 +122,10 @@ void main() {
     vec3 gravityDir = -normalize(samplePos);
     rayDir = normalize(rayDir + gravityDir * gravityStrength * STEP_SIZE);
 
-    // Dynamic step: larger steps when far from the disk
+    // NOTE: passos maiores quando longe do disco
     float diskZone = smoothstep(DISK_OUTER * 1.2, DISK_OUTER, distanceToCenter);
     float dynamicStep = mix(STEP_SIZE * 2.0, STEP_SIZE, diskZone);
-    
+
     samplePos += rayDir * dynamicStep;
 
     if(distanceToCenter > maxRadius && dot(rayDir, samplePos) > 0.0)
