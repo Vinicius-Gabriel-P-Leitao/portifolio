@@ -14,7 +14,7 @@ export const ContactObject = () => (
   <group position={[20, 10, 0]} rotation={[0, -Math.PI / 2, 0]}>
     <Float speed={1} rotationIntensity={2} floatIntensity={1}>
       <TorusKnot args={[1, 0.3, 100, 16]}>
-        <meshStandardMaterial color='#ec4899' roughness={0.2} metalness={0.8} />
+        <meshStandardMaterial color='#f59e0b' roughness={0.2} metalness={0.8} />
       </TorusKnot>
     </Float>
 
@@ -23,7 +23,7 @@ export const ContactObject = () => (
       // biome-ignore lint/suspicious/noArrayIndexKey: Necessário para usar o index do array como key
       <Float key={index} speed={0.5 + Math.random()} position={[(Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5]}>
         <Sphere args={[0.05, 8, 8]}>
-          <meshBasicMaterial color='cyan' />
+          <meshBasicMaterial color='#fbbf24' />
         </Sphere>
       </Float>
     ))}
@@ -76,11 +76,11 @@ const ContactComponent = () => {
 
   return (
     <motion.div key='contact' variants={animateVariants} initial='initial' animate='animate' exit='exit' className='text-center'>
-      <h2 className='text-5xl font-bold text-white mb-8'>{t('contact.title')}</h2>
+      <h2 className='text-5xl font-display font-bold text-white mb-8 text-glow'>{t('contact.title')}</h2>
       <div className='flex justify-center gap-6'>
         <button
           type='button'
-          className='p-4 bg-white/15 hover:bg-white/10 rounded-full text-white transition-colors border border-white/10 cursor-pointer'
+          className='p-4 bg-celestial-gold/10 hover:bg-celestial-gold/20 rounded-full text-white transition-all duration-300 border border-celestial-gold/20 cursor-pointer hover:border-celestial-gold/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]'
           onClick={() => setIsModalOpen(true)}
         >
           <Mail size={24} />
@@ -90,19 +90,21 @@ const ContactComponent = () => {
           rel='noopener'
           target='_blank'
           href='https://github.com/Vinicius-Gabriel-P-Leitao'
-          className='p-4 bg-white/50 hover:bg-white/60 rounded-full text-white transition-colors border border-white/10'
+          className='p-4 glass-morphism rounded-full text-white transition-all duration-300 hover:border-celestial-gold/40'
         >
           <Github className='w-6 h-6 text-white' />
         </a>
       </div>
 
-      <p className='mt-8 text-slate-500 text-sm'>vinicius.gabriel.p.leitao@gmail.com</p>
+      <p className='mt-8 text-slate-400 font-sans text-sm tracking-widest'>
+        {t('contact.email', { defaultValue: 'vinicius.gabriel.p.leitao@gmail.com' })}
+      </p>
 
       <Modal.Root isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} size='md' position='center'>
         <Modal.Header onClose={() => setIsModalOpen(false)}>{t('contact.modalTitle')}</Modal.Header>
 
         <Modal.Content className='flex flex-col gap-4'>
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-2 font-sans'>
             <label htmlFor='name' className='text-sm font-medium text-slate-300'>
               {t('contact.form.name')}
             </label>
@@ -112,12 +114,12 @@ const ContactComponent = () => {
               type='text'
               value={form.name}
               placeholder={t('contact.form.namePlaceholder')}
-              className='bg-white/5 border border-white/10 rounded-lg p-2 text-white focus:outline-none focus:border-indigo-500 transition-colors'
+              className='bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-celestial-gold/50 transition-colors'
               onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
             />
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-2 font-sans'>
             <label htmlFor='email' className='text-sm font-medium text-slate-300'>
               {t('contact.form.email')}
             </label>
@@ -127,12 +129,12 @@ const ContactComponent = () => {
               type='email'
               value={form.email}
               placeholder={t('contact.form.emailPlaceholder')}
-              className='bg-white/5 border border-white/10 rounded-lg p-2 text-white focus:outline-none focus:border-indigo-500 transition-colors'
+              className='bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-celestial-gold/50 transition-colors'
               onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
             />
           </div>
 
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-2 font-sans'>
             <label htmlFor='message' className='text-sm font-medium text-slate-300'>
               {t('contact.form.message')}
             </label>
@@ -141,7 +143,7 @@ const ContactComponent = () => {
               id='message'
               value={form.message}
               placeholder={t('contact.form.messagePlaceholder')}
-              className='bg-white/5 border border-white/10 rounded-lg p-2 text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none h-32'
+              className='bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-celestial-gold/50 transition-colors resize-none h-32'
               onChange={(event) => setForm((prev) => ({ ...prev, message: event.target.value }))}
             />
           </div>
