@@ -1,4 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-nebula-purple: #a855f7;
+  --color-nebula-violet: #d946ef;
+  --color-deep-indigo: #1e1b4b;
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --font-sans: "Outfit", "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
 
 body,
 html {
@@ -6,8 +16,9 @@ html {
   padding: 0;
   height: 100%;
   overflow: hidden;
-  background-color: #050505;
-  font-family: "Inter", sans-serif;
+  background-color: #020202;
+  color: #f8fafc;
+  -webkit-font-smoothing: antialiased;
 }
 
 #root {
@@ -21,4 +32,20 @@ html {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.text-glow {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.text-purple-glow {
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
 }

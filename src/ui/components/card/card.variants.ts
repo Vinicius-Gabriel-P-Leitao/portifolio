@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority'
 
 export const rootVariants = cva(
-  'bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl hover:border-indigo-500/50 transition-colors group cursor-pointer overflow-hidden',
+  'glass-morphism rounded-2xl hover:border-nebula-purple/50 transition-all duration-500 group cursor-pointer overflow-hidden hover:translate-y--2 hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.2)]',
   {
     variants: {
       size: {
@@ -12,12 +12,14 @@ export const rootVariants = cva(
       width: {
         sm: 'w-64',
         md: 'w-80',
-        lg: 'w-96'
+        lg: 'w-96',
+        full: 'w-full'
       },
       height: {
         sm: 'h-56',
         md: 'h-64',
-        lg: 'h-96'
+        lg: 'h-96',
+        full: 'h-full'
       }
     },
     defaultVariants: {
