@@ -55,7 +55,33 @@ const resources = {
             title: 'Acerola',
             desc: 'App android feito com intuito de ler quadrinhos no formato cbz e cbr.',
             tech: ['Kotlin', 'Jetpack compose', 'Hilt'],
-            preview: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png'
+            preview: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png',
+            images: [
+              {
+                title: 'Home',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png'
+              },
+              {
+                title: 'Manga Settings',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-manga-screen.png'
+              },
+              {
+                title: 'General Settings',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-screen.png'
+              },
+              {
+                title: 'History',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/history-screen.png'
+              },
+              {
+                title: 'Reader Modes',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/reader-screen-modes.png'
+              },
+              {
+                title: 'Webtoon',
+                url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/webtom-reader-mode.png'
+              }
+            ]
           },
           {
             title: 'Arch sticker',
