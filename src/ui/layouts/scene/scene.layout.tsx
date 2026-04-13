@@ -18,7 +18,8 @@ export const Scene: FC<SceneProps> = ({ sceneState }) => {
         <pointLight position={[0, 10, 0]} intensity={1} color='white' />
         <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} intensity={2} castShadow />
 
-        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={0.5} />
+        {/* NOTE: Ajustado raio e profundidade das estrelas para não conflitar com o fundo opaco do buraco negro */}
+        <Stars radius={50} depth={30} count={4000} factor={3} saturation={0} fade speed={0.5} />
         <Environment preset='city' />
 
         <Gargantua position={[0, 0, -200]} scale={25} />
