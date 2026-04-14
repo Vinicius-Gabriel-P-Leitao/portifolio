@@ -15,7 +15,7 @@ export async function fetchGitHubUser(
 		const headers: Record<string, string> = { Accept: 'application/vnd.github+json' };
 		if (token) headers['Authorization'] = `Bearer ${token}`;
 
-		console.log(`[github] GET /users/${username}`);
+		console.log(`[github] GET /users/${username} (auth: ${token ? 'yes' : 'no'})`);
 		const res = await fetch(`https://api.github.com/users/${username}`, { headers });
 		console.log(`[github] GET /users/${username} → ${res.status}`);
 
