@@ -40,6 +40,39 @@ describe('fetchGitHubUser', () => {
 		);
 	});
 
+	test('includes Authorization header when token is provided', async () => {
+		const fetchSpy = vi.fn().mockResolvedValue({
+			ok: true,
+			json: () => Promise.resolve(MOCK_USER)
+		});
+		vi.stubGlobal('fetch', fetchSpy);
+
+		await fetchGitHubUser('test-user', 'ghp_mytoken');
+
+		expect(fetchSpy).toHaveBeenCalledWith(
+			'https://api.github.com/users/test-user',
+			expect.objectContaining({
+				headers: {
+					Accept: 'application/vnd.github+json',
+					Authorization: 'Bearer ghp_mytoken'
+				}
+			})
+		);
+	});
+
+	test('omits Authorization header when token is not provided', async () => {
+		const fetchSpy = vi.fn().mockResolvedValue({
+			ok: true,
+			json: () => Promise.resolve(MOCK_USER)
+		});
+		vi.stubGlobal('fetch', fetchSpy);
+
+		await fetchGitHubUser('test-user');
+
+		const [, options] = fetchSpy.mock.calls[0];
+		expect(options.headers).not.toHaveProperty('Authorization');
+	});
+
 	test('returns null when the HTTP response is not ok', async () => {
 		vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
 
