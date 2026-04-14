@@ -7,15 +7,22 @@ export type GitHubUser = {
 	html_url: string;
 };
 
-export async function fetchGitHubUser(username: string): Promise<GitHubUser | null> {
+export async function fetchGitHubUser(
+	username: string,
+	token?: string
+): Promise<GitHubUser | null> {
 	try {
-		const res = await fetch(`https://api.github.com/users/${username}`, {
-			headers: { Accept: 'application/vnd.github+json' }
-		});
+		const headers: Record<string, string> = { Accept: 'application/vnd.github+json' };
+		if (token) headers['Authorization'] = `Bearer ${token}`;
+
+		console.log(`[github] GET /users/${username}`);
+		const res = await fetch(`https://api.github.com/users/${username}`, { headers });
+		console.log(`[github] GET /users/${username} → ${res.status}`);
 
 		if (!res.ok) return null;
 		return (await res.json()) as GitHubUser;
-	} catch {
+	} catch (err) {
+		console.error(`[github] GET /users/${username} → error:`, err);
 		return null;
 	}
 }
