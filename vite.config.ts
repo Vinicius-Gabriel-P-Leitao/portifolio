@@ -1,32 +1,80 @@
-import tailwindcss from '@tailwindcss/vite'
-import svgr from 'vite-plugin-svgr'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-import { defineConfig } from 'vite'
+import { paraglideVitePlugin } from '@inlang/paraglide-js';
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vitest/config';
+import { playwright } from '@vitest/browser-playwright';
+import { sveltekit } from '@sveltejs/kit/vite';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+const dirname =
+	typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig(({ mode }) => {
-  return {
-    plugins: [react(), svgr(), tailwindcss()],
-    svgr: {
-      svgrOptions: {
-        icon: true,
-        expandProps: 'end'
-      }
-    },
-    server: {
-      port: 3000,
-      host: '0.0.0.0'
-    },
-    resolve: {
-      alias: {
-        '@ui': path.resolve(__dirname, 'src/ui'),
-        '@app': path.resolve(__dirname, 'src/app'),
-        '@i18n': path.resolve(__dirname, 'src/i18n'),
-        '@utils': path.resolve(__dirname, 'src/utils'),
-        '@assets': path.resolve(__dirname, 'src/assets'),
-        '@config': path.resolve(__dirname, 'src/config'),
-        '@composable': path.resolve(__dirname, 'src/composable')
-      }
-    }
-  }
-})
+export default defineConfig({
+	server: {
+		host: true
+	},
+	plugins: [
+		tailwindcss(),
+		sveltekit(),
+		paraglideVitePlugin({
+			project: './project.inlang',
+			outdir: './src/lib/paraglide',
+			strategy: ['url', 'cookie', 'baseLocale']
+		})
+	],
+	test: {
+		expect: {
+			requireAssertions: true
+		},
+		projects: [
+			{
+				extends: './vite.config.ts',
+				test: {
+					name: 'client',
+					browser: {
+						enabled: true,
+						provider: playwright(),
+						instances: [
+							{
+								browser: 'chromium',
+								headless: true
+							}
+						]
+					},
+					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+					exclude: ['src/lib/server/**']
+				}
+			},
+			{
+				extends: './vite.config.ts',
+				test: {
+					name: 'server',
+					environment: 'node',
+					include: ['src/**/*.{test,spec}.{js,ts}'],
+					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}']
+				}
+			},
+			{
+				extends: true,
+				plugins: [
+					storybookTest({
+						configDir: path.join(dirname, '.storybook')
+					})
+				],
+				test: {
+					name: 'storybook',
+					browser: {
+						enabled: true,
+						headless: true,
+						provider: playwright({}),
+						instances: [
+							{
+								browser: 'chromium'
+							}
+						]
+					}
+				}
+			}
+		]
+	}
+});

@@ -1,29 +1,15 @@
 {
-  "include": ["src"],
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "useDefineForClassFields": false,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "moduleResolution": "bundler",
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "noEmit": true,
-    "types": ["node"],
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "paths": {
-      "@ui/*": ["./src/ui/*"],
-      "@app/*": ["./src/app/*"],
-      "@i18n/*": ["./src/i18n/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@config/*": ["./src/config/*"],
-      "@composable/*": ["./src/composable/*"]
-    }
-  }
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"rewriteRelativeImportExtensions": true,
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"moduleResolution": "bundler"
+	}
 }

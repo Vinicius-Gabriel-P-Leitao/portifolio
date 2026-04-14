@@ -1,0 +1,56 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"site": {
+		"name": "VINICIUS-GPL.COM"
+	},
+	"nav": {
+		"home": "Home",
+		"projects": "Projetos",
+		"about": "Sobre",
+		"contact": "Contato"
+	},
+	"hero": {
+		"role": "Desenvolvedor Full-Stack",
+		"subtitle": "Sempre criando novos projetos.",
+		"cta_projects": "Ver projetos"
+	},
+	"projects": {
+		"title": "Projetos",
+		"ideas_title": "Ideias Futuras",
+		"github": "GitHub",
+		"demo": "Demo",
+		"learn_more": "Detalhes",
+		"close": "Fechar",
+		"highlights": "Destaques",
+		"gallery": "Galeria",
+		"status": {
+			"done": "Concluído",
+			"pre_release": "Pré-release",
+			"in_progress": "Em desenvolvimento",
+			"idea": "Ideia futura"
+		}
+	},
+	"about": {
+		"title": "Sobre",
+		"bio": "Sou Vinícius, desenvolvedor full-stack que cria apps web modernos e escaláveis. Trabalho com JavaScript/TypeScript, React, Node.js e Tailwind no frontend, e Java, Kotlin, Spring Boot e Rust no backend. Atualmente expandindo para desenvolvimento Android.",
+		"frontend": "Frontend",
+		"backend": "Backend",
+		"database": "Banco de dados",
+		"infra": "Infra"
+	},
+	"contact": {
+		"title": "Vamos criar juntos",
+		"name": "Nome",
+		"name_placeholder": "Seu nome",
+		"email": "Email",
+		"email_placeholder": "seu@email.com",
+		"message": "Mensagem",
+		"message_placeholder": "Sua mensagem...",
+		"send": "Enviar",
+		"sending": "Enviando..."
+	},
+	"toast": {
+		"success": "Email enviado com sucesso!",
+		"error": "Falha ao enviar. Tente novamente."
+	}
+}

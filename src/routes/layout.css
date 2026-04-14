@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		/* offset so fixed navbar doesn't cover anchors */
+		scroll-padding-top: 3.5rem;
+		/* snap between sections so no section bleeds into the viewport of another */
+		scroll-snap-type: y mandatory;
+	}
+
+	body {
+		background-color: #0a0a0a;
+		color: #f1f5f9;
+		font-family:
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			'Segoe UI',
+			sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Consistent focus ring */
+	:focus-visible {
+		outline: 2px solid #6366f1;
+		outline-offset: 2px;
+	}
+
+	/* Thin scrollbar */
+	::-webkit-scrollbar {
+		width: 4px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.1);
+		border-radius: 9999px;
+	}
+}
+
+/* Every section occupies at least the full viewport and snaps into place */
+section {
+	min-height: 100dvh;
+	scroll-snap-align: start;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/* On mobile the BottomNav (≈60px) is fixed at the bottom.
+   Reserve that space so content is never hidden behind it. */
+@media (max-width: 768px) {
+	html {
+		scroll-padding-bottom: 4rem;
+	}
+
+	section {
+		padding-bottom: 4rem;
+	}
+}
+
+/* Sections animate in when entering viewport */
+[data-visible='true'] {
+	animation: section-in 0.5s ease forwards;
+}
+
+[data-visible='false'],
+section:not([data-visible]) {
+	opacity: 0;
+	transform: translateY(12px);
+}
+
+/* Hero is always visible (first thing loaded) */
+#hero {
+	opacity: 1 !important;
+	transform: none !important;
+	animation: none !important;
+}
+
+@keyframes section-in {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
