@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate Paraglide runtime
+        run: npx @inlang/paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide
+
       - name: Lint
         run: npm run lint
 
