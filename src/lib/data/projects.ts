@@ -107,6 +107,10 @@ export const PROJECTS: Project[] = [
 			{
 				title: 'Webtoon',
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/webtom-reader-mode.png'
+			},
+			{
+				title: 'Chapter',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/chapter-manga-screen.png'
 			}
 		],
 		highlights: [
