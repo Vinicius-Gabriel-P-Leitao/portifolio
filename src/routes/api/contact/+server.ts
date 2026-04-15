@@ -24,9 +24,12 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 	const { name, email, message } = body as Record<string, unknown>;
 
 	if (
-		typeof name !== 'string' || !name.trim() ||
-		typeof email !== 'string' || !email.trim() ||
-		typeof message !== 'string' || !message.trim()
+		typeof name !== 'string' ||
+		!name.trim() ||
+		typeof email !== 'string' ||
+		!email.trim() ||
+		typeof message !== 'string' ||
+		!message.trim()
 	) {
 		return json({ error: 'validation_error' }, { status: 400 });
 	}
@@ -37,15 +40,15 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${resendToken}`,
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
 			from: fromAddress,
 			to: toAddress,
 			reply_to: email,
 			subject: `Nova mensagem de ${name}`,
-			html: buildEmailHtml(payload),
-		}),
+			html: buildEmailHtml(payload)
+		})
 	});
 
 	if (!res.ok) {
