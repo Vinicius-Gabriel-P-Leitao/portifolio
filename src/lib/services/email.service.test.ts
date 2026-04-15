@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { buildEmailPayload } from './email';
+import { buildEmailPayload } from './email.service';
 
 describe('buildEmailPayload', () => {
 	test('includes all input fields in the payload', () => {

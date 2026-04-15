@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Home, FolderOpen, User, Mail } from 'lucide-svelte';
-	import { isMobile } from '$lib/hooks/is-mobile.svelte';
+	import { isMobile } from '$lib/reactive/is-mobile.svelte';
 	import { navigation } from '$lib/stores/navigation.svelte';
 	import * as m from '$lib/paraglide/messages';
 

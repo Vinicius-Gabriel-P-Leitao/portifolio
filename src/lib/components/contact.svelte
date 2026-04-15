@@ -3,7 +3,7 @@
 	import GithubIcon from '$lib/components/github-icon.svelte';
 	import { intersect } from '$lib/actions/intersect';
 	import { toast } from '$lib/stores/toast.svelte';
-	import { sendEmail } from '$lib/utils/email';
+	import { sendEmail } from '$lib/services/email.service';
 	import * as m from '$lib/paraglide/messages';
 
 	let name = $state('');
