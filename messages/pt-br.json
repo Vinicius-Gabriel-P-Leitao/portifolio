@@ -32,7 +32,7 @@
 	},
 	"about": {
 		"title": "Sobre",
-		"bio": "Sou Vinícius, desenvolvedor full-stack que cria apps web modernos e escaláveis. Trabalho com JavaScript/TypeScript, React, Node.js e Tailwind no frontend, e Java, Kotlin, Spring Boot e Rust no backend. Atualmente expandindo para desenvolvimento Android.",
+		"bio": "Desenvolvedor full-stack criando apps modernos. Trabalho com TypeScript, React, Node.js e Tailwind no frontend, Java, Spring Boot no backend. Atualmente expandindo para Android utilizando Kotlin e nativo com Rust.",
 		"frontend": "Frontend",
 		"backend": "Backend",
 		"database": "Banco de dados",

@@ -32,7 +32,7 @@
 	},
 	"about": {
 		"title": "About",
-		"bio": "I'm Vinícius, a full-stack developer who builds modern and scalable web apps. I work with JavaScript/TypeScript, React, Node.js and Tailwind on the frontend, and Java, Kotlin, Spring Boot and Rust on the backend. Currently expanding into Android development.",
+		"bio": "Full-stack developer building modern apps. I work with TypeScript, React, Node.js and Tailwind on the frontend, Java and Spring Boot on the backend. Currently expanding into Android using Kotlin and native with Rust.",
 		"frontend": "Frontend",
 		"backend": "Backend",
 		"database": "Database",
