@@ -5,7 +5,7 @@
 	import { locales, localizeHref, getLocale } from '$lib/paraglide/runtime';
 	import type { Pathname } from '$app/types';
 	import { Home, FolderOpen, User, Mail } from 'lucide-svelte';
-	import { isMobile } from '$lib/hooks/is-mobile.svelte';
+	import { isMobile } from '$lib/reactive/is-mobile.svelte';
 	import { navigation } from '$lib/stores/navigation.svelte';
 	import type { Section } from '$lib/stores/navigation.svelte';
 	import * as m from '$lib/paraglide/messages';
