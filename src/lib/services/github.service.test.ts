@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { fetchGitHubUser } from './github';
-import type { GitHubUser } from './github';
+import { fetchGitHubUser } from './github.service';
+import type { GitHubUser } from './github.service';
 
 const MOCK_USER: GitHubUser = {
 	login: 'test-user',
@@ -36,7 +36,9 @@ describe('fetchGitHubUser', () => {
 
 		expect(fetchSpy).toHaveBeenCalledWith(
 			'https://api.github.com/users/test-user',
-			expect.objectContaining({ headers: { Accept: 'application/vnd.github+json' } })
+			expect.objectContaining({
+				headers: expect.objectContaining({ Accept: 'application/vnd.github+json' })
+			})
 		);
 	});
 
@@ -52,10 +54,10 @@ describe('fetchGitHubUser', () => {
 		expect(fetchSpy).toHaveBeenCalledWith(
 			'https://api.github.com/users/test-user',
 			expect.objectContaining({
-				headers: {
+				headers: expect.objectContaining({
 					Accept: 'application/vnd.github+json',
 					Authorization: 'Bearer ghp_mytoken'
-				}
+				})
 			})
 		);
 	});

@@ -2,7 +2,7 @@
 	import { fly, fade } from 'svelte/transition';
 	import { X, ExternalLink, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-svelte';
 	import { getLocale } from '$lib/paraglide/runtime';
-	import { isMobile } from '$lib/hooks/is-mobile.svelte';
+	import { isMobile } from '$lib/reactive/is-mobile.svelte';
 	import GithubIcon from '$lib/components/github-icon.svelte';
 	import type { Project, ProjectStatus } from '$lib/data/projects';
 	import * as m from '$lib/paraglide/messages';
