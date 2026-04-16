@@ -35,6 +35,22 @@ export const PROJECTS: Project[] = [
 		},
 		tech: ['Java', 'Spring Boot', 'Spring Security', 'React', 'TypeScript', 'JWT'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/auth-server',
+		preview:
+			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png',
+		images: [
+			{
+				title: 'Login',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-login.png'
+			},
+			{
+				title: 'Metadata',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-metadata.png'
+			},
+			{
+				title: 'Admin Panel',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png'
+			}
+		],
 		highlights: [
 			{
 				title: { en: 'Token Architecture', 'pt-br': 'Arquitetura de Tokens' },

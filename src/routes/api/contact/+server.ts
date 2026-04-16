@@ -43,7 +43,7 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			from: fromAddress,
+			from: `Portifolio ${fromAddress}`,
 			to: toAddress,
 			reply_to: email,
 			subject: `Nova mensagem de ${name}`,
