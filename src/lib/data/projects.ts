@@ -95,7 +95,7 @@ export const PROJECTS: Project[] = [
 			'pt-br':
 				'Leitor de mangá para Android que escaneia pastas locais, lê CBZ e CBR, busca metadados automaticamente no MangaDex e AniList, e suporta múltiplos modos de leitura e temas.'
 		},
-		tech: ['Kotlin', 'Jetpack Compose', 'Hilt', 'MangaDex API', 'AniList API'],
+		tech: ['Kotlin', 'Rust', 'Iroh', 'Jetpack Compose', 'Hilt', 'MangaDex API', 'AniList API'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-android',
 		preview:
 			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png',
@@ -181,7 +181,7 @@ export const PROJECTS: Project[] = [
 			'pt-br':
 				'Leitor de quadrinhos desktop multiplataforma em Rust e Tauri. Lê CBZ, CBR e PDF, gerencia biblioteca local, faz streaming de páginas via HTTP para celular e conecta ao plugin de tradução com IA.'
 		},
-		tech: ['Rust', 'Tauri v2', 'Svelte 5', 'TypeScript', 'Axum', 'Tailwind'],
+		tech: ['Rust', 'Tauri v2', 'Svelte 5', 'TypeScript', 'Iroh', 'Tailwind'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-desktop',
 		highlights: [
 			{
