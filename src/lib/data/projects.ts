@@ -281,6 +281,76 @@ export const PROJECTS: Project[] = [
 		]
 	},
 	{
+		id: 'acerola-rag',
+		title: 'Acerola RAG',
+		status: 'done',
+		desc: {
+			en: 'Retrieval-Augmented Generation system for chatting with your documents. Hybrid vector search, real-time streaming, multi-provider LLM support (OpenAI, Gemini, Claude, Ollama) and an admin panel for document management.',
+			'pt-br':
+				'Sistema de Retrieval-Augmented Generation para conversar com seus documentos. Busca vetorial híbrida, streaming em tempo real, suporte a múltiplos LLMs (OpenAI, Gemini, Claude, Ollama) e painel administrativo para gerenciar documentos.'
+		},
+		tech: ['Python', 'FastAPI', 'LlamaIndex', 'Qdrant', 'SvelteKit', 'Svelte 5', 'Tailwind', 'Docker'],
+		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-rag',
+		preview:
+			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/chat-print.png',
+		images: [
+			{
+				title: 'Chat',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/chat-print.png'
+			},
+			{
+				title: 'Admin Panel',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/admin-print.png'
+			},
+			{
+				title: 'History',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/history-print.png'
+			}
+		],
+		highlights: [
+			{
+				title: { en: 'Hybrid Search', 'pt-br': 'Busca Híbrida' },
+				body: {
+					en: 'Combines dense vector search with BM25 in Qdrant — retrieves the top-6 most relevant chunks and reranks them contextually before feeding the LLM.',
+					'pt-br':
+						'Combina busca vetorial densa com BM25 no Qdrant — recupera os 6 chunks mais relevantes e os reordena contextualmente antes de alimentar o LLM.'
+				}
+			},
+			{
+				title: { en: 'Multi-provider LLM', 'pt-br': 'LLM Multi-provedor' },
+				body: {
+					en: 'OpenAI, Gemini, Anthropic and Ollama behind a single interface — swap the provider without touching the pipeline.',
+					'pt-br':
+						'OpenAI, Gemini, Anthropic e Ollama atrás de uma interface única — troca de provedor sem mexer no pipeline.'
+				}
+			},
+			{
+				title: { en: 'Parallel Ingestion', 'pt-br': 'Ingestão Paralela' },
+				body: {
+					en: '4 workers process documents simultaneously. Chunks of 512 tokens with 64-token overlap using BAAI/bge-small-en-v1.5 embeddings (384 dimensions).',
+					'pt-br':
+						'4 workers processam documentos simultaneamente. Chunks de 512 tokens com overlap de 64 usando embeddings BAAI/bge-small-en-v1.5 (384 dimensões).'
+				}
+			},
+			{
+				title: { en: 'Real-time Streaming', 'pt-br': 'Streaming em Tempo Real' },
+				body: {
+					en: 'Answers stream progressively to the browser via SSE — no waiting for the full response before reading.',
+					'pt-br':
+						'Respostas chegam progressivamente ao navegador via SSE — sem esperar a resposta completa para começar a ler.'
+				}
+			},
+			{
+				title: { en: 'Smart Parsing', 'pt-br': 'Parsing Inteligente' },
+				body: {
+					en: 'EasyOCR and Unstructured extract text from scanned PDFs, images and mixed-format documents automatically.',
+					'pt-br':
+						'EasyOCR e Unstructured extraem texto de PDFs escaneados, imagens e documentos com formatos mistos automaticamente.'
+				}
+			}
+		]
+	},
+	{
 		id: 'acerola-relay',
 		title: 'Acerola Relay',
 		status: 'idea',
@@ -289,8 +359,16 @@ export const PROJECTS: Project[] = [
 			'pt-br':
 				'Servidor de sync e relay do ecossistema Acerola. Conecta o cliente desktop, o leitor mobile e o translator para que bibliotecas, progresso de leitura e arquivos traduzidos fiquem sincronizados entre dispositivos.'
 		},
-		tech: ['Go', 'WebSocket', 'SQLite', 'Docker'],
+		tech: ['Rust', 'iroh', 'SQLite', 'Docker'],
 		highlights: [
+			{
+				title: { en: 'Peer-to-peer with iroh', 'pt-br': 'Peer-to-peer com iroh' },
+				body: {
+					en: 'Built on iroh for direct device-to-device connections — no central server required, works through NAT and firewalls automatically.',
+					'pt-br':
+						'Construído sobre iroh para conexões diretas entre dispositivos — sem servidor central, atravessa NAT e firewalls automaticamente.'
+				}
+			},
 			{
 				title: { en: 'Remote Access', 'pt-br': 'Acesso Remoto' },
 				body: {
