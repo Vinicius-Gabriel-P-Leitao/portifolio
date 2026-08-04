@@ -13,7 +13,7 @@
 	import Navbar from '$lib/components/navbar.svelte';
 	import BottomNav from '$lib/components/bottom-nav.svelte';
 	import Toast from '$lib/components/toast.svelte';
-	import Threads from '$lib/components/svelte-bits/Threads.svelte';
+	import BlackHole from '$lib/components/svelte-bits/BlackHole.svelte';
 	import Noise from '$lib/components/svelte-bits/Noise.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
@@ -32,14 +32,9 @@
 	<meta name="theme-color" content="#0a0a0a" />
 </svelte:head>
 
-<!-- Global Fixed Background -->
-<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 opacity-40">
-	<Threads
-		color={[0.39, 0.4, 0.95]}
-		amplitude={1.2}
-		distance={0.2}
-		enableMouseInteraction={true}
-	/>
+<!-- Global Fixed Background: Buraco Negro Gargantua em OGL -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 opacity-70">
+	<BlackHole speed={0.4} iterations={90} enableMouseInteraction={true} />
 </div>
 
 <div
