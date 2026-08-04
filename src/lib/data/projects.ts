@@ -169,6 +169,14 @@ export const PROJECTS: Project[] = [
 					'pt-br':
 						'Projetado para conectar com o acerola-desktop via Wi-Fi local e com o acerola-relay para acesso remoto fora de casa.'
 				}
+			},
+			{
+				title: { en: 'Compose Design System', 'pt-br': 'Design System em Compose' },
+				body: {
+					en: 'Modular UI built with Jetpack Compose, adaptive sheets, custom cards, dialogs, and isolated @Preview functions for Light and Dark modes.',
+					'pt-br':
+						'UI modular construída com Jetpack Compose, adaptive sheets, cards customizados, diálogos e funções @Preview isoladas para temas Claro e Escuro.'
+				}
 			}
 		]
 	},
