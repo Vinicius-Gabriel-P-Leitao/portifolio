@@ -84,9 +84,9 @@
 	}
 
 	.bio-text {
-		font-size: 0.9375rem;
+		font-size: 1rem;
 		line-height: 1.8;
-		color: rgba(255, 255, 255, 0.5);
+		color: rgba(255, 255, 255, 0.88);
 		max-width: 60ch;
 	}
 
@@ -96,22 +96,24 @@
 		gap: 1rem;
 	}
 
-	/* SpotlightCard override para ter visual mais limpo */
+	/* SpotlightCard override para ter visual mais limpo e alto contraste */
 	:global(.stack-card) {
 		padding: 1.25rem !important;
-		border-radius: 12px !important;
-		background: rgba(255,255,255,0.025) !important;
-		border-color: rgba(255,255,255,0.06) !important;
+		border-radius: 16px !important;
+		background: rgba(18, 18, 24, 0.88) !important;
+		backdrop-filter: blur(20px) !important;
+		border-color: rgba(255, 255, 255, 0.15) !important;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
 	}
 
 	.stack-category {
 		display: block;
-		font-size: 0.6rem;
+		font-size: 0.65rem;
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: rgba(255,255,255,0.3);
+		color: rgba(255, 255, 255, 0.6);
 		margin-bottom: 0.875rem;
-		font-weight: 600;
+		font-weight: 700;
 	}
 
 	.stack-items {
@@ -124,13 +126,13 @@
 	}
 
 	.stack-item {
-		font-size: 0.825rem;
-		color: rgba(255,255,255,0.6);
-		padding: 0.25rem 0;
-		border-bottom: 1px solid rgba(255,255,255,0.05);
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.9);
+		padding: 0.3rem 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 		transition: color 0.2s;
 	}
 
 	.stack-item:last-child { border-bottom: none; }
-	.stack-item:hover { color: rgba(255,255,255,0.9); }
+	.stack-item:hover { color: #ffffff; }
 </style>

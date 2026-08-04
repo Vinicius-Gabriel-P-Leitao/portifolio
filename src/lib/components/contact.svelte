@@ -44,7 +44,7 @@
 					speed={5}
 					class="section-label"
 				/>
-				<h2 class="section-title">Get in touch</h2>
+				<h2 class="section-title">{m['contact.title']()}</h2>
 			</div>
 		</FadeContent>
 

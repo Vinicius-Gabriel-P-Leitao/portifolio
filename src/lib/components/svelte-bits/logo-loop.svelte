@@ -23,7 +23,7 @@
 	>
 		{#each logos as logo, i (logo.name + i)}
 			<div
-				class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] backdrop-blur-sm text-xs font-mono tracking-wider text-neutral-400 select-none hover:text-white hover:border-white/20 transition-colors"
+				class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-[#121218]/90 backdrop-blur-md text-xs font-mono font-medium tracking-wider text-white shadow-md select-none hover:border-white/40 hover:bg-[#1a1a24] transition-colors"
 			>
 				<span class="w-1.5 h-1.5 rounded-full bg-indigo-500/60"></span>
 				<span>{logo.name}</span>
@@ -38,7 +38,7 @@
 	>
 		{#each logos as logo, i (logo.name + '-dup-' + i)}
 			<div
-				class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] backdrop-blur-sm text-xs font-mono tracking-wider text-neutral-400 select-none hover:text-white hover:border-white/20 transition-colors"
+				class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-[#121218]/90 backdrop-blur-md text-xs font-mono font-medium tracking-wider text-white shadow-md select-none hover:border-white/40 hover:bg-[#1a1a24] transition-colors"
 			>
 				<span class="w-1.5 h-1.5 rounded-full bg-indigo-500/60"></span>
 				<span>{logo.name}</span>

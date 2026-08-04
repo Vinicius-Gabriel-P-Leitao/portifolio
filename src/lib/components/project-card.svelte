@@ -98,48 +98,54 @@
 <style>
 	:global(.project-card) {
 		padding: 0 !important;
-		border-radius: 12px !important;
-		background: rgba(255,255,255,0.025) !important;
-		border-color: rgba(255,255,255,0.07) !important;
+		border-radius: 16px !important;
+		background: rgba(18, 18, 24, 0.88) !important;
+		backdrop-filter: blur(20px) !important;
+		border-color: rgba(255, 255, 255, 0.15) !important;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		overflow: hidden;
-		transition: border-color 0.25s !important;
+		transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s !important;
 	}
 	:global(.project-card:hover) {
-		border-color: rgba(255,255,255,0.13) !important;
+		border-color: rgba(255, 255, 255, 0.35) !important;
+		transform: translateY(-2px) !important;
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 255, 255, 0.05) !important;
 	}
 
 	.preview {
 		height: 160px;
 		overflow: hidden;
-		background: rgba(255,255,255,0.02);
+		background: rgba(0, 0, 0, 0.4);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		padding: 1rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 	}
 	.preview-img {
 		max-height: 100%;
 		max-width: 100%;
 		object-fit: contain;
-		opacity: 0.85;
+		opacity: 0.95;
 	}
 	.preview-empty {
 		height: 100px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: rgba(255,255,255,0.015);
+		background: rgba(0, 0, 0, 0.3);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 	}
 	.preview-initial {
 		font-size: 2.5rem;
 		font-weight: 700;
-		color: rgba(255,255,255,0.06);
+		color: rgba(255, 255, 255, 0.15);
 	}
 
-	.card-body { display: flex; flex-direction: column; flex: 1; padding: 1.125rem; }
+	.card-body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
 
 	.card-top {
 		display: flex;
@@ -150,9 +156,9 @@
 	}
 
 	.card-title {
-		font-size: 0.875rem;
-		font-weight: 600;
-		color: rgba(255,255,255,0.85);
+		font-size: 0.95rem;
+		font-weight: 700;
+		color: #ffffff;
 		line-height: 1.3;
 	}
 
@@ -166,18 +172,18 @@
 	}
 
 	.card-desc {
-		font-size: 0.75rem;
+		font-size: 0.8rem;
 		line-height: 1.65;
-		color: rgba(255,255,255,0.38);
+		color: rgba(255, 255, 255, 0.85);
 		flex: 1;
-		margin-bottom: 0.875rem;
+		margin-bottom: 1rem;
 	}
 
 	.card-tags {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.375rem;
-		margin-bottom: 0.875rem;
+		margin-bottom: 1rem;
 	}
 
 	.tag {

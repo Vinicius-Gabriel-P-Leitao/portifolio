@@ -18,5 +18,11 @@ export const navigation = {
 	navigate(section: Section) {
 		_lastClickAt = Date.now();
 		_active = section;
+		if (typeof document !== 'undefined') {
+			const el = document.getElementById(section);
+			if (el) {
+				el.scrollIntoView({ behavior: 'smooth' });
+			}
+		}
 	}
 };
