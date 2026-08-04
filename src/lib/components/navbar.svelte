@@ -11,11 +11,14 @@
 	import * as m from '$lib/paraglide/messages';
 
 	let scrolled = $state(false);
+	let scrollProgress = $state(0);
 
 	$effect(() => {
 		if (!browser) return;
 		const handler = () => {
 			scrolled = window.scrollY > 20;
+			const total = document.body.scrollHeight - window.innerHeight;
+			scrollProgress = total > 0 ? window.scrollY / total : 0;
 		};
 		window.addEventListener('scroll', handler, { passive: true });
 		return () => window.removeEventListener('scroll', handler);
@@ -29,49 +32,41 @@
 	];
 </script>
 
-<header
-	class={[
-		'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-		scrolled ? 'border-b border-white/8 bg-black/85 backdrop-blur-md' : ''
-	].join(' ')}
->
-	<nav class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
-		<!-- Logo / brand -->
-		<span class="shrink-0 text-[11px] font-semibold tracking-[0.2em] text-white/40 uppercase">
-			{m['site.name']()}
-		</span>
+<header class="navbar" class:scrolled>
+	<!-- Scroll progress line at bottom of header -->
+	<div
+		class="progress-line"
+		style="transform: scaleX({scrollProgress}); opacity: {scrolled ? 1 : 0};"
+	></div>
 
-		<!-- Desktop nav links (icon + label) -->
+	<nav class="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+		<span class="brand">{m['site.name']()}</span>
+
 		{#if !isMobile.current}
-			<div class="flex items-center gap-1">
+			<div class="nav-links">
 				{#each NAV_LINKS as link (link.id)}
 					{@const isActive = navigation.active === link.id}
 					{@const Icon = link.Icon}
 					<a
 						href="#{link.id}"
 						onclick={() => navigation.navigate(link.id)}
-						class={[
-							'flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11px] tracking-widest uppercase transition-colors',
-							isActive ? 'bg-white/8 text-white' : 'text-white/40 hover:text-white/70'
-						].join(' ')}
+						class="nav-link"
+						class:active={isActive}
 						aria-current={isActive ? 'page' : undefined}
 					>
-						<Icon size={13} strokeWidth={isActive ? 2.5 : 1.5} />
+						<Icon size={12} strokeWidth={isActive ? 2 : 1.5} />
 						{link.label()}
 					</a>
 				{/each}
 			</div>
 		{/if}
 
-		<!-- Language switcher -->
-		<div class="flex shrink-0 items-center gap-1">
+		<div class="lang-switcher">
 			{#each locales as locale (locale)}
 				<a
 					href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}
-					class={[
-						'rounded px-2 py-1 text-[10px] tracking-widest uppercase transition-colors',
-						getLocale() === locale ? 'bg-white/10 text-white' : 'text-white/35 hover:text-white/60'
-					].join(' ')}
+					class="lang-btn"
+					class:active={getLocale() === locale}
 				>
 					{locale === 'pt-br' ? 'PT' : 'EN'}
 				</a>
@@ -79,3 +74,78 @@
 		</div>
 	</nav>
 </header>
+
+<style>
+	.navbar {
+		position: fixed;
+		inset: 0;
+		bottom: auto;
+		z-index: 50;
+		transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+	}
+
+	.navbar.scrolled {
+		background: rgba(10, 10, 10, 0.82);
+		border-bottom: 1px solid rgba(255,255,255,0.06);
+		backdrop-filter: blur(16px);
+	}
+
+	/* Thin progress line at the very bottom of the header */
+	.progress-line {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 1px;
+		width: 100%;
+		background: linear-gradient(90deg, rgba(99,102,241,0.8), rgba(196,181,253,0.5));
+		transform-origin: left;
+		transition: opacity 0.4s, transform 0.05s linear;
+	}
+
+	.brand {
+		font-size: 0.65rem;
+		font-weight: 600;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: rgba(255,255,255,0.45);
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 0;
+	}
+
+	.nav-link {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		padding: 0.35rem 0.75rem;
+		border-radius: 6px;
+		font-size: 0.6rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		font-weight: 500;
+		color: rgba(255,255,255,0.3);
+		text-decoration: none;
+		transition: color 0.2s, background 0.2s;
+	}
+	.nav-link:hover { color: rgba(255,255,255,0.65); }
+	.nav-link.active { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.06); }
+
+	.lang-switcher { display: flex; gap: 2px; }
+
+	.lang-btn {
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		font-size: 0.6rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		font-weight: 600;
+		text-decoration: none;
+		color: rgba(255,255,255,0.25);
+		transition: color 0.2s, background 0.2s;
+	}
+	.lang-btn:hover { color: rgba(255,255,255,0.6); }
+	.lang-btn.active { color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.06); }
+</style>

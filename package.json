@@ -48,7 +48,10 @@
 		"vitest-browser-svelte": "^2.1.0"
 	},
 	"dependencies": {
+		"gsap": "^3.15.0",
 		"lucide-svelte": "^1.0.1",
+		"motion": "^12.43.0",
+		"ogl": "^1.0.11",
 		"resend": "^6.11.0"
 	}
 }

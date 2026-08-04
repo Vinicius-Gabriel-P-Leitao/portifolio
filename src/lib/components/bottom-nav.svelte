@@ -13,27 +13,58 @@
 </script>
 
 {#if isMobile.current}
-	<nav
-		class="fixed inset-x-0 bottom-0 z-50 flex items-center justify-around border-t border-white/8 bg-black/90 px-2 py-2 backdrop-blur-md"
-		aria-label="Mobile navigation"
-	>
+	<nav class="bottom-nav" aria-label="Mobile navigation">
 		{#each ITEMS as item (item.id)}
 			{@const isActive = navigation.active === item.id}
 			{@const Icon = item.Icon}
 			<a
 				href="#{item.id}"
 				onclick={() => navigation.navigate(item.id)}
-				class={[
-					'flex min-w-[56px] flex-col items-center gap-1 rounded-xl px-3 py-1.5 transition-all duration-200',
-					isActive ? 'text-white' : 'text-white/30 hover:text-white/60'
-				].join(' ')}
+				class="bottom-item"
+				class:active={isActive}
 				aria-current={isActive ? 'page' : undefined}
 			>
-				<span class={['transition-transform duration-200', isActive ? 'scale-110' : ''].join(' ')}>
-					<Icon size={20} strokeWidth={isActive ? 2.5 : 1.5} />
-				</span>
-				<span class="text-[9px] leading-none tracking-widest uppercase">{item.label()}</span>
+				<Icon size={20} strokeWidth={isActive ? 2 : 1.5} />
+				<span class="bottom-label">{item.label()}</span>
 			</a>
 		{/each}
 	</nav>
 {/if}
+
+<style>
+	.bottom-nav {
+		position: fixed;
+		inset-x: 0;
+		bottom: 0;
+		z-index: 50;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		padding: 0.5rem 0.5rem 0.875rem;
+		background: rgba(10, 10, 10, 0.9);
+		backdrop-filter: blur(20px);
+		border-top: 1px solid rgba(255,255,255,0.06);
+	}
+
+	.bottom-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 3px;
+		min-width: 52px;
+		padding: 0.35rem 0.5rem;
+		text-decoration: none;
+		color: rgba(255,255,255,0.28);
+		transition: color 0.2s;
+		border-radius: 8px;
+	}
+	.bottom-item:hover { color: rgba(255,255,255,0.55); }
+	.bottom-item.active { color: rgba(255,255,255,0.85); }
+
+	.bottom-label {
+		font-size: 0.55rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-weight: 500;
+	}
+</style>
