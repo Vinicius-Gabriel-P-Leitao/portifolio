@@ -2,8 +2,8 @@
 	import { ChevronRight } from 'lucide-svelte';
 	import { intersect } from '$lib/actions/intersect';
 	import GithubIcon from '$lib/components/github-icon.svelte';
-	import TextType from '$lib/components/svelte-bits/TextType.svelte';
-	import ShinyText from '$lib/components/svelte-bits/ShinyText.svelte';
+	import TextType from '$lib/components/svelte-bits/text-type.svelte';
+	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
 	import type { GitHubUser } from '$lib/services/github.service';
 	import * as m from '$lib/paraglide/messages';
 

@@ -13,8 +13,8 @@
 	import Navbar from '$lib/components/navbar.svelte';
 	import BottomNav from '$lib/components/bottom-nav.svelte';
 	import Toast from '$lib/components/toast.svelte';
-	import BlackHole from '$lib/components/svelte-bits/BlackHole.svelte';
-	import Noise from '$lib/components/svelte-bits/Noise.svelte';
+	import BlackHole from '$lib/components/svelte-bits/black-hole.svelte';
+	import Noise from '$lib/components/svelte-bits/noise.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 

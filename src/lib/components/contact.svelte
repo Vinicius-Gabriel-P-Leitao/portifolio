@@ -4,8 +4,8 @@
 	import { intersect } from '$lib/actions/intersect';
 	import { toast } from '$lib/stores/toast.svelte';
 	import { sendEmail } from '$lib/services/email.service';
-	import FadeContent from '$lib/components/svelte-bits/FadeContent.svelte';
-	import ShinyText from '$lib/components/svelte-bits/ShinyText.svelte';
+	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
+	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
 
 	import * as m from '$lib/paraglide/messages';
 

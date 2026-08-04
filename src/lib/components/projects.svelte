@@ -6,9 +6,8 @@
 	import * as m from '$lib/paraglide/messages';
 	import ProjectCard from './project-card.svelte';
 	import ProjectDetail from './project-detail.svelte';
-	import FadeContent from '$lib/components/svelte-bits/FadeContent.svelte';
-	import ShinyText from '$lib/components/svelte-bits/ShinyText.svelte';
-	import Particles from '$lib/components/svelte-bits/Particles.svelte';
+	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
+	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
 
 	const activeProjects = PROJECTS.filter((p) => p.status !== 'idea');
 	const ideaProjects = PROJECTS.filter((p) => p.status === 'idea');
@@ -39,20 +38,6 @@
 	class="projects-section relative"
 	use:intersect={{ section: 'projects', threshold: 0.1 }}
 >
-	<!-- Particles muito sutis como textura de fundo -->
-	<div aria-hidden="true" class="absolute inset-0 pointer-events-none z-0">
-		<Particles
-			particleCount={60}
-			particleSpread={20}
-			speed={0.02}
-			particleColors={['rgba(255,255,255,0.6)', 'rgba(255,255,255,0.3)']}
-			particleBaseSize={30}
-			alphaParticles={true}
-			disableRotation={true}
-			moveParticlesOnHover={false}
-		/>
-	</div>
-
 	<div class="relative z-10 px-6 pt-24 pb-16 mx-auto w-full max-w-6xl">
 
 		<FadeContent blur duration={800} threshold={0.2} class="mb-12">

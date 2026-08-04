@@ -2,7 +2,7 @@
 	import { ExternalLink, ArrowUpRight } from 'lucide-svelte';
 	import { getLocale } from '$lib/paraglide/runtime';
 	import GithubIcon from '$lib/components/github-icon.svelte';
-	import SpotlightCard from '$lib/components/svelte-bits/SpotlightCard.svelte';
+	import SpotlightCard from '$lib/components/svelte-bits/spotlight-card.svelte';
 	import type { Project, ProjectStatus } from '$lib/data/projects';
 	import * as m from '$lib/paraglide/messages';
 
