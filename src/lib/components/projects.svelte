@@ -7,6 +7,7 @@
 	import ProjectCard from './project-card.svelte';
 	import ProjectDetail from './project-detail.svelte';
 	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
+	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
 
 	const activeProjects = PROJECTS.filter((p) => p.status !== 'idea');
 	const ideaProjects = PROJECTS.filter((p) => p.status === 'idea');
@@ -41,7 +42,13 @@
 
 		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
 			<div class="section-header">
-				<span class="section-label">{m['projects.title']()}</span>
+				<ShinyText
+					text={m['projects.title']()}
+					color="rgba(255,255,255,0.3)"
+					shineColor="rgba(255,255,255,0.7)"
+					speed={5}
+					class="section-label"
+				/>
 				<div class="title-row">
 					<h2 class="section-title">{m['projects.title']()}</h2>
 					<span class="project-count">{activeProjects.length}</span>

@@ -5,6 +5,7 @@
 	import { toast } from '$lib/stores/toast.svelte';
 	import { sendEmail } from '$lib/services/email.service';
 	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
+	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
 
 	import * as m from '$lib/paraglide/messages';
 
@@ -36,7 +37,13 @@
 
 		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
 			<div class="section-header">
-				<span class="section-label">{m['contact.title']()}</span>
+				<ShinyText
+					text={m['contact.title']()}
+					color="rgba(255,255,255,0.3)"
+					shineColor="rgba(255,255,255,0.7)"
+					speed={5}
+					class="section-label"
+				/>
 				<h2 class="section-title">{m['contact.title']()}</h2>
 			</div>
 		</FadeContent>

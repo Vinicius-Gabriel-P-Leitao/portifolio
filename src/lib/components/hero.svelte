@@ -2,6 +2,8 @@
 	import { ChevronRight } from 'lucide-svelte';
 	import { intersect } from '$lib/actions/intersect';
 	import GithubIcon from '$lib/components/github-icon.svelte';
+	import TextType from '$lib/components/svelte-bits/text-type.svelte';
+	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
 	import type { GitHubUser } from '$lib/services/github.service';
 	import * as m from '$lib/paraglide/messages';
 
@@ -28,9 +30,15 @@
 		<!-- Nome -->
 		<h1 class="hero-name">Vinícius Gabriel</h1>
 
-		<!-- Cargo -->
+		<!-- Cargo com animação TextType -->
 		<div class="hero-role-container">
-			<p class="hero-role">{m['hero.role']()}</p>
+			<TextType
+				text={m['hero.role']()}
+				typingSpeed={55}
+				showCursor={true}
+				cursorChar="|"
+				class="hero-role"
+			/>
 		</div>
 
 		<!-- Separador visual fino -->
@@ -58,7 +66,13 @@
 
 		<!-- Scroll hint -->
 		<div class="scroll-hint">
-			<span class="scroll-label">scroll</span>
+			<ShinyText
+				text="scroll"
+				color="rgba(255,255,255,0.18)"
+				shineColor="rgba(255,255,255,0.45)"
+				speed={5}
+				class="scroll-label"
+			/>
 			<div class="scroll-line"></div>
 		</div>
 	</div>
