@@ -119,7 +119,7 @@
 	.projects-section {
 		min-height: 100dvh;
 		scroll-snap-align: start;
-		background: #0a0a0a;
+		background: transparent;
 		display: flex;
 		flex-direction: column;
 	}

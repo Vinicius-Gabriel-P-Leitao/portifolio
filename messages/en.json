@@ -11,6 +11,8 @@
 	},
 	"hero": {
 		"role": "Full-Stack Developer",
+		"role_backend": "Backend Engineer",
+		"role_ui": "UI Craftsman",
 		"subtitle": "Always creating new projects.",
 		"cta_projects": "View projects"
 	},

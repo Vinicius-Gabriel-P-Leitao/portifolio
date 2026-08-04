@@ -37,6 +37,7 @@
 <!-- SpotlightCard como wrapper: spotlight muda de cor por status -->
 <SpotlightCard
 	class="project-card"
+	role="article"
 	spotlightColor={STATUS_COLORS[project.status]}
 >
 	<!-- Preview or placeholder -->

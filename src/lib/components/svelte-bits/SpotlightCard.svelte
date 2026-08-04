@@ -4,10 +4,11 @@
 	type Props = {
 		class?: string;
 		spotlightColor?: string;
+		role?: string;
 		children?: Snippet;
 	};
 
-	let { class: className = '', spotlightColor = 'rgba(255, 255, 255, 0.25)', children }: Props = $props();
+	let { class: className = '', spotlightColor = 'rgba(255, 255, 255, 0.25)', role, children }: Props = $props();
 
 	let divRef: HTMLDivElement;
 	let isFocused = $state(false);
@@ -29,7 +30,7 @@
 
 <div
 	bind:this={divRef}
-	role="presentation"
+	{role}
 	onmousemove={handleMouseMove}
 	onfocus={handleFocus}
 	onblur={handleBlur}

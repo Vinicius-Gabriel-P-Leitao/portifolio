@@ -2,20 +2,12 @@
 	import { ChevronRight } from 'lucide-svelte';
 	import { intersect } from '$lib/actions/intersect';
 	import GithubIcon from '$lib/components/github-icon.svelte';
-	import Threads from '$lib/components/svelte-bits/Threads.svelte';
-	import Noise from '$lib/components/svelte-bits/Noise.svelte';
-	import RotatingText from '$lib/components/svelte-bits/RotatingText.svelte';
+	import TextType from '$lib/components/svelte-bits/TextType.svelte';
 	import ShinyText from '$lib/components/svelte-bits/ShinyText.svelte';
 	import type { GitHubUser } from '$lib/services/github.service';
 	import * as m from '$lib/paraglide/messages';
 
 	let { github }: { github: GitHubUser | null } = $props();
-
-	const roles = $derived([
-		m['hero.role'](),
-		'Backend Engineer',
-		'UI Craftsman'
-	]);
 </script>
 
 <section
@@ -23,53 +15,29 @@
 	class="hero relative flex min-h-[100dvh] flex-col items-center justify-center px-6 py-24 text-center overflow-hidden"
 	use:intersect={{ section: 'hero', threshold: 0.4 }}
 >
-	<!-- Threads: WebGL background de linhas fluidas elegantes -->
-	<div aria-hidden="true" class="absolute inset-0 pointer-events-none z-0 opacity-40">
-		<Threads
-			color={[0.39, 0.4, 0.95]}
-			amplitude={1.2}
-			distance={0.2}
-			enableMouseInteraction={true}
-		/>
-	</div>
-
-	<!-- Vignette forte: suaviza as bordas e destaca o conteúdo -->
-	<div
-		aria-hidden="true"
-		class="absolute inset-0 pointer-events-none z-[1]"
-		style="background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 20%, #0a0a0a 85%);"
-	></div>
-
-	<!-- Noise: textura de grain sutil por cima -->
-	<div aria-hidden="true" class="absolute inset-0 pointer-events-none z-[2]">
-		<Noise patternAlpha={8} patternRefreshInterval={4} />
-	</div>
-
 	<!-- Conteúdo -->
 	<div class="relative z-10 flex flex-col items-center">
 		{#if github?.avatar_url}
 			<img
 				src={github.avatar_url}
 				alt={github.login}
-				width="52"
-				height="52"
-				class="mb-10 h-13 w-13 rounded-full border border-white/10 opacity-70"
+				width="74"
+				height="74"
+				class="mb-10 h-[74px] w-[74px] rounded-full border border-white/10 opacity-80"
 			/>
 		{/if}
 
 		<!-- Nome -->
 		<h1 class="hero-name">Vinícius Gabriel</h1>
 
-		<!-- Cargo rotativo -->
+		<!-- Cargo com animação TextType -->
 		<div class="hero-role-container">
-			<RotatingText
-				texts={roles}
-				rotationInterval={3200}
-				staggerDuration={0.018}
-				staggerFrom="first"
-				splitBy="characters"
-				mainClassName="hero-role"
-				elementLevelClassName="hero-role-char"
+			<TextType
+				text={m['hero.role']()}
+				typingSpeed={55}
+				showCursor={true}
+				cursorChar="|"
+				class="hero-role"
 			/>
 		</div>
 
@@ -112,7 +80,7 @@
 
 <style>
 	.hero {
-		background: #0a0a0a;
+		background: transparent;
 	}
 
 	/* Nome */
@@ -127,12 +95,15 @@
 
 	/* Wrapper do RotatingText com altura fixa para não deslocar layout */
 	.hero-role-container {
-		height: 1.6rem;
+		width: 100%;
+		max-width: 100%;
+		height: 2.2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		margin-bottom: 1.75rem;
 		overflow: hidden;
+		padding: 0.125rem 0;
 	}
 
 	:global(.hero-role) {
@@ -140,8 +111,11 @@
 		letter-spacing: 0.04em;
 		color: rgba(255, 255, 255, 0.38);
 		font-weight: 400;
-		overflow: hidden;
-		height: 1.2em;
+		line-height: 1.5;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		white-space: nowrap;
 	}
 
 	/* Linha separadora */

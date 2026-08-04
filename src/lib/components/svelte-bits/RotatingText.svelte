@@ -231,32 +231,32 @@
 	});
 </script>
 
-<span class="text-rotate {mainClassName}" style="display:flex;flex-wrap:wrap;white-space:pre-wrap;position:relative;">
+<span class="text-rotate {mainClassName}" style="display:inline-flex;align-items:center;justify-content:center;position:relative;vertical-align:middle;">
 	<span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
 		{texts[currentTextIndex]}
 	</span>
 	<span
 		class={splitBy === 'lines' ? 'text-rotate-lines' : 'text-rotate'}
 		style={splitBy === 'lines'
-			? 'display:flex;flex-direction:column;width:100%;'
-			: 'display:flex;flex-wrap:wrap;white-space:pre-wrap;position:relative;'}
+			? 'display:flex;flex-direction:column;width:100%;align-items:center;justify-content:center;'
+			: 'display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;position:relative;'}
 		aria-hidden="true"
 	>
 		{#each elements as wordObj, wordIndex (wordIndex)}
 			{@const previousCharsCount = elements
 				.slice(0, wordIndex)
 				.reduce((sum, w) => sum + w.characters.length, 0)}
-			<span class="text-rotate-word {splitLevelClassName}" style="display:inline-flex;">
+			<span class="text-rotate-word {splitLevelClassName}" style="display:inline-flex;align-items:center;">
 				{#each wordObj.characters as char, charIndex (charIndex)}
 					<span
 						bind:this={elementsByKey[`${displayedIndex}:${previousCharsCount + charIndex}`]}
 						class="text-rotate-element {elementLevelClassName}"
-						style="display:inline-block;"
+						style="display:inline-block;vertical-align:middle;"
 					>
 						{char}
 					</span>
 				{/each}
-				{#if wordObj.needsSpace}<span class="text-rotate-space" style="white-space:pre;"> </span>{/if}
+				{#if wordObj.needsSpace}<span class="text-rotate-space" style="display:inline-block;white-space:pre;">{'\u00A0'}</span>{/if}
 			</span>
 		{/each}
 	</span>
