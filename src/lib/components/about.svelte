@@ -2,8 +2,6 @@
 	import { intersect } from '$lib/actions/intersect';
 	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
 	import SpotlightCard from '$lib/components/svelte-bits/spotlight-card.svelte';
-	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
-	import LogoLoop from '$lib/components/svelte-bits/logo-loop.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	const STACK = [
@@ -12,12 +10,6 @@
 		{ category: () => m['about.database'](), items: ['PostgreSQL', 'SQLite', 'MongoDB', 'Firebase'] },
 		{ category: () => m['about.infra'](), items: ['Docker', 'Git'] }
 	];
-
-	const ALL_LOGOS = [
-		{ name: 'Svelte' }, { name: 'Tailwind' }, { name: 'React' }, { name: 'Java' },
-		{ name: 'Kotlin' }, { name: 'Spring Boot' }, { name: 'Node.js' }, { name: 'PostgreSQL' },
-		{ name: 'Docker' }, { name: 'Git' }
-	];
 </script>
 
 <section id="about" class="px-6 py-24" use:intersect={{ section: 'about', threshold: 0.2 }}>
@@ -25,24 +17,13 @@
 
 		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
 			<div class="section-header">
-				<ShinyText
-					text={m['about.title']()}
-					color="rgba(255,255,255,0.3)"
-					shineColor="rgba(255,255,255,0.7)"
-					speed={5}
-					class="section-label"
-				/>
+				<span class="section-label">{m['about.title']()}</span>
 				<h2 class="section-title">{m['about.title']()}</h2>
 			</div>
 		</FadeContent>
 
 		<FadeContent blur duration={900} delay={100} threshold={0.15} class="mb-12">
 			<p class="bio-text">{m['about.bio']()}</p>
-		</FadeContent>
-
-		<!-- Logo Loop Marquee -->
-		<FadeContent duration={600} delay={150} threshold={0.1} class="mb-12">
-			<LogoLoop logos={ALL_LOGOS} speed={25} />
 		</FadeContent>
 
 		<!-- Stack: SpotlightCard em cada grupo -->
