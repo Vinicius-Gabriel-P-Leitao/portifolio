@@ -27,12 +27,25 @@
 	let containerRef: HTMLDivElement;
 
 	onMount(() => {
-		const renderer = new Renderer({
-			alpha: true,
-			antialias: true,
-			powerPreference: 'high-performance',
-			dpr: Math.min(window.devicePixelRatio || 1, 1.5)
-		});
+		if (
+			typeof window !== 'undefined' &&
+			(navigator.webdriver || window.location.search.includes('disable-webgl'))
+		) {
+			// Skip OGL WebGL rendering in automated E2E test environments (headless CI without GPU)
+			return;
+		}
+
+		let renderer: Renderer;
+		try {
+			renderer = new Renderer({
+				alpha: true,
+				antialias: true,
+				powerPreference: 'high-performance',
+				dpr: Math.min(window.devicePixelRatio || 1, 1.5)
+			});
+		} catch {
+			return;
+		}
 		const gl = renderer.gl;
 
 		// eslint-disable-next-line svelte/no-dom-manipulating

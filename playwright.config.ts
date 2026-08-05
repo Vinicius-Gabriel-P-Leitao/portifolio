@@ -8,11 +8,11 @@ export default defineConfig({
 	use: {
 		launchOptions: {
 			args: [
-				'--use-gl=swiftshader',
+				'--use-gl=angle',
+				'--use-angle=swiftshader',
 				'--enable-unsafe-swiftshader',
 				'--disable-gpu-sandbox',
-				'--no-sandbox',
-				'--disable-setuid-sandbox'
+				'--no-sandbox'
 			]
 		}
 	},
