@@ -20,12 +20,12 @@ test('about section is present on the page', async ({ page }) => {
 
 test('contact form is visible after scrolling to it', async ({ page }) => {
 	await page.goto('/');
-	const contactBtn = page.getByTitle('Contato');
-	if (await contactBtn.isVisible()) {
-		await contactBtn.click();
-	} else {
-		await page.locator('#contact').scrollIntoViewIfNeeded();
-	}
+
+	const contactBtn = page
+		.getByRole('link', { name: /Contato|Contact/i })
+		.or(page.getByTitle('Contato'))
+		.first();
+	await contactBtn.click();
 
 	await expect(page.getByRole('form')).toBeVisible();
 });
@@ -38,12 +38,14 @@ test('language switcher toggles between EN and PT', async ({ page }) => {
 		.getByRole('link', { name: /English|EN/i })
 		.first()
 		.click();
+	await page.waitForURL((url) => url.pathname.startsWith('/en'));
 	await expect(page).toHaveURL(/\/en(\/|$)/);
 
-	// Switch back to PT (base locale, no /pt-br/ prefix)
+	// Switch back to PT (base locale, no /en/ prefix)
 	await page
 		.getByRole('link', { name: /Portuguese|PT/i })
 		.first()
 		.click();
-	await expect(page).not.toHaveURL(/\/en(\/|$)/);
+	await page.waitForURL((url) => !url.pathname.startsWith('/en'));
+	await expect(page).toHaveURL(/^https?:\/\/[^/]+\/?$/);
 });

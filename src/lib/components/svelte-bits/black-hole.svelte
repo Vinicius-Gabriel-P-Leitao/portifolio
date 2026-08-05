@@ -141,6 +141,8 @@
 				// eslint-disable-next-line svelte/no-dom-manipulating
 				containerRef.removeChild(gl.canvas);
 			}
+			// Safely release WebGL context to avoid context leaks in headless Chromium
+			gl.getExtension('WEBGL_lose_context')?.loseContext();
 		};
 	});
 </script>
