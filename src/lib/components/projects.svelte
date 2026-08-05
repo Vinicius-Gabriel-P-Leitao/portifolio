@@ -1,19 +1,18 @@
 <script lang="ts">
 	import type { Project } from '$lib/data/projects';
 	import ProjectCard from './project-card.svelte';
-	import ProjectDetail from './project-detail.svelte';
 
 	let {
 		projects,
 		activeIndex = 0,
-		total
+		total,
+		onSelect
 	}: {
 		projects: Project[];
 		activeIndex: number;
 		total: number;
+		onSelect?: (project: Project) => void;
 	} = $props();
-
-	let selected = $state<Project | null>(null);
 </script>
 
 <section id="projects" class="projects-section">
@@ -53,7 +52,7 @@
 						<span class="card-index">PROJECT [{String(i + 1).padStart(2, '0')}]</span>
 						<span class="card-tech">{project.tech[0] || 'FULL-STACK'}</span>
 					</div>
-					<ProjectCard {project} onSelect={() => (selected = project)} />
+					<ProjectCard {project} onSelect={() => onSelect?.(project)} />
 				</div>
 			{/each}
 		</div>
@@ -79,8 +78,6 @@
 		</span>
 	</div>
 </section>
-
-<ProjectDetail project={selected} onClose={() => (selected = null)} />
 
 <style>
 	.projects-section {

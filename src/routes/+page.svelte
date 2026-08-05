@@ -5,7 +5,9 @@
 	import Projects from '$lib/components/projects.svelte';
 	import About from '$lib/components/about.svelte';
 	import Contact from '$lib/components/contact.svelte';
+	import ProjectDetail from '$lib/components/project-detail.svelte';
 	import { PROJECTS } from '$lib/data/projects';
+	import type { Project } from '$lib/data/projects';
 	import { navigation } from '$lib/stores/navigation.svelte';
 	import { scrollState } from '$lib/stores/scroll.svelte';
 	import type { PageData } from './$types';
@@ -24,6 +26,7 @@
 	let sectionIdx = $state(0); // outer panel index
 	let projectIdx = $state(0); // inner project carousel index
 	let busy = $state(false);
+	let selectedProject = $state<Project | null>(null);
 
 	// Scroll progress for the black hole
 	$effect(() => {
@@ -39,7 +42,7 @@
 	});
 
 	function advance(dir: 1 | -1) {
-		if (busy) return;
+		if (busy || selectedProject) return;
 
 		if (sectionIdx === 1) {
 			// Inside projects: scroll through individual projects first
@@ -69,7 +72,7 @@
 	}
 
 	function goToSection(idx: number) {
-		if (busy) return;
+		if (busy || selectedProject) return;
 		sectionIdx = idx;
 		if (idx === 1) projectIdx = 0;
 		busy = true;
@@ -91,6 +94,7 @@
 		let accTimer: ReturnType<typeof setTimeout>;
 
 		const onWheel = (e: WheelEvent) => {
+			if (selectedProject) return; // Don't move carousel when project modal is open
 			e.preventDefault();
 			if (busy) return;
 			acc += e.deltaY;
@@ -106,12 +110,14 @@
 		let ty = 0;
 		const onTouchStart = (e: TouchEvent) => (ty = e.touches[0].clientY);
 		const onTouchEnd = (e: TouchEvent) => {
+			if (selectedProject) return;
 			const dy = ty - e.changedTouches[0].clientY;
 			if (Math.abs(dy) > 50) advance(dy > 0 ? 1 : -1);
 		};
 
 		// Keyboard
 		const onKey = (e: KeyboardEvent) => {
+			if (selectedProject) return;
 			if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
 				e.preventDefault();
 				advance(1);
@@ -135,15 +141,6 @@
 			clearTimeout(accTimer);
 		};
 	});
-
-	// Active progress indicator (for the right nav)
-	const overallProgress = $derived(
-		sectionIdx === 0
-			? 0
-			: sectionIdx === 1
-				? (1 + projectIdx / Math.max(N - 1, 1)) / (SECTIONS - 1)
-				: sectionIdx / (SECTIONS - 1)
-	);
 </script>
 
 <svelte:head>
@@ -164,7 +161,12 @@
 
 		<!-- Panel 1: Projects (internal carousel) -->
 		<div class="panel">
-			<Projects projects={allProjects} activeIndex={projectIdx} total={N} />
+			<Projects
+				projects={allProjects}
+				activeIndex={projectIdx}
+				total={N}
+				onSelect={(proj) => (selectedProject = proj)}
+			/>
 		</div>
 
 		<!-- Panel 2: About -->
@@ -178,6 +180,9 @@
 		</div>
 	</div>
 </div>
+
+<!-- Render Project Detail Modal at root level to prevent CSS transform clipping -->
+<ProjectDetail project={selectedProject} onClose={() => (selectedProject = null)} />
 
 <!-- ── RIGHT-SIDE NAVIGATION DOTS ── -->
 <nav class="side-nav" aria-label="Navegação">
@@ -275,7 +280,7 @@
 		flex-direction: column;
 		align-items: flex-end;
 		gap: 0.6rem;
-		z-index: 60;
+		z-index: 40;
 	}
 
 	.nav-item {
@@ -387,7 +392,7 @@
 		flex-direction: column;
 		gap: 0.2rem;
 		pointer-events: none;
-		z-index: 60;
+		z-index: 40;
 	}
 
 	.chevron {
