@@ -37,7 +37,7 @@
 
 <section
 	id="contact"
-	class="px-6 py-10 pb-12 md:pb-10"
+	class="h-full flex flex-col items-center justify-center px-6 py-10"
 	bind:this={sectionEl}
 >
 	<div class="mx-auto w-full max-w-md">

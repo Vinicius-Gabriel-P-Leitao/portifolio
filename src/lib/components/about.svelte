@@ -29,7 +29,7 @@
 	];
 </script>
 
-<section id="about" class="px-6 py-10" bind:this={sectionEl}>
+<section id="about" class="h-full flex flex-col items-center justify-center px-6 py-10" bind:this={sectionEl}>
 	<div class="mx-auto w-full max-w-4xl">
 
 		<!-- Section Index Header -->

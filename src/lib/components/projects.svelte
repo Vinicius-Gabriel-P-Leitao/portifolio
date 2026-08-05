@@ -99,6 +99,8 @@
 		overflow: hidden;
 		position: relative;
 		padding: 1.5rem 0;
+		-webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+		mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 	}
 
 	.ribbon-track {
