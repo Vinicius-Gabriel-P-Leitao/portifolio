@@ -8,6 +8,7 @@
 		setLocale,
 		getLocale
 	} from '$lib/paraglide/runtime';
+	import Navbar from '$lib/components/navbar.svelte';
 	import Toast from '$lib/components/toast.svelte';
 	import BlackHole from '$lib/components/svelte-bits/black-hole.svelte';
 	import Noise from '$lib/components/svelte-bits/Noise.svelte';
@@ -58,6 +59,7 @@
 
 {#key locale}
 	<div class="relative z-10">
+		<Navbar />
 		{@render children()}
 	</div>
 
