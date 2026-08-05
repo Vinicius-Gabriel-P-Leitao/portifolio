@@ -4,7 +4,7 @@
 	export type NavItem = {
 		id: string;
 		label: string;
-		icon?: Component<any> | any;
+		icon?: Component<{ size?: number; strokeWidth?: number }>;
 		href?: string;
 	};
 
@@ -42,6 +42,7 @@
 		style="left: {indicatorLeft}px; width: {indicatorWidth}px; opacity: {indicatorOpacity};"
 	></div>
 
+	<!-- eslint-disable svelte/no-navigation-without-resolve -->
 	{#each items as item (item.id)}
 		{@const isActive = item.id === activeId}
 		{@const Icon = item.icon}
@@ -63,4 +64,5 @@
 			<span>{item.label}</span>
 		</a>
 	{/each}
+	<!-- eslint-enable svelte/no-navigation-without-resolve -->
 </div>

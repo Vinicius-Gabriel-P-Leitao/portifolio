@@ -85,6 +85,7 @@
 
 		<!-- Actions -->
 		<div class="card-actions">
+			<!-- eslint-disable svelte/no-navigation-without-resolve -->
 			{#if project.github}
 				<a
 					href={project.github}
@@ -109,6 +110,7 @@
 					{m['projects.demo']()}
 				</a>
 			{/if}
+			<!-- eslint-enable svelte/no-navigation-without-resolve -->
 			<button
 				type="button"
 				onclick={(e) => {

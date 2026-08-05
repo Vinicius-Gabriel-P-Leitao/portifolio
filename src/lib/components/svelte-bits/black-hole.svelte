@@ -35,6 +35,7 @@
 		});
 		const gl = renderer.gl;
 
+		// eslint-disable-next-line svelte/no-dom-manipulating
 		containerRef.appendChild(gl.canvas);
 
 		const camera = new Camera(gl, { fov: 45, near: 0.1, far: 1000 });
@@ -137,6 +138,7 @@
 			}
 			cancelAnimationFrame(animationFrameId);
 			if (gl.canvas.parentElement === containerRef) {
+				// eslint-disable-next-line svelte/no-dom-manipulating
 				containerRef.removeChild(gl.canvas);
 			}
 		};

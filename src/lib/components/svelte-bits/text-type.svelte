@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	type Props = {
 		text: string | string[];
 		typingSpeed?: number; // ms per char
@@ -35,7 +33,6 @@
 
 	$effect(() => {
 		// Reset when text changes
-		const targetText = textArray[textIndex] ?? '';
 		void text;
 
 		let timeout: ReturnType<typeof setTimeout>;
