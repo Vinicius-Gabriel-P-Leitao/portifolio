@@ -4,7 +4,7 @@
 	export type NavItem = {
 		id: string;
 		label: string;
-		icon?: ComponentType<any> | Component<any>;
+		icon?: ComponentType | Component;
 		href?: string;
 	};
 
