@@ -91,9 +91,9 @@ export const PROJECTS: Project[] = [
 		title: 'Acerola Android',
 		status: 'pre-release',
 		desc: {
-			en: 'Android manga reader built with Kotlin and Jetpack Compose. Scans local storage, parses CBZ/CBR, auto-fetches metadata from MangaDex and AniList, and includes modular component previews for Light and Dark UI modes.',
+			en: 'Android manga reader built with Kotlin and Jetpack Compose. Scans local storage, parses CBZ/CBR, and auto-fetches metadata from MangaDex and AniList.',
 			'pt-br':
-				'Leitor de mangá para Android em Kotlin e Jetpack Compose. Escaneia armazenamento local, processa CBZ/CBR, busca metadados no MangaDex/AniList e possui previews modulares para temas Claro e Escuro.'
+				'Leitor de mangá para Android em Kotlin e Jetpack Compose. Escaneia armazenamento local, processa CBZ/CBR e busca metadados no MangaDex/AniList.'
 		},
 		tech: ['Kotlin', 'Jetpack Compose', 'Rust', 'Iroh', 'Hilt', 'MangaDex API', 'AniList API'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-android',
@@ -114,14 +114,6 @@ export const PROJECTS: Project[] = [
 			}
 		],
 		highlights: [
-			{
-				title: { en: 'Compose Component Previews (@Preview)', 'pt-br': 'Previews em Compose (@Preview)' },
-				body: {
-					en: 'Modular components (@dialog, @card, @adaptivesheet) built with isolated Light and Dark @Preview functions (AcerolaThemePreview, RememberSearchBarContentPaddingPreview).',
-					'pt-br':
-						'Componentes modulares (@dialog, @card, @adaptivesheet) desenvolvidos com funções @Preview isoladas para modo Claro e Escuro (AcerolaThemePreview, RememberSearchBarContentPaddingPreview).'
-				}
-			},
 			{
 				title: { en: 'Storage Scanner', 'pt-br': 'Scanner de Armazenamento' },
 				body: {
