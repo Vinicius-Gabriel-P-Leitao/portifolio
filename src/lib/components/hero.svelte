@@ -10,7 +10,7 @@
 
 <section
 	id="hero"
-	class="hero relative flex min-h-full flex-col items-center justify-center px-6 pt-12 pb-5 text-center overflow-hidden"
+	class="hero relative flex min-h-full flex-col items-center justify-center px-4 sm:px-6 pt-16 pb-20 text-center overflow-hidden"
 >
 	<div class="relative z-10 flex flex-col items-center max-w-4xl">
 		{#if github?.avatar_url}
@@ -167,9 +167,15 @@
 	}
 
 	.scroll-hint {
-		margin-top: 3.5rem;
+		margin-top: 1.75rem;
 		display: flex;
 		justify-content: center;
+	}
+
+	@media (min-width: 640px) {
+		.scroll-hint {
+			margin-top: 3.5rem;
+		}
 	}
 
 	.scroll-label-pill {

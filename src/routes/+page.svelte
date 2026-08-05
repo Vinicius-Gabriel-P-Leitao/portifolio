@@ -106,13 +106,35 @@
 			}
 		};
 
-		// Touch
-		let ty = 0;
-		const onTouchStart = (e: TouchEvent) => (ty = e.touches[0].clientY);
+		// Touch gesture detection (supports both horizontal & vertical swipes)
+		let startX = 0;
+		let startY = 0;
+		let startTime = 0;
+
+		const onTouchStart = (e: TouchEvent) => {
+			if (e.touches.length !== 1) return;
+			startX = e.touches[0].clientX;
+			startY = e.touches[0].clientY;
+			startTime = Date.now();
+		};
+
 		const onTouchEnd = (e: TouchEvent) => {
 			if (selectedProject) return;
-			const dy = ty - e.changedTouches[0].clientY;
-			if (Math.abs(dy) > 50) advance(dy > 0 ? 1 : -1);
+			if (e.changedTouches.length === 0) return;
+
+			const elapsed = Date.now() - startTime;
+			if (elapsed > 800) return;
+
+			const dx = startX - e.changedTouches[0].clientX;
+			const dy = startY - e.changedTouches[0].clientY;
+			const absX = Math.abs(dx);
+			const absY = Math.abs(dy);
+
+			if (absX > absY && absX > 35) {
+				advance(dx > 0 ? 1 : -1);
+			} else if (absY >= absX && absY > 45) {
+				advance(dy > 0 ? 1 : -1);
+			}
 		};
 
 		// Keyboard
@@ -247,6 +269,9 @@
 	.viewport {
 		position: fixed;
 		inset: 0;
+		height: 100%;
+		height: 100dvh;
+		width: 100vw;
 		overflow: hidden;
 	}
 
@@ -262,15 +287,18 @@
 	/* Each full-screen panel */
 	.panel {
 		width: 100vw;
-		height: 100vh;
+		height: 100%;
+		height: 100dvh;
 		flex-shrink: 0;
-		overflow: hidden;
+		overflow-y: auto;
+		overflow-x: hidden;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		-webkit-overflow-scrolling: touch;
 	}
 
-	/* ── Right-side nav ── */
+	/* ── Right-side nav (desktop only) ── */
 	.side-nav {
 		position: fixed;
 		right: 1.5rem;
@@ -281,6 +309,15 @@
 		align-items: flex-end;
 		gap: 0.6rem;
 		z-index: 40;
+	}
+
+	@media (max-width: 768px) {
+		.side-nav {
+			display: none;
+		}
+		.scroll-hint {
+			display: none;
+		}
 	}
 
 	.nav-item {
@@ -383,41 +420,42 @@
 		transform: scale(1.5);
 	}
 
-	/* Scroll hint (double chevron → right) */
+	/* Scroll hint (double chevron → right >>) */
 	.scroll-hint {
 		position: fixed;
 		right: 1.5rem;
 		bottom: 2rem;
 		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.15rem;
 		pointer-events: none;
 		z-index: 40;
 	}
 
 	.chevron {
-		width: 10px;
-		height: 10px;
-		border-right: 2px solid rgba(255, 255, 255, 0.35);
-		border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+		width: 9px;
+		height: 9px;
+		border-right: 2px solid rgba(255, 255, 255, 0.6);
+		border-bottom: 2px solid rgba(255, 255, 255, 0.6);
 		transform: rotate(-45deg);
 		animation: chev 1.8s ease-in-out infinite;
 	}
 
 	.chevron-2 {
 		animation-delay: 0.2s;
-		opacity: 0.5;
+		opacity: 0.6;
 	}
 
 	@keyframes chev {
 		0%,
 		100% {
 			opacity: 0.3;
-			transform: rotate(-45deg) translate(0, 0);
+			transform: rotate(-45deg) translateX(0);
 		}
 		50% {
 			opacity: 1;
-			transform: rotate(-45deg) translate(3px, 3px);
+			transform: rotate(-45deg) translateX(3px);
 		}
 	}
 </style>

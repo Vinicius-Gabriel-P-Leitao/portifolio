@@ -14,7 +14,7 @@
 </script>
 
 {#if isMobile.current}
-	<aside class="fixed bottom-4 left-4 right-4 z-50 flex justify-center pointer-events-none">
+	<aside class="fixed bottom-[max(0.85rem,env(safe-area-inset-bottom))] left-4 right-4 z-50 flex justify-center pointer-events-none">
 		<nav class="bottom-nav pointer-events-auto" aria-label="Mobile Navigation">
 			{#each ITEMS as item (item.id)}
 				{@const isActive = navigation.active === item.id}

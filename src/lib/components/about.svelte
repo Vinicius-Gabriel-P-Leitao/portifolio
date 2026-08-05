@@ -29,36 +29,36 @@
 	];
 </script>
 
-<section id="about" class="h-full flex flex-col items-center justify-center px-6 py-10" bind:this={sectionEl}>
+<section id="about" class="min-h-full flex flex-col items-center justify-center px-4 sm:px-6 pt-14 sm:pt-16 pb-20 sm:pb-24" bind:this={sectionEl}>
 	<div class="mx-auto w-full max-w-4xl">
 
 		<!-- Section Index Header -->
-		<div class="flex items-center justify-between mb-8">
+		<div class="flex items-center justify-between mb-4 sm:mb-8">
 			<div class="flex items-center gap-4">
-				<span class="font-mono text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+				<span class="font-mono text-[10px] sm:text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3 sm:px-3.5 py-1 rounded-full border border-white/20">
 					// 02 . SOBRE E TECH STACK
 				</span>
-				<div class="h-[1px] w-12 bg-white/20"></div>
+				<div class="h-[1px] w-8 sm:w-12 bg-white/20"></div>
 			</div>
-			<div class="flex items-center gap-2 font-mono text-xs text-white/90 bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+			<div class="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/90 bg-white/10 px-3 sm:px-3.5 py-1 rounded-full border border-white/20">
 				<span class="text-white font-bold">02</span>
 				<span>/</span>
 				<span>03</span>
 			</div>
 		</div>
 
-		<FadeContent blur duration={800} threshold={0.2} class="mb-8">
+		<FadeContent blur duration={800} threshold={0.2} class="mb-3 sm:mb-8">
 			<div class="section-header">
 				<h2 class="section-title">{m['about.title']()}</h2>
 			</div>
 		</FadeContent>
 
-		<FadeContent blur duration={900} delay={100} threshold={0.15} class="mb-12">
+		<FadeContent blur duration={900} delay={100} threshold={0.15} class="mb-5 sm:mb-12">
 			<p class="bio-text">{m['about.bio']()}</p>
 		</FadeContent>
 
 		<!-- Logo Loop Marquee -->
-		<FadeContent duration={600} delay={150} threshold={0.1} class="mb-12">
+		<FadeContent duration={600} delay={150} threshold={0.1} class="mb-5 sm:mb-12">
 			<LogoLoop logos={ALL_LOGOS} speed={25} />
 		</FadeContent>
 
@@ -84,34 +84,40 @@
 </section>
 
 <style>
-	.section-label {
-		font-size: 0.65rem;
-		letter-spacing: 0.3em;
-		text-transform: uppercase;
-		display: block;
-		margin-bottom: 0.5rem;
-	}
-
 	.section-title {
-		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-size: clamp(1.6rem, 5vw, 3.5rem);
 		font-weight: 700;
 		letter-spacing: -0.03em;
-		color: rgba(255,255,255,0.9);
-		line-height: 1;
+		color: rgba(255, 255, 255, 0.9);
+		line-height: 1.05;
 	}
 
 	.bio-text {
 		font-size: 1rem;
-		line-height: 1.8;
+		line-height: 1.75;
 		color: rgba(255, 255, 255, 0.88);
 		max-width: 65ch;
 	}
 
+	@media (max-width: 640px) {
+		.bio-text {
+			font-size: 0.85rem;
+			line-height: 1.5;
+		}
+	}
+
 	.stack-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 		gap: 1.25rem;
 		align-items: stretch;
+	}
+
+	@media (max-width: 640px) {
+		.stack-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 0.6rem;
+		}
 	}
 
 	/* SpotlightCard override para ter visual mais limpo e alto contraste */
@@ -127,6 +133,13 @@
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
 	}
 
+	@media (max-width: 640px) {
+		:global(.stack-card) {
+			padding: 0.65rem 0.75rem !important;
+			border-radius: 12px !important;
+		}
+	}
+
 	.stack-category {
 		display: block;
 		font-size: 0.7rem;
@@ -135,6 +148,13 @@
 		color: rgba(255, 255, 255, 0.65);
 		margin-bottom: 0.5rem;
 		font-weight: 700;
+	}
+
+	@media (max-width: 640px) {
+		.stack-category {
+			font-size: 0.6rem;
+			margin-bottom: 0.2rem;
+		}
 	}
 
 	.stack-items {
@@ -149,6 +169,13 @@
 		padding: 0.35rem 0;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 		transition: color 0.2s;
+	}
+
+	@media (max-width: 640px) {
+		.stack-item {
+			font-size: 0.72rem;
+			padding: 0.2rem 0;
+		}
 	}
 
 	.stack-item:last-child {

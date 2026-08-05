@@ -35,7 +35,7 @@
 	<div class="ribbon-viewport">
 		<div
 			class="ribbon-track"
-			style="transform: translateX(calc(50vw - 230px - {activeIndex} * (460px + 2rem)))"
+			style="transform: translateX(calc(50vw - (var(--card-w) / 2) - {activeIndex} * (var(--card-w) + var(--card-gap))))"
 		>
 			{#each projects as project, i (project.id)}
 				{@const dist = Math.abs(i - activeIndex)}
@@ -81,12 +81,14 @@
 
 <style>
 	.projects-section {
+		--card-w: min(460px, 84vw);
+		--card-gap: clamp(1rem, 4vw, 2rem);
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		padding-top: 4.5rem;
-		padding-bottom: 2rem;
+		padding-top: 4rem;
+		padding-bottom: 2.5rem;
 		overflow: hidden;
 		position: relative;
 	}
@@ -96,21 +98,20 @@
 		overflow: hidden;
 		position: relative;
 		padding: 1.5rem 0;
-		-webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-		mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+		-webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+		mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
 	}
 
 	.ribbon-track {
 		display: flex;
 		flex-direction: row;
-		gap: 2rem;
+		gap: var(--card-gap);
 		will-change: transform;
 		transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 	}
 
 	.card-slot {
-		width: 460px;
-		max-width: 80vw;
+		width: var(--card-w);
 		flex-shrink: 0;
 		transition:
 			transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
