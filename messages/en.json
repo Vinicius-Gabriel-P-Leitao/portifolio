@@ -19,6 +19,7 @@
 	"projects": {
 		"title": "Projects",
 		"ideas_title": "Future Ideas",
+		"scroll_more": "Scroll to see more projects",
 		"github": "GitHub",
 		"demo": "Demo",
 		"learn_more": "Details",

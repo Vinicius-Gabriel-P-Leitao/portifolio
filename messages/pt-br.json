@@ -19,6 +19,7 @@
 	"projects": {
 		"title": "Projetos",
 		"ideas_title": "Ideias Futuras",
+		"scroll_more": "Role para ver mais projetos",
 		"github": "GitHub",
 		"demo": "Demo",
 		"learn_more": "Detalhes",

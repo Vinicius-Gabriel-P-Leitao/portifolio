@@ -8,6 +8,7 @@
 	import ProjectDetail from './project-detail.svelte';
 	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
 	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
+	import { ChevronDown } from 'lucide-svelte';
 
 	const activeProjects = PROJECTS.filter((p) => p.status !== 'idea');
 	const ideaProjects = PROJECTS.filter((p) => p.status === 'idea');
@@ -20,7 +21,7 @@
 		return () => { document.body.style.overflow = ''; };
 	});
 
-	// Scroll hint: some when user scrolls down inside the section
+	// Scroll hint: hide when user scrolls down inside the section
 	let sectionEl: HTMLElement;
 	let showScrollHint = $state(true);
 
@@ -76,39 +77,33 @@
 		{/if}
 	</div>
 
-	<!-- Indicador de scroll: aparece fixo na base da viewport quando dentro da seção -->
-	<div class="scroll-more" class:hidden={!showScrollHint} aria-hidden="true">
-		<span class="scroll-more-text">
-			{m['projects.title']()} · scroll
-		</span>
-		<div class="scroll-more-arrows">
-			<svg width="12" height="20" viewBox="0 0 12 20" fill="none">
-				<path d="M6 1 L6 14 M2 10 L6 15 L10 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
-		</div>
+	<!-- Indicador de scroll: pill interativo em alto contraste na base da viewport -->
+	<div class="scroll-more-wrapper" class:hidden={!showScrollHint}>
+		<button
+			type="button"
+			onclick={() => {
+				if (browser) window.scrollBy({ top: 350, behavior: 'smooth' });
+			}}
+			class="scroll-more-pill"
+			aria-label={m['projects.scroll_more']()}
+		>
+			<span class="scroll-more-text">{m['projects.scroll_more']()}</span>
+			<div class="scroll-more-icon">
+				<ChevronDown size={14} />
+			</div>
+		</button>
 	</div>
 </section>
 
 <ProjectDetail project={selected} onClose={() => (selected = null)} />
 
 <style>
-	/* A section cresce com o conteúdo — sem altura mínima forçada aqui.
-	   O scroll-snap da página inteira faz a snap no topo desta section. */
 	.projects-section {
 		min-height: 100dvh;
 		scroll-snap-align: start;
 		background: transparent;
 		display: flex;
 		flex-direction: column;
-	}
-
-	/* Header */
-	.section-label {
-		font-size: 0.65rem;
-		letter-spacing: 0.3em;
-		text-transform: uppercase;
-		display: block;
-		margin-bottom: 0.75rem;
 	}
 
 	.title-row {
@@ -121,80 +116,98 @@
 		font-size: clamp(2rem, 5vw, 3.5rem);
 		font-weight: 700;
 		letter-spacing: -0.03em;
-		color: rgba(255, 255, 255, 0.9);
+		color: #ffffff;
 		line-height: 1;
 	}
 
-	/* Contador de projetos ao lado do título */
 	.project-count {
 		font-size: 0.75rem;
-		font-weight: 600;
-		color: rgba(255, 255, 255, 0.18);
-		letter-spacing: 0.05em;
-		font-variant-numeric: tabular-nums;
-		padding: 0.1rem 0.45rem;
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 4px;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.7);
+		background: rgba(255, 255, 255, 0.1);
+		padding: 0.2rem 0.6rem;
+		border-radius: 9999px;
+		border: 1px solid rgba(255, 255, 255, 0.15);
 	}
 
-	/* Ideas divider */
 	.ideas-header {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
 	}
-
 	.ideas-line {
 		flex: 1;
 		height: 1px;
-		background: rgba(255, 255, 255, 0.07);
+		background: rgba(255, 255, 255, 0.1);
 	}
 
 	.ideas-label {
-		font-size: 0.6rem;
-		letter-spacing: 0.3em;
+		font-size: 0.65rem;
+		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: rgba(255, 255, 255, 0.2);
+		color: rgba(255, 255, 255, 0.6);
 		white-space: nowrap;
-		font-weight: 500;
+		font-weight: 700;
 	}
 
-	/* Scroll hint — fixo na base da viewport, visível só quando dentro desta section */
-	.scroll-more {
+	/* Scroll hint — pill em alto contraste fixo na base */
+	.scroll-more-wrapper {
 		position: sticky;
-		bottom: 0;
+		bottom: 1.5rem;
 		left: 0;
 		right: 0;
 		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.25rem;
-		padding: 1rem;
-		background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 60%, transparent);
+		justify-content: center;
 		pointer-events: none;
-		transition: opacity 0.4s;
-		z-index: 20;
+		transition: opacity 0.4s ease, transform 0.4s ease;
+		z-index: 30;
+		padding: 0 1rem;
 	}
 
-	.scroll-more.hidden {
+	.scroll-more-wrapper.hidden {
 		opacity: 0;
+		transform: translateY(12px);
+		pointer-events: none;
+	}
+
+	.scroll-more-pill {
+		pointer-events: auto;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.6rem 1.25rem;
+		border-radius: 9999px;
+		background: rgba(18, 18, 24, 0.94);
+		backdrop-filter: blur(16px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+		color: #ffffff;
+		cursor: pointer;
+		transition: background 0.2s, border-color 0.2s, transform 0.2s;
+	}
+
+	.scroll-more-pill:hover {
+		background: rgba(30, 30, 40, 0.98);
+		border-color: rgba(255, 255, 255, 0.35);
+		transform: translateY(-2px);
 	}
 
 	.scroll-more-text {
-		font-size: 0.55rem;
-		letter-spacing: 0.25em;
-		text-transform: uppercase;
-		color: rgba(255, 255, 255, 0.2);
-		font-weight: 500;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: #ffffff;
 	}
 
-	.scroll-more-arrows {
-		color: rgba(255, 255, 255, 0.2);
+	.scroll-more-icon {
+		display: flex;
+		align-items: center;
+		color: #818cf8;
 		animation: arrow-bounce 1.6s ease-in-out infinite;
 	}
 
 	@keyframes arrow-bounce {
-		0%, 100% { transform: translateY(-3px); opacity: 0.4; }
-		50% { transform: translateY(3px); opacity: 1; }
+		0%, 100% { transform: translateY(-2px); }
+		50% { transform: translateY(3px); }
 	}
 </style>
