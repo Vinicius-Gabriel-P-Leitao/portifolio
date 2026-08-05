@@ -20,7 +20,12 @@ test('about section is present on the page', async ({ page }) => {
 
 test('contact form is visible after scrolling to it', async ({ page }) => {
 	await page.goto('/');
-	await page.locator('#contact').scrollIntoViewIfNeeded();
+	const contactBtn = page.getByTitle('Contato');
+	if (await contactBtn.isVisible()) {
+		await contactBtn.click();
+	} else {
+		await page.locator('#contact').scrollIntoViewIfNeeded();
+	}
 
 	await expect(page.getByRole('form')).toBeVisible();
 });
