@@ -98,35 +98,19 @@ export const PROJECTS: Project[] = [
 		tech: ['Kotlin', 'Jetpack Compose', 'Rust', 'Iroh', 'Hilt', 'MangaDex API', 'AniList API'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-android',
 		preview:
-			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png',
+			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/01-home.png',
 		images: [
 			{
 				title: 'Home',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png'
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/01-home.png'
 			},
 			{
-				title: 'Manga Settings',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-manga-screen.png'
+				title: 'Reader',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/02-reader.png'
 			},
 			{
-				title: 'General Settings',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-screen.png'
-			},
-			{
-				title: 'History',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/history-screen.png'
-			},
-			{
-				title: 'Reader Modes',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/reader-screen-modes.png'
-			},
-			{
-				title: 'Webtoon',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/webtom-reader-mode.png'
-			},
-			{
-				title: 'Chapter',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/chapter-manga-screen.png'
+				title: 'Customization',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/03-customization.png'
 			}
 		],
 		highlights: [
