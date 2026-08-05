@@ -42,13 +42,6 @@
 
 		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
 			<div class="section-header">
-				<ShinyText
-					text={m['projects.title']()}
-					color="rgba(255,255,255,0.3)"
-					shineColor="rgba(255,255,255,0.7)"
-					speed={5}
-					class="section-label"
-				/>
 				<div class="title-row">
 					<h2 class="section-title">{m['projects.title']()}</h2>
 					<span class="project-count">{activeProjects.length}</span>

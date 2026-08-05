@@ -25,13 +25,6 @@
 
 		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
 			<div class="section-header">
-				<ShinyText
-					text={m['about.title']()}
-					color="rgba(255,255,255,0.3)"
-					shineColor="rgba(255,255,255,0.7)"
-					speed={5}
-					class="section-label"
-				/>
 				<h2 class="section-title">{m['about.title']()}</h2>
 			</div>
 		</FadeContent>

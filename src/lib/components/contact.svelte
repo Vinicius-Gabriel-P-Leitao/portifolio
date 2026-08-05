@@ -35,21 +35,14 @@
 >
 	<div class="mx-auto w-full max-w-md">
 
-		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
+		<FadeContent blur duration={800} threshold={0.2} class="mb-8">
 			<div class="section-header">
-				<ShinyText
-					text={m['contact.title']()}
-					color="rgba(255,255,255,0.3)"
-					shineColor="rgba(255,255,255,0.7)"
-					speed={5}
-					class="section-label"
-				/>
 				<h2 class="section-title">{m['contact.title']()}</h2>
 			</div>
 		</FadeContent>
 
 		<FadeContent blur duration={900} delay={100} threshold={0.15}>
-			<form onsubmit={handleSubmit} novalidate aria-label="Contact" class="form">
+			<form onsubmit={handleSubmit} novalidate aria-label="Contact" class="form contact-card">
 				<div class="field">
 					<label for="contact-name" class="field-label">{m['contact.name']()}</label>
 					<input
@@ -99,81 +92,85 @@
 </section>
 
 <style>
-	.section-label {
-		font-size: 0.65rem;
-		letter-spacing: 0.3em;
-		text-transform: uppercase;
-		display: block;
-		margin-bottom: 0.5rem;
-	}
 	.section-title {
 		font-size: clamp(2rem, 5vw, 3.5rem);
 		font-weight: 700;
 		letter-spacing: -0.03em;
-		color: rgba(255,255,255,0.9);
+		color: #ffffff;
 		line-height: 1;
 	}
 
 	.form { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem; }
 
-	.field { display: flex; flex-direction: column; gap: 0.375rem; }
+	.contact-card {
+		padding: 1.75rem;
+		border-radius: 16px;
+		background: rgba(18, 18, 24, 0.92);
+		backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+	}
+
+	.field { display: flex; flex-direction: column; gap: 0.5rem; }
 
 	.field-label {
-		font-size: 0.65rem;
-		letter-spacing: 0.15em;
+		font-size: 0.7rem;
+		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: rgba(255,255,255,0.3);
-		font-weight: 600;
+		color: rgba(255, 255, 255, 0.8);
+		font-weight: 700;
 	}
 
 	.field-input {
 		width: 100%;
-		padding: 0.75rem 0.875rem;
-		background: rgba(255,255,255,0.03);
-		border: 1px solid rgba(255,255,255,0.08);
-		border-radius: 8px;
-		color: rgba(255,255,255,0.85);
-		font-size: 0.875rem;
+		padding: 0.85rem 1rem;
+		background: rgba(0, 0, 0, 0.45);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 10px;
+		color: #ffffff;
+		font-size: 0.9rem;
 		font-family: inherit;
 		transition: border-color 0.2s, background 0.2s;
 		outline: none;
 	}
-	.field-input::placeholder { color: rgba(255,255,255,0.16); }
+	.field-input::placeholder { color: rgba(255, 255, 255, 0.45); }
 	.field-input:focus {
-		border-color: rgba(255,255,255,0.2);
-		background: rgba(255,255,255,0.05);
+		border-color: rgba(255, 255, 255, 0.45);
+		background: rgba(0, 0, 0, 0.6);
 	}
 
 	.btn-send {
 		display: inline-flex;
 		align-items: center;
-		gap: 7px;
-		padding: 0.7rem 1.5rem;
-		border-radius: 6px;
-		background: white;
+		justify-content: center;
+		gap: 8px;
+		padding: 0.85rem 1.5rem;
+		border-radius: 10px;
+		background: #ffffff;
 		color: #0a0a0a;
-		font-size: 0.8rem;
-		font-weight: 600;
+		font-size: 0.85rem;
+		font-weight: 700;
 		font-family: inherit;
 		border: none;
 		cursor: pointer;
 		transition: opacity 0.2s, transform 0.2s;
 	}
-	.btn-send:hover { opacity: 0.88; transform: translateY(-1px); }
+	.btn-send:hover { opacity: 0.9; transform: translateY(-1px); }
 	.btn-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
 	.contact-links {
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
 		gap: 1rem;
 		padding-top: 1.5rem;
-		border-top: 1px solid rgba(255,255,255,0.06);
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
 	}
 	.contact-link {
-		display: flex; align-items: center; gap: 5px;
-		font-size: 0.8rem; color: rgba(255,255,255,0.35);
+		display: flex; align-items: center; gap: 6px;
+		font-size: 0.85rem; color: rgba(255, 255, 255, 0.85);
 		text-decoration: none; transition: color 0.2s;
 	}
-	.contact-link:hover { color: rgba(255,255,255,0.75); }
-	.contact-email { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+	.contact-link:hover { color: #ffffff; }
+	.contact-email { font-size: 0.8rem; color: rgba(255, 255, 255, 0.65); font-family: monospace; }
 </style>
