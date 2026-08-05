@@ -1,13 +1,20 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { Send } from 'lucide-svelte';
 	import GithubIcon from '$lib/components/github-icon.svelte';
-	import { intersect } from '$lib/actions/intersect';
 	import { toast } from '$lib/stores/toast.svelte';
 	import { sendEmail } from '$lib/services/email.service';
 	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
-	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
-
 	import * as m from '$lib/paraglide/messages';
+
+	let sectionEl = $state<HTMLElement | null>(null);
+
+	onMount(() => {
+		const t = setTimeout(() => {
+			if (sectionEl) sectionEl.dataset.visible = 'true';
+		}, 200);
+		return () => clearTimeout(t);
+	});
 
 	let name = $state('');
 	let email = $state('');
@@ -30,8 +37,8 @@
 
 <section
 	id="contact"
-	class="px-6 py-24 pb-32 md:pb-24"
-	use:intersect={{ section: 'contact', threshold: 0.2 }}
+	class="px-6 py-10 pb-12 md:pb-10"
+	bind:this={sectionEl}
 >
 	<div class="mx-auto w-full max-w-md">
 

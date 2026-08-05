@@ -1,10 +1,19 @@
 <script lang="ts">
-	import { intersect } from '$lib/actions/intersect';
+	import { onMount } from 'svelte';
 	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
 	import SpotlightCard from '$lib/components/svelte-bits/spotlight-card.svelte';
-	import ShinyText from '$lib/components/svelte-bits/shiny-text.svelte';
 	import LogoLoop from '$lib/components/svelte-bits/logo-loop.svelte';
 	import * as m from '$lib/paraglide/messages';
+
+	let sectionEl = $state<HTMLElement | null>(null);
+
+	onMount(() => {
+		// Trigger entrance animation after a short delay (slide transition takes ~750ms)
+		const t = setTimeout(() => {
+			if (sectionEl) sectionEl.dataset.visible = 'true';
+		}, 200);
+		return () => clearTimeout(t);
+	});
 
 	const STACK = [
 		{ category: () => m['about.frontend'](), items: ['Tailwind', 'React', 'Svelte', 'Jetpack Compose'] },
@@ -20,7 +29,7 @@
 	];
 </script>
 
-<section id="about" class="px-6 py-24" use:intersect={{ section: 'about', threshold: 0.2 }}>
+<section id="about" class="px-6 py-10" bind:this={sectionEl}>
 	<div class="mx-auto w-full max-w-4xl">
 
 		<!-- Section Index Header -->

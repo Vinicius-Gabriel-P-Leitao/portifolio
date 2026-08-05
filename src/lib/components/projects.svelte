@@ -1,116 +1,149 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { intersect } from '$lib/actions/intersect';
-	import { PROJECTS } from '$lib/data/projects';
 	import type { Project } from '$lib/data/projects';
-	import * as m from '$lib/paraglide/messages';
 	import ProjectCard from './project-card.svelte';
 	import ProjectDetail from './project-detail.svelte';
-	import { ArrowRight } from 'lucide-svelte';
 
-	const activeProjects = PROJECTS.filter((p) => p.status !== 'idea');
-	const ideaProjects = PROJECTS.filter((p) => p.status === 'idea');
-	const allProjects = [...activeProjects, ...ideaProjects];
+	let {
+		projects,
+		activeIndex = 0,
+		total
+	}: {
+		projects: Project[];
+		activeIndex: number;
+		total: number;
+	} = $props();
 
 	let selected = $state<Project | null>(null);
-
-	let containerEl = $state<HTMLElement | null>(null);
-	let scrollRatio = $state(0);
-
-	$effect(() => {
-		if (!browser) return;
-		document.body.style.overflow = selected ? 'hidden' : '';
-		return () => {
-			document.body.style.overflow = '';
-		};
-	});
-
-	$effect(() => {
-		if (!browser) return;
-
-		const handleScroll = () => {
-			if (!containerEl) return;
-			const rect = containerEl.getBoundingClientRect();
-			const totalScrollable = rect.height - window.innerHeight;
-			if (totalScrollable <= 0) return;
-
-			// Calculates scroll progress inside this pinned section (0.0 to 1.0)
-			const current = -rect.top;
-			const progress = Math.max(0, Math.min(1, current / totalScrollable));
-			scrollRatio = progress;
-		};
-
-		window.addEventListener('scroll', handleScroll, { passive: true });
-		handleScroll();
-		return () => window.removeEventListener('scroll', handleScroll);
-	});
 </script>
 
-<!-- Outer container creating crisp horizontal scrubbing without dead scroll -->
-<section
-	id="projects"
-	bind:this={containerEl}
-	class="relative h-[120vh] w-full"
-	use:intersect={{ section: 'projects', threshold: 0.05 }}
->
-	<!-- Sticky 100vh viewport stage -->
-	<div class="sticky top-0 flex h-screen w-full flex-col justify-center overflow-hidden py-8">
-
-		<!-- Top section label & index bar (fades out as section ends) -->
-		<div
-			class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 mb-6 transition-opacity duration-200"
-			style="opacity: {scrollRatio > 0.88 ? Math.max(0, 1 - (scrollRatio - 0.88) * 8) : 1}"
-		>
-			<div class="flex items-center gap-4">
-				<span class="font-mono text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
-					// 01 . PROJETOS E ARQUITETURA
-				</span>
-				<div class="h-[1px] w-12 bg-white/20"></div>
-			</div>
-			<div class="flex items-center gap-2 font-mono text-xs text-white/90 bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
-				<span class="text-white font-bold">01</span>
-				<span>/</span>
-				<span>03</span>
-			</div>
+<section id="projects" class="projects-section">
+	<!-- Top Section Header -->
+	<div class="projects-header mx-auto flex w-full max-w-7xl items-center justify-between px-6 mb-6">
+		<div class="flex items-center gap-4">
+			<span class="font-mono text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+				// 01 . PROJETOS E ARQUITETURA
+			</span>
+			<div class="h-[1px] w-12 bg-white/20"></div>
 		</div>
+		<div class="flex items-center gap-2 font-mono text-xs text-white/90 bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+			<span class="text-white font-bold">01</span>
+			<span>/</span>
+			<span>03</span>
+		</div>
+	</div>
 
-		<!-- Horizontal card ribbon transformed by vertical scrollRatio -->
+	<!-- Continuous Horizontal Ribbon for Projects -->
+	<div class="ribbon-viewport">
 		<div
-			class="flex items-center gap-6 px-6 md:px-16 transition-transform duration-100 ease-out will-change-transform"
-			style="transform: translateX(calc(-{scrollRatio * (allProjects.length - 1) * 78}%))"
+			class="ribbon-track"
+			style="transform: translateX(calc(50vw - 230px - {activeIndex} * (460px + 2rem)))"
 		>
-			{#each allProjects as project, i (project.id)}
+			{#each projects as project, i (project.id)}
+				{@const dist = Math.abs(i - activeIndex)}
+				{@const isCurrent = i === activeIndex}
 				<div
-					class="w-[85vw] max-w-[440px] shrink-0 transition-all duration-300"
-					style="transform: scale({1 - Math.abs(scrollRatio - i / (allProjects.length - 1)) * 0.12}); opacity: {1 - Math.abs(scrollRatio - i / (allProjects.length - 1)) * 0.45}"
+					class="card-slot"
+					style="
+						transform: scale({isCurrent ? 1 : 0.88 - Math.min(dist * 0.05, 0.15)});
+						opacity: {isCurrent ? 1 : Math.max(0.2, 0.5 - (dist - 1) * 0.15)};
+						filter: {isCurrent ? 'none' : 'blur(' + Math.min(dist * 1.5, 4) + 'px)'};
+					"
 				>
-					<div class="mb-3 flex items-center justify-between font-mono text-xs text-white/60">
-						<span class="text-white font-bold">PROJECT [{String(i + 1).padStart(2, '0')}]</span>
-						<span class="text-white/80">{project.tech[0] || 'FULL-STACK'}</span>
+					<div class="card-meta">
+						<span class="card-index">PROJECT [{String(i + 1).padStart(2, '0')}]</span>
+						<span class="card-tech">{project.tech[0] || 'FULL-STACK'}</span>
 					</div>
 					<ProjectCard {project} onSelect={() => (selected = project)} />
 				</div>
 			{/each}
 		</div>
+	</div>
 
-		<!-- Scroll progress indicator bar bottom (fades out as section ends) -->
-		<div
-			class="mx-auto mt-8 flex w-full max-w-7xl items-center justify-between px-6 transition-opacity duration-200"
-			style="opacity: {scrollRatio > 0.88 ? Math.max(0, 1 - (scrollRatio - 0.88) * 8) : 1}"
-		>
-			<div class="h-1.5 w-48 rounded-full bg-white/20 overflow-hidden">
+	<!-- Bottom Section Footer -->
+	<div class="projects-footer mx-auto mt-6 flex w-full max-w-7xl items-center justify-between px-6">
+		<div class="dots flex items-center gap-2">
+			{#each Array(total) as _, i (i)}
 				<div
-					class="h-full bg-gradient-to-r from-white via-cyan-400 to-indigo-400 transition-all duration-75"
-					style="width: {scrollRatio * 100}%"
+					class="dot"
+					class:dot-active={i === activeIndex}
+					style="
+						width: {i === activeIndex ? '1.75rem' : '0.4rem'};
+						background: {i === activeIndex ? '#ffffff' : 'rgba(255,255,255,0.25)'};
+					"
 				></div>
-			</div>
-			<div class="flex items-center gap-2 font-mono text-xs text-white font-bold bg-zinc-900/90 border border-white/30 px-4 py-2 rounded-full shadow-xl backdrop-blur-md">
-				<span>DESLIZE PARA EXPLORAR</span>
-				<ArrowRight size={14} class="text-white animate-pulse" />
-			</div>
+			{/each}
 		</div>
 
+		<span class="font-mono text-xs text-white/50">
+			PROJETO {String(activeIndex + 1).padStart(2, '0')} <span class="text-white/20">/</span> {String(total).padStart(2, '0')}
+		</span>
 	</div>
 </section>
 
 <ProjectDetail project={selected} onClose={() => (selected = null)} />
+
+<style>
+	.projects-section {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding-top: 4.5rem;
+		padding-bottom: 2rem;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.ribbon-viewport {
+		width: 100vw;
+		overflow: hidden;
+		position: relative;
+		padding: 1.5rem 0;
+	}
+
+	.ribbon-track {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+		will-change: transform;
+		transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.card-slot {
+		width: 460px;
+		max-width: 80vw;
+		flex-shrink: 0;
+		transition:
+			transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+			opacity 0.5s ease,
+			filter 0.5s ease;
+	}
+
+	.card-meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 0.6rem;
+		font-family: monospace;
+		font-size: 0.7rem;
+	}
+
+	.card-index {
+		color: #ffffff;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+	}
+
+	.card-tech {
+		color: rgba(255, 255, 255, 0.5);
+		letter-spacing: 0.06em;
+	}
+
+	.dot {
+		height: 0.3rem;
+		border-radius: 9999px;
+		transition:
+			width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+			background 0.25s;
+	}
+</style>

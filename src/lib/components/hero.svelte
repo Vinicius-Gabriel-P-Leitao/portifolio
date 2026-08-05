@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { ChevronRight, ArrowDown } from 'lucide-svelte';
-	import { intersect } from '$lib/actions/intersect';
 	import GithubIcon from '$lib/components/github-icon.svelte';
 	import TextType from '$lib/components/svelte-bits/text-type.svelte';
 	import type { GitHubUser } from '$lib/services/github.service';
@@ -11,8 +10,7 @@
 
 <section
 	id="hero"
-	class="hero relative flex min-h-[80vh] flex-col items-center justify-center px-6 pt-20 pb-12 text-center overflow-hidden"
-	use:intersect={{ section: 'hero', threshold: 0.4 }}
+	class="hero relative flex min-h-full flex-col items-center justify-center px-6 pt-12 pb-5 text-center overflow-hidden"
 >
 	<div class="relative z-10 flex flex-col items-center max-w-4xl">
 		{#if github?.avatar_url}

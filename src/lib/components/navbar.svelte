@@ -11,19 +11,10 @@
 	import GooeyNav from '$lib/components/svelte-bits/gooey-nav.svelte';
 	import * as m from '$lib/paraglide/messages';
 
-	let scrolled = $state(false);
-	let scrollProgress = $state(0);
+	import { scrollState } from '$lib/stores/scroll.svelte';
 
-	$effect(() => {
-		if (!browser) return;
-		const handler = () => {
-			scrolled = window.scrollY > 20;
-			const total = document.body.scrollHeight - window.innerHeight;
-			scrollProgress = total > 0 ? window.scrollY / total : 0;
-		};
-		window.addEventListener('scroll', handler, { passive: true });
-		return () => window.removeEventListener('scroll', handler);
-	});
+	const scrolled = $derived(scrollState.progress > 0.02);
+	const scrollProgress = $derived(scrollState.progress);
 
 	const NAV_ITEMS = $derived([
 		{ id: 'hero', icon: Home, label: m['nav.home']() },

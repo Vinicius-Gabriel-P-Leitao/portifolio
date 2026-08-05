@@ -2,10 +2,13 @@
 @import 'tailwindcss';
 
 @layer base {
-	html {
-		scroll-behavior: smooth;
-		scroll-padding-top: 3.5rem;
-		scroll-snap-type: y mandatory;
+	html,
+	body {
+		/* JS carousel controls all movement — block native scroll */
+		overflow: hidden;
+		height: 100%;
+		width: 100%;
+		overscroll-behavior: none;
 	}
 
 	body {
@@ -14,19 +17,17 @@
 		font-family: 'Inter', system-ui, -apple-system, sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		overflow-x: hidden;
 	}
 
 	:focus-visible {
-		outline: 2px solid rgba(255,255,255,0.4);
+		outline: 2px solid rgba(255, 255, 255, 0.4);
 		outline-offset: 2px;
 	}
 
-	::-webkit-scrollbar { width: 2px; }
-	::-webkit-scrollbar-track { background: transparent; }
-	::-webkit-scrollbar-thumb {
-		background: rgba(255,255,255,0.12);
-		border-radius: 9999px;
+	/* Hide scrollbar (belt and suspenders) */
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
 	}
 
 	::selection {
@@ -35,41 +36,32 @@
 	}
 }
 
-/* Todas as sections exceto #projects — ela define seu próprio scroll-snap */
-section:not(#projects) {
-	min-height: 100dvh;
-	scroll-snap-align: start;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+/* Sections fill their panel height */
+section {
+	height: 100%;
 }
 
-/* #projects cresce com o conteúdo e snapa no topo */
-#projects {
-	scroll-snap-align: start;
-}
-
-@media (max-width: 768px) {
-	html { scroll-padding-bottom: 4rem; }
-	section { padding-bottom: 4rem; }
-}
-
-[data-visible='true'] {
-	animation: section-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-[data-visible='false'],
-section:not([data-visible]) {
-	opacity: 0;
-	transform: translateY(16px);
-}
-
+/* Hero: always fully visible */
 #hero {
 	opacity: 1 !important;
 	transform: none !important;
 	animation: none !important;
 }
 
-@keyframes section-in {
-	to { opacity: 1; transform: translateY(0); }
+/* Entrance animation: about / contact fade+slide up on mount */
+[data-visible='true'] {
+	animation: panel-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+[data-visible='false'],
+section:not([data-visible]):not(#hero):not(#projects) {
+	opacity: 0;
+	transform: translateY(18px);
+}
+
+@keyframes panel-in {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

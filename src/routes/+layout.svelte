@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import Lenis from 'lenis';
 	import {
 		locales,
 		localizeHref,
@@ -17,42 +15,13 @@
 	import Noise from '$lib/components/svelte-bits/Noise.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { scrollState } from '$lib/stores/scroll.svelte';
 
 	let { children } = $props();
 	const locale = $derived(browser ? (getLocaleForUrl(page.url.href) ?? getLocale()) : getLocale());
 
-	let scrollProgress = $state(0);
-	let scrollVelocity = $state(0);
-
 	$effect(() => {
 		setLocale(locale, { reload: false });
-	});
-
-	onMount(() => {
-		const lenis = new Lenis({
-			duration: 1.2,
-			easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-			smoothWheel: true
-		});
-
-		lenis.on('scroll', (e: any) => {
-			const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-			scrollProgress = maxScroll > 0 ? e.scroll / maxScroll : 0;
-			scrollVelocity = e.velocity || 0;
-		});
-
-		let animationFrameId: number;
-		function raf(time: number) {
-			lenis.raf(time);
-			animationFrameId = requestAnimationFrame(raf);
-		}
-
-		animationFrameId = requestAnimationFrame(raf);
-
-		return () => {
-			cancelAnimationFrame(animationFrameId);
-			lenis.destroy();
-		};
 	});
 </script>
 
@@ -64,8 +33,8 @@
 
 <!-- Slim Top Scroll Progress Indicator -->
 <div
-	class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-amber-500 via-white to-cyan-500 z-50 transition-all duration-75 pointer-events-none opacity-80"
-	style="width: {scrollProgress * 100}%"
+	class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-amber-500 via-white to-cyan-500 z-50 transition-all duration-500 pointer-events-none opacity-80"
+	style="width: {scrollState.progress * 100}%"
 ></div>
 
 <!-- Global Fixed Background: Buraco Negro Gargantua em OGL -->
@@ -74,8 +43,8 @@
 		speed={0.4}
 		iterations={85}
 		enableMouseInteraction={true}
-		{scrollProgress}
-		{scrollVelocity}
+		scrollProgress={scrollState.progress}
+		scrollVelocity={scrollState.velocity}
 	/>
 </div>
 
