@@ -58,9 +58,11 @@
 				class="preview-img"
 				loading="lazy"
 			/>
+			<div class="preview-gradient"></div>
 		</div>
 	{:else}
 		<div class="preview-empty">
+			<div class="preview-grid-pattern"></div>
 			<span class="preview-initial">{project.title[0]}</span>
 		</div>
 	{/if}
@@ -126,110 +128,140 @@
 <style>
 	:global(.project-card) {
 		padding: 0 !important;
-		border-radius: 16px !important;
-		background: rgba(18, 18, 24, 0.88) !important;
-		backdrop-filter: blur(20px) !important;
+		border-radius: 20px !important;
+		background: rgba(18, 18, 24, 0.92) !important;
+		backdrop-filter: blur(24px) !important;
 		border-color: rgba(255, 255, 255, 0.15) !important;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
+		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8) !important;
 		display: flex;
 		flex-direction: column;
-		height: 380px !important;
-		min-height: 380px !important;
+		height: 440px !important;
+		min-height: 440px !important;
 		overflow: hidden;
-		transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s !important;
+		transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s !important;
 	}
 	:global(.project-card:hover) {
-		border-color: rgba(255, 255, 255, 0.35) !important;
-		transform: translateY(-2px) !important;
-		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 255, 255, 0.05) !important;
+		border-color: rgba(255, 255, 255, 0.4) !important;
+		transform: translateY(-4px) !important;
+		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.08) !important;
 	}
 
 	.preview {
-		height: 160px;
+		height: 230px;
+		position: relative;
 		overflow: hidden;
-		background: rgba(0, 0, 0, 0.4);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 1rem;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		background: #08080c;
 	}
 	.preview-img {
-		max-height: 100%;
-		max-width: 100%;
-		object-fit: contain;
-		opacity: 0.95;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top center;
+		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 	}
+	:global(.project-card:hover) .preview-img {
+		transform: scale(1.06);
+	}
+
+	.preview-gradient {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, transparent 35%, rgba(18, 18, 24, 0.95) 100%);
+		pointer-events: none;
+	}
+
 	.preview-empty {
-		height: 160px;
+		height: 230px;
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: rgba(0, 0, 0, 0.3);
-		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		background: radial-gradient(circle at 50% 50%, rgba(30, 30, 42, 0.9), #08080c);
+	}
+	.preview-grid-pattern {
+		position: absolute;
+		inset: 0;
+		background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+		background-size: 16px 16px;
 	}
 	.preview-initial {
-		font-size: 2.5rem;
-		font-weight: 700;
-		color: rgba(255, 255, 255, 0.15);
+		font-size: 3.5rem;
+		font-weight: 900;
+		color: rgba(255, 255, 255, 0.12);
+		text-transform: uppercase;
+		position: relative;
+		z-index: 1;
 	}
 
-	.card-body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		padding: 1.1rem 1.25rem 1.25rem 1.25rem;
+		justify-content: space-between;
+	}
 
 	.card-top {
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
 		justify-content: space-between;
 		gap: 0.5rem;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.35rem;
 	}
 
 	.card-title {
-		font-size: 0.95rem;
-		font-weight: 700;
+		font-size: 1rem;
+		font-weight: 800;
 		color: #ffffff;
-		line-height: 1.3;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
 	}
 
 	.card-status {
 		font-size: 0.6rem;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		font-weight: 600;
+		font-weight: 700;
 		white-space: nowrap;
 		flex-shrink: 0;
 	}
 
 	.card-desc {
-		font-size: 0.8rem;
-		line-height: 1.65;
-		color: rgba(255, 255, 255, 0.85);
-		flex: 1;
-		margin-bottom: 1rem;
+		font-size: 0.78rem;
+		line-height: 1.55;
+		color: rgba(255, 255, 255, 0.75);
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		margin-bottom: 0.75rem;
 	}
 
 	.card-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.375rem;
-		margin-bottom: 1rem;
+		gap: 0.35rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.tag {
-		font-size: 0.6rem;
+		font-size: 0.58rem;
+		font-family: monospace;
 		letter-spacing: 0.06em;
-		color: rgba(255,255,255,0.35);
-		border: 1px solid rgba(255,255,255,0.07);
+		color: rgba(255, 255, 255, 0.5);
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.1);
 		padding: 0.15rem 0.5rem;
-		border-radius: 4px;
+		border-radius: 6px;
 	}
 
 	.card-actions {
 		display: flex;
 		align-items: center;
 		gap: 0.875rem;
-		padding-top: 0.75rem;
-		border-top: 1px solid rgba(255,255,255,0.05);
+		padding-top: 0.65rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
 	}
 
 	.action-link {
@@ -237,18 +269,19 @@
 		align-items: center;
 		gap: 4px;
 		font-size: 0.7rem;
-		color: rgba(255,255,255,0.3);
+		color: rgba(255, 255, 255, 0.45);
 		text-decoration: none;
 		transition: color 0.2s;
 	}
-	.action-link:hover { color: rgba(255,255,255,0.7); }
+	.action-link:hover { color: #ffffff; }
 
 	.action-btn-more {
 		display: flex;
 		align-items: center;
 		gap: 3px;
 		font-size: 0.7rem;
-		color: rgba(255,255,255,0.3);
+		font-weight: 600;
+		color: rgba(255, 255, 255, 0.5);
 		background: none;
 		border: none;
 		cursor: pointer;
@@ -256,5 +289,6 @@
 		padding: 0;
 		transition: color 0.2s, gap 0.2s;
 	}
-	.action-btn-more:hover { color: rgba(255,255,255,0.75); gap: 6px; }
+	.action-btn-more:hover { color: #ffffff; gap: 6px; }
 </style>
+
