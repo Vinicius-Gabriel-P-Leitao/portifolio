@@ -10,11 +10,12 @@
 		getLocale
 	} from '$lib/paraglide/runtime';
 	import type { Pathname } from '$app/types';
-	import Navbar from '$lib/components/navbar.svelte';
-	import BottomNav from '$lib/components/bottom-nav.svelte';
 	import Toast from '$lib/components/toast.svelte';
+	import BlackHole from '$lib/components/svelte-bits/black-hole.svelte';
+	import Noise from '$lib/components/svelte-bits/Noise.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { scrollState } from '$lib/stores/scroll.svelte';
 
 	let { children } = $props();
 	const locale = $derived(browser ? (getLocaleForUrl(page.url.href) ?? getLocale()) : getLocale());
@@ -30,11 +31,37 @@
 	<meta name="theme-color" content="#0a0a0a" />
 </svelte:head>
 
-{#key locale}
-	<Navbar />
-	<BottomNav />
+<!-- Slim Top Scroll Progress Indicator -->
+<div
+	class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-amber-500 via-white to-cyan-500 z-50 transition-all duration-500 pointer-events-none opacity-80"
+	style="width: {scrollState.progress * 100}%"
+></div>
 
-	{@render children()}
+<!-- Global Fixed Background: Buraco Negro Gargantua em OGL -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 opacity-75">
+	<BlackHole
+		speed={0.4}
+		iterations={85}
+		enableMouseInteraction={true}
+		scrollProgress={scrollState.progress}
+		scrollVelocity={scrollState.velocity}
+	/>
+</div>
+
+<div
+	aria-hidden="true"
+	class="fixed inset-0 pointer-events-none z-[1]"
+	style="background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 20%, #0a0a0a 85%);"
+></div>
+
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-[2]">
+	<Noise patternAlpha={8} patternRefreshInterval={4} />
+</div>
+
+{#key locale}
+	<div class="relative z-10">
+		{@render children()}
+	</div>
 
 	<Toast />
 {/key}

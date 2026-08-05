@@ -91,83 +91,67 @@ export const PROJECTS: Project[] = [
 		title: 'Acerola Android',
 		status: 'pre-release',
 		desc: {
-			en: 'Android manga reader that scans local folders, reads CBZ and CBR files, auto-fetches metadata from MangaDex and AniList, and supports multiple reading modes and themes.',
+			en: 'Android manga reader built with Kotlin and Jetpack Compose. Scans local storage, parses CBZ/CBR, auto-fetches metadata from MangaDex and AniList, and includes modular component previews for Light and Dark UI modes.',
 			'pt-br':
-				'Leitor de mangá para Android que escaneia pastas locais, lê CBZ e CBR, busca metadados automaticamente no MangaDex e AniList, e suporta múltiplos modos de leitura e temas.'
+				'Leitor de mangá para Android em Kotlin e Jetpack Compose. Escaneia armazenamento local, processa CBZ/CBR, busca metadados no MangaDex/AniList e possui previews modulares para temas Claro e Escuro.'
 		},
-		tech: ['Kotlin', 'Rust', 'Iroh', 'Jetpack Compose', 'Hilt', 'MangaDex API', 'AniList API'],
+		tech: ['Kotlin', 'Jetpack Compose', 'Rust', 'Iroh', 'Hilt', 'MangaDex API', 'AniList API'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-android',
 		preview:
-			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png',
+			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/01-home.png',
 		images: [
 			{
 				title: 'Home',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/home-screen.png'
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/01-home.png'
 			},
 			{
-				title: 'Manga Settings',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-manga-screen.png'
+				title: 'Reader',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/02-reader.png'
 			},
 			{
-				title: 'General Settings',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/config-screen.png'
-			},
-			{
-				title: 'History',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/history-screen.png'
-			},
-			{
-				title: 'Reader Modes',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/reader-screen-modes.png'
-			},
-			{
-				title: 'Webtoon',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/webtom-reader-mode.png'
-			},
-			{
-				title: 'Chapter',
-				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/chapter-manga-screen.png'
+				title: 'Customization',
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/03-customization.png'
 			}
 		],
 		highlights: [
 			{
-				title: { en: 'Auto Library', 'pt-br': 'Biblioteca Automática' },
+				title: { en: 'Compose Component Previews (@Preview)', 'pt-br': 'Previews em Compose (@Preview)' },
 				body: {
-					en: 'Points to any storage folder and builds a searchable library automatically — detects new files without manual refresh.',
+					en: 'Modular components (@dialog, @card, @adaptivesheet) built with isolated Light and Dark @Preview functions (AcerolaThemePreview, RememberSearchBarContentPaddingPreview).',
 					'pt-br':
-						'Aponta para qualquer pasta e monta uma biblioteca pesquisável automaticamente — detecta novos arquivos sem atualização manual.'
+						'Componentes modulares (@dialog, @card, @adaptivesheet) desenvolvidos com funções @Preview isoladas para modo Claro e Escuro (AcerolaThemePreview, RememberSearchBarContentPaddingPreview).'
 				}
 			},
 			{
-				title: { en: 'Metadata Engine', 'pt-br': 'Motor de Metadados' },
+				title: { en: 'Storage Scanner', 'pt-br': 'Scanner de Armazenamento' },
 				body: {
-					en: 'Fetches cover, synopsis, author and genre from MangaDex, AniList and ComicInfo. Source is switchable per manga and editable manually.',
+					en: 'Indexes designated storage directories and builds a searchable library without requiring manual user refreshes.',
 					'pt-br':
-						'Busca capa, sinopse, autor e gênero no MangaDex, AniList e ComicInfo. A fonte é alternável por mangá e editável manualmente.'
+						'Indexa diretórios de armazenamento e constrói a biblioteca de forma automática.'
 				}
 			},
 			{
-				title: { en: 'Format Support', 'pt-br': 'Formatos Suportados' },
+				title: { en: 'Metadata Fetcher', 'pt-br': 'Buscador de Metadados' },
 				body: {
-					en: 'Reads CBZ and CBR natively. PDF files are converted to CBZ automatically on first open — no manual step required.',
+					en: 'Fetches covers, synopses, authors, and chapter indexes from MangaDex, AniList, and embedded ComicInfo data.',
 					'pt-br':
-						'Lê CBZ e CBR nativamente. Arquivos PDF são convertidos para CBZ automaticamente na primeira abertura — sem etapa manual.'
+						'Obtém capas, sinopses, autores e capítulos via MangaDex, AniList e dados ComicInfo incorporados.'
 				}
 			},
 			{
-				title: { en: 'Reading Modes', 'pt-br': 'Modos de Leitura' },
+				title: { en: 'Format Processing', 'pt-br': 'Processamento de Formatos' },
 				body: {
-					en: 'Paginated horizontal/vertical or webtoon continuous scroll. Reading position is saved automatically per chapter.',
+					en: 'Direct CBZ/CBR archive extraction and automated on-demand PDF conversion on first launch.',
 					'pt-br':
-						'Paginado horizontal/vertical ou scroll contínuo estilo webtoon. A posição de leitura é salva automaticamente por capítulo.'
+						'Extração direta de arquivos CBZ/CBR e conversão automática sob demanda de PDF.'
 				}
 			},
 			{
-				title: { en: 'Ecosystem Ready', 'pt-br': 'Ecossistema Integrado' },
+				title: { en: 'Reader Engine', 'pt-br': 'Engine de Leitura' },
 				body: {
-					en: 'Designed to connect with acerola-desktop over local Wi-Fi and acerola-relay for remote access outside your home network.',
+					en: 'Supports paginated horizontal/vertical modes and continuous webtoon scroll with automatic page persistence.',
 					'pt-br':
-						'Projetado para conectar com o acerola-desktop via Wi-Fi local e com o acerola-relay para acesso remoto fora de casa.'
+						'Oferece leitura paginada horizontal/vertical e scroll contínuo de webtoon com salvamento automático de posição.'
 				}
 			}
 		]

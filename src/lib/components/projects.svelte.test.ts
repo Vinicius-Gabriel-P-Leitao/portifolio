@@ -14,14 +14,14 @@ describe('Projects', () => {
 	test('renders a card for every project', async () => {
 		const { getByRole } = render(Projects);
 
-		const articles = await getByRole('article').all();
+		const articles = await getByRole('article', { includeHidden: true }).all();
 		expect(articles.length).toBe(PROJECTS.length);
 	});
 
 	test('each card has a heading with the project title', async () => {
 		const { getByRole } = render(Projects);
 
-		const headings = await getByRole('heading', { level: 3 }).all();
+		const headings = await getByRole('heading', { level: 3, includeHidden: true }).all();
 		expect(headings.length).toBe(PROJECTS.length);
 	});
 });

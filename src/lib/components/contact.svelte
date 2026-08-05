@@ -1,10 +1,20 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { Send } from 'lucide-svelte';
 	import GithubIcon from '$lib/components/github-icon.svelte';
-	import { intersect } from '$lib/actions/intersect';
 	import { toast } from '$lib/stores/toast.svelte';
 	import { sendEmail } from '$lib/services/email.service';
+	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
 	import * as m from '$lib/paraglide/messages';
+
+	let sectionEl = $state<HTMLElement | null>(null);
+
+	onMount(() => {
+		const t = setTimeout(() => {
+			if (sectionEl) sectionEl.dataset.visible = 'true';
+		}, 200);
+		return () => clearTimeout(t);
+	});
 
 	let name = $state('');
 	let email = $state('');
@@ -16,97 +26,173 @@
 		loading = true;
 		const result = await sendEmail({ name, email, message });
 		loading = false;
-
 		if (result.ok) {
 			toast.show(m['toast.success'](), 'success');
-			name = '';
-			email = '';
-			message = '';
+			name = ''; email = ''; message = '';
 		} else {
 			toast.show(m['toast.error'](), 'error');
 		}
 	}
-
-	const INPUT_CLASS =
-		'w-full rounded-lg border border-white/8 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/20 transition-colors focus:border-indigo-500/50 focus:outline-none';
-	const LABEL_CLASS = 'block text-[10px] uppercase tracking-wider text-white/35';
 </script>
 
 <section
 	id="contact"
-	class="px-4 py-20 pb-32 md:pb-20"
-	use:intersect={{ section: 'contact', threshold: 0.2 }}
+	class="min-h-full flex flex-col items-center justify-center px-4 sm:px-6 pt-16 pb-24"
+	bind:this={sectionEl}
 >
-	<div class="mx-auto w-full max-w-xl">
-		<h2 class="mb-8 text-[11px] tracking-[0.3em] text-white/40 uppercase">
-			{m['contact.title']()}
-		</h2>
+	<div class="mx-auto w-full max-w-md">
 
-		<form onsubmit={handleSubmit} novalidate aria-label="Contact" class="mb-10 space-y-4">
-			<div class="space-y-1.5">
-				<label for="contact-name" class={LABEL_CLASS}>{m['contact.name']()}</label>
-				<input
-					id="contact-name"
-					type="text"
-					bind:value={name}
-					placeholder={m['contact.name_placeholder']()}
-					required
-					autocomplete="name"
-					class={INPUT_CLASS}
-				/>
+		<!-- Section Index Header -->
+		<div class="flex items-center justify-between mb-8">
+			<div class="flex items-center gap-4">
+				<span class="font-mono text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+					// 03 . CONTATO
+				</span>
+				<div class="h-[1px] w-12 bg-white/20"></div>
 			</div>
-
-			<div class="space-y-1.5">
-				<label for="contact-email" class={LABEL_CLASS}>{m['contact.email']()}</label>
-				<input
-					id="contact-email"
-					type="email"
-					bind:value={email}
-					placeholder={m['contact.email_placeholder']()}
-					required
-					autocomplete="email"
-					class={INPUT_CLASS}
-				/>
+			<div class="flex items-center gap-2 font-mono text-xs text-white/90 bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+				<span class="text-white font-bold">03</span>
+				<span>/</span>
+				<span>03</span>
 			</div>
-
-			<div class="space-y-1.5">
-				<label for="contact-message" class={LABEL_CLASS}>{m['contact.message']()}</label>
-				<textarea
-					id="contact-message"
-					bind:value={message}
-					placeholder={m['contact.message_placeholder']()}
-					required
-					rows="4"
-					class="{INPUT_CLASS} resize-none"
-				></textarea>
-			</div>
-
-			<button
-				type="submit"
-				disabled={loading}
-				class="flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
-			>
-				{loading ? m['contact.sending']() : m['contact.send']()}
-				{#if !loading}
-					<Send size={14} />
-				{/if}
-			</button>
-		</form>
-
-		<!-- Links -->
-		<div
-			class="flex flex-col gap-3 border-t border-white/8 pt-6 sm:flex-row sm:items-center sm:gap-6"
-		>
-			<a
-				href="https://github.com/Vinicius-Gabriel-P-Leitao"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="flex items-center gap-2 text-sm text-white/45 transition-colors hover:text-white"
-			>
-				<GithubIcon size={15} />
-				GitHub
-			</a>
-			<span class="text-sm text-white/25 select-all">vinicius.gabriel.p.leitao@gmail.com</span>
 		</div>
+
+		<FadeContent blur duration={800} threshold={0.2} class="mb-8">
+			<div class="section-header">
+				<h2 class="section-title">{m['contact.title']()}</h2>
+			</div>
+		</FadeContent>
+
+		<FadeContent blur duration={900} delay={100} threshold={0.15}>
+			<form onsubmit={handleSubmit} novalidate aria-label="Contact" class="form contact-card">
+				<div class="field">
+					<label for="contact-name" class="field-label">{m['contact.name']()}</label>
+					<input
+						id="contact-name" type="text" bind:value={name}
+						placeholder={m['contact.name_placeholder']()}
+						required autocomplete="name" class="field-input"
+					/>
+				</div>
+
+				<div class="field">
+					<label for="contact-email" class="field-label">{m['contact.email']()}</label>
+					<input
+						id="contact-email" type="email" bind:value={email}
+						placeholder={m['contact.email_placeholder']()}
+						required autocomplete="email" class="field-input"
+					/>
+				</div>
+
+				<div class="field">
+					<label for="contact-message" class="field-label">{m['contact.message']()}</label>
+					<textarea
+						id="contact-message" bind:value={message}
+						placeholder={m['contact.message_placeholder']()}
+						required rows="5" class="field-input resize-none"
+					></textarea>
+				</div>
+
+				<button type="submit" disabled={loading} class="btn-send">
+					{loading ? m['contact.sending']() : m['contact.send']()}
+					{#if !loading}<Send size={13} />{/if}
+				</button>
+			</form>
+
+			<div class="contact-links">
+				<a
+					href="https://github.com/Vinicius-Gabriel-P-Leitao"
+					target="_blank" rel="noopener noreferrer"
+					class="contact-link"
+				>
+					<GithubIcon size={14} />
+					GitHub
+				</a>
+				<span class="contact-email select-all">vinicius.gabriel.p.leitao@gmail.com</span>
+			</div>
+		</FadeContent>
 	</div>
 </section>
+
+<style>
+	.section-title {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		color: #ffffff;
+		line-height: 1;
+	}
+
+	.form { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem; }
+
+	.contact-card {
+		padding: 1.75rem;
+		border-radius: 16px;
+		background: rgba(18, 18, 24, 0.92);
+		backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+	}
+
+	.field { display: flex; flex-direction: column; gap: 0.5rem; }
+
+	.field-label {
+		font-size: 0.7rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.8);
+		font-weight: 700;
+	}
+
+	.field-input {
+		width: 100%;
+		padding: 0.85rem 1rem;
+		background: rgba(0, 0, 0, 0.45);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 10px;
+		color: #ffffff;
+		font-size: 0.9rem;
+		font-family: inherit;
+		transition: border-color 0.2s, background 0.2s;
+		outline: none;
+	}
+	.field-input::placeholder { color: rgba(255, 255, 255, 0.45); }
+	.field-input:focus {
+		border-color: rgba(255, 255, 255, 0.45);
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	.btn-send {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		padding: 0.85rem 1.5rem;
+		border-radius: 10px;
+		background: #ffffff;
+		color: #0a0a0a;
+		font-size: 0.85rem;
+		font-weight: 700;
+		font-family: inherit;
+		border: none;
+		cursor: pointer;
+		transition: opacity 0.2s, transform 0.2s;
+	}
+	.btn-send:hover { opacity: 0.9; transform: translateY(-1px); }
+	.btn-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+	.contact-links {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	.contact-link {
+		display: flex; align-items: center; gap: 6px;
+		font-size: 0.85rem; color: rgba(255, 255, 255, 0.85);
+		text-decoration: none; transition: color 0.2s;
+	}
+	.contact-link:hover { color: #ffffff; }
+	.contact-email { font-size: 0.8rem; color: rgba(255, 255, 255, 0.65); font-family: monospace; }
+</style>

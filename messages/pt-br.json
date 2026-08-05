@@ -11,12 +11,15 @@
 	},
 	"hero": {
 		"role": "Desenvolvedor Full-Stack",
-		"subtitle": "Sempre criando novos projetos.",
+		"role_backend": "Engenheiro Backend",
+		"role_ui": "Especialista em UI",
+		"subtitle": "Desenvolvimento de aplicações web, serviços backend e apps nativos.",
 		"cta_projects": "Ver projetos"
 	},
 	"projects": {
 		"title": "Projetos",
 		"ideas_title": "Ideias Futuras",
+		"scroll_more": "Role para ver mais projetos",
 		"github": "GitHub",
 		"demo": "Demo",
 		"learn_more": "Detalhes",
@@ -39,7 +42,7 @@
 		"infra": "Infra"
 	},
 	"contact": {
-		"title": "Vamos criar juntos",
+		"title": "Contato",
 		"name": "Nome",
 		"name_placeholder": "Seu nome",
 		"email": "Email",

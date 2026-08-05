@@ -2,38 +2,75 @@
 	import { Home, FolderOpen, User, Mail } from 'lucide-svelte';
 	import { isMobile } from '$lib/reactive/is-mobile.svelte';
 	import { navigation } from '$lib/stores/navigation.svelte';
+	import type { Section } from '$lib/stores/navigation.svelte';
 	import * as m from '$lib/paraglide/messages';
 
-	const ITEMS = [
-		{ id: 'hero', Icon: Home, label: () => m['nav.home']() },
-		{ id: 'projects', Icon: FolderOpen, label: () => m['nav.projects']() },
-		{ id: 'about', Icon: User, label: () => m['nav.about']() },
-		{ id: 'contact', Icon: Mail, label: () => m['nav.contact']() }
-	] as const;
+	const ITEMS = $derived([
+		{ id: 'hero' as Section, Icon: Home, label: m['nav.home']() },
+		{ id: 'projects' as Section, Icon: FolderOpen, label: m['nav.projects']() },
+		{ id: 'about' as Section, Icon: User, label: m['nav.about']() },
+		{ id: 'contact' as Section, Icon: Mail, label: m['nav.contact']() }
+	]);
 </script>
 
 {#if isMobile.current}
-	<nav
-		class="fixed inset-x-0 bottom-0 z-50 flex items-center justify-around border-t border-white/8 bg-black/90 px-2 py-2 backdrop-blur-md"
-		aria-label="Mobile navigation"
-	>
-		{#each ITEMS as item (item.id)}
-			{@const isActive = navigation.active === item.id}
-			{@const Icon = item.Icon}
-			<a
-				href="#{item.id}"
-				onclick={() => navigation.navigate(item.id)}
-				class={[
-					'flex min-w-[56px] flex-col items-center gap-1 rounded-xl px-3 py-1.5 transition-all duration-200',
-					isActive ? 'text-white' : 'text-white/30 hover:text-white/60'
-				].join(' ')}
-				aria-current={isActive ? 'page' : undefined}
-			>
-				<span class={['transition-transform duration-200', isActive ? 'scale-110' : ''].join(' ')}>
-					<Icon size={20} strokeWidth={isActive ? 2.5 : 1.5} />
-				</span>
-				<span class="text-[9px] leading-none tracking-widest uppercase">{item.label()}</span>
-			</a>
-		{/each}
-	</nav>
+	<aside class="fixed bottom-[max(0.85rem,env(safe-area-inset-bottom))] left-4 right-4 z-50 flex justify-center pointer-events-none">
+		<nav class="bottom-nav pointer-events-auto" aria-label="Mobile Navigation">
+			{#each ITEMS as item (item.id)}
+				{@const isActive = navigation.active === item.id}
+				{@const Icon = item.Icon}
+				<a
+					href="#{item.id}"
+					onclick={() => navigation.navigate(item.id)}
+					class="bottom-item"
+					class:active={isActive}
+					aria-current={isActive ? 'page' : undefined}
+					aria-label={item.label}
+				>
+					<Icon size={18} strokeWidth={isActive ? 2.2 : 1.5} />
+					<span class="bottom-label">{item.label}</span>
+				</a>
+			{/each}
+		</nav>
+	</aside>
 {/if}
+
+<style>
+	.bottom-nav {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.4rem 0.6rem;
+		background: rgba(10, 10, 10, 0.75);
+		backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 9999px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.03);
+	}
+
+	.bottom-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2px;
+		min-width: 56px;
+		padding: 0.35rem 0.6rem;
+		text-decoration: none;
+		color: rgba(255, 255, 255, 0.35);
+		transition: color 0.2s, background 0.2s, transform 0.2s;
+		border-radius: 9999px;
+	}
+	.bottom-item:hover { color: rgba(255, 255, 255, 0.75); }
+	.bottom-item.active {
+		color: #fff;
+		background: rgba(255, 255, 255, 0.12);
+		box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+	}
+
+	.bottom-label {
+		font-size: 0.55rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+</style>

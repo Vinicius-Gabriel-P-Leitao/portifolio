@@ -20,7 +20,7 @@ describe('About', () => {
 		const { getByText } = render(About);
 
 		// Spot-check a few known tech items — use exact: true to avoid matching substrings in the bio
-		await expect.element(getByText('Tailwind', { exact: true })).toBeInTheDocument();
-		await expect.element(getByText('Docker', { exact: true })).toBeInTheDocument();
+		await expect.element(getByText('Tailwind', { exact: true }).first()).toBeInTheDocument();
+		await expect.element(getByText('Docker', { exact: true }).first()).toBeInTheDocument();
 	});
 });
