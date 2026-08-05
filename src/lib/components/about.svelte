@@ -105,11 +105,13 @@
 
 	.stack-category {
 		display: block;
-		font-size: 0.65rem;
-		letter-spacing: 0.2em;
+		font-size: 0.7rem;
+		letter-spacing: 0.15em;
 		text-transform: uppercase;
-		color: rgba(255, 255, 255, 0.6);
-		margin-bottom: 0.875rem;
+		color: rgba(255, 255, 255, 0.65);
+		padding-bottom: 0.75rem;
+		margin-bottom: 0.75rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 		font-weight: 700;
 	}
 
@@ -119,18 +121,26 @@
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
+		gap: 0.5rem;
 		flex: 1;
 	}
 
 	.stack-item {
+		display: flex;
+		align-items: center;
 		font-size: 0.85rem;
+		font-weight: 500;
 		color: rgba(255, 255, 255, 0.9);
-		padding: 0.4rem 0;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-		transition: color 0.2s;
+		padding: 0.5rem 0.75rem;
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 8px;
+		transition: background 0.2s, color 0.2s, border-color 0.2s;
 	}
 
-	.stack-item:last-child { border-bottom: none; }
-	.stack-item:hover { color: #ffffff; }
+	.stack-item:hover {
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.2);
+		color: #ffffff;
+	}
 </style>
