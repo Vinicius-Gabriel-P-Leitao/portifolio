@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { resolve } from '$app/paths';
 	import { locales, localizeHref, getLocale } from '$lib/paraglide/runtime';
-	import type { Pathname } from '$app/types';
 	import { Home, FolderOpen, User, Mail } from 'lucide-svelte';
 	import { isMobile } from '$lib/reactive/is-mobile.svelte';
 	import { navigation } from '$lib/stores/navigation.svelte';
@@ -53,7 +51,7 @@
 		>
 			{#each locales as locale (locale)}
 				<a
-					href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}
+					href={localizeHref(page.url.pathname, { locale })}
 					class="lang-btn"
 					class:active={getLocale() === locale}
 					aria-label="Switch language to {locale === 'pt-br' ? 'Portuguese' : 'English'}"

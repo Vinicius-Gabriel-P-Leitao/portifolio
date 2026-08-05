@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import {
 		locales,
@@ -9,7 +8,6 @@
 		setLocale,
 		getLocale
 	} from '$lib/paraglide/runtime';
-	import type { Pathname } from '$app/types';
 	import Toast from '$lib/components/toast.svelte';
 	import BlackHole from '$lib/components/svelte-bits/black-hole.svelte';
 	import Noise from '$lib/components/svelte-bits/Noise.svelte';
@@ -68,6 +66,6 @@
 
 <div style="display:none">
 	{#each locales as loc (loc)}
-		<a href={resolve(localizeHref(page.url.pathname, { locale: loc }) as Pathname)}>{loc}</a>
+		<a href={localizeHref(page.url.pathname, { locale: loc })}>{loc}</a>
 	{/each}
 </div>
