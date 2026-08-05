@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { locales, localizeHref, getLocale } from '$lib/paraglide/runtime';
@@ -32,7 +31,11 @@
 	></div>
 
 	<nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-		<a href="#hero" onclick={() => navigation.navigate('hero')} class="brand focus:outline-none focus:ring-1 focus:ring-white/20 rounded">
+		<a
+			href="#hero"
+			onclick={() => navigation.navigate('hero')}
+			class="brand rounded focus:ring-1 focus:ring-white/20 focus:outline-none"
+		>
 			{m['site.name']()}
 		</a>
 
@@ -45,7 +48,9 @@
 			/>
 		{/if}
 
-		<div class="lang-switcher flex items-center gap-1 p-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+		<div
+			class="lang-switcher flex items-center gap-1 rounded-full border border-white/10 bg-black/40 p-1 backdrop-blur-md"
+		>
 			{#each locales as locale (locale)}
 				<a
 					href={resolve(localizeHref(page.url.pathname, { locale }) as Pathname)}
@@ -67,7 +72,10 @@
 		left: 0;
 		right: 0;
 		z-index: 50;
-		transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+		transition:
+			background 0.3s,
+			border-color 0.3s,
+			backdrop-filter 0.3s;
 	}
 
 	.navbar.scrolled {
@@ -85,7 +93,9 @@
 		width: 100%;
 		background: linear-gradient(90deg, rgba(99, 102, 241, 0.9), rgba(196, 181, 253, 0.6));
 		transform-origin: left;
-		transition: opacity 0.4s, transform 0.05s linear;
+		transition:
+			opacity 0.4s,
+			transform 0.05s linear;
 	}
 
 	.brand {
@@ -97,9 +107,13 @@
 		text-decoration: none;
 		transition: color 0.2s;
 	}
-	.brand:hover { color: #fff; }
+	.brand:hover {
+		color: #fff;
+	}
 
-	.lang-switcher { display: flex; }
+	.lang-switcher {
+		display: flex;
+	}
 
 	.lang-btn {
 		padding: 0.2rem 0.5rem;
@@ -110,8 +124,15 @@
 		font-weight: 600;
 		text-decoration: none;
 		color: rgba(255, 255, 255, 0.35);
-		transition: color 0.2s, background 0.2s;
+		transition:
+			color 0.2s,
+			background 0.2s;
 	}
-	.lang-btn:hover { color: rgba(255, 255, 255, 0.75); }
-	.lang-btn.active { color: #fff; background: rgba(255, 255, 255, 0.15); }
+	.lang-btn:hover {
+		color: rgba(255, 255, 255, 0.75);
+	}
+	.lang-btn.active {
+		color: #fff;
+		background: rgba(255, 255, 255, 0.15);
+	}
 </style>

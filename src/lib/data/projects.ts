@@ -91,9 +91,9 @@ export const PROJECTS: Project[] = [
 		title: 'Acerola Android',
 		status: 'pre-release',
 		desc: {
-			en: 'Android manga reader built with Kotlin and Jetpack Compose. Scans local storage, parses CBZ/CBR, auto-fetches metadata from MangaDex and AniList, and includes modular component previews for Light and Dark UI modes.',
+			en: 'Android manga reader built with Kotlin and Jetpack Compose. Scans local storage, parses CBZ/CBR, and auto-fetches metadata from MangaDex and AniList.',
 			'pt-br':
-				'Leitor de mangá para Android em Kotlin e Jetpack Compose. Escaneia armazenamento local, processa CBZ/CBR, busca metadados no MangaDex/AniList e possui previews modulares para temas Claro e Escuro.'
+				'Leitor de mangá para Android em Kotlin e Jetpack Compose. Escaneia armazenamento local, processa CBZ/CBR e busca metadados no MangaDex/AniList.'
 		},
 		tech: ['Kotlin', 'Jetpack Compose', 'Rust', 'Iroh', 'Hilt', 'MangaDex API', 'AniList API'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-android',
@@ -115,19 +115,10 @@ export const PROJECTS: Project[] = [
 		],
 		highlights: [
 			{
-				title: { en: 'Compose Component Previews (@Preview)', 'pt-br': 'Previews em Compose (@Preview)' },
-				body: {
-					en: 'Modular components (@dialog, @card, @adaptivesheet) built with isolated Light and Dark @Preview functions (AcerolaThemePreview, RememberSearchBarContentPaddingPreview).',
-					'pt-br':
-						'Componentes modulares (@dialog, @card, @adaptivesheet) desenvolvidos com funções @Preview isoladas para modo Claro e Escuro (AcerolaThemePreview, RememberSearchBarContentPaddingPreview).'
-				}
-			},
-			{
 				title: { en: 'Storage Scanner', 'pt-br': 'Scanner de Armazenamento' },
 				body: {
 					en: 'Indexes designated storage directories and builds a searchable library without requiring manual user refreshes.',
-					'pt-br':
-						'Indexa diretórios de armazenamento e constrói a biblioteca de forma automática.'
+					'pt-br': 'Indexa diretórios de armazenamento e constrói a biblioteca de forma automática.'
 				}
 			},
 			{
@@ -142,8 +133,7 @@ export const PROJECTS: Project[] = [
 				title: { en: 'Format Processing', 'pt-br': 'Processamento de Formatos' },
 				body: {
 					en: 'Direct CBZ/CBR archive extraction and automated on-demand PDF conversion on first launch.',
-					'pt-br':
-						'Extração direta de arquivos CBZ/CBR e conversão automática sob demanda de PDF.'
+					'pt-br': 'Extração direta de arquivos CBZ/CBR e conversão automática sob demanda de PDF.'
 				}
 			},
 			{
@@ -273,7 +263,16 @@ export const PROJECTS: Project[] = [
 			'pt-br':
 				'Sistema de Retrieval-Augmented Generation para conversar com seus documentos. Busca vetorial híbrida, streaming em tempo real, suporte a múltiplos LLMs (OpenAI, Gemini, Claude, Ollama) e painel administrativo para gerenciar documentos.'
 		},
-		tech: ['Python', 'FastAPI', 'LlamaIndex', 'Qdrant', 'SvelteKit', 'Svelte 5', 'Tailwind', 'Docker'],
+		tech: [
+			'Python',
+			'FastAPI',
+			'LlamaIndex',
+			'Qdrant',
+			'SvelteKit',
+			'Svelte 5',
+			'Tailwind',
+			'Docker'
+		],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-rag',
 		preview:
 			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/chat-print.png',

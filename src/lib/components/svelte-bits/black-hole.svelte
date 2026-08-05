@@ -35,6 +35,7 @@
 		});
 		const gl = renderer.gl;
 
+		// eslint-disable-next-line svelte/no-dom-manipulating
 		containerRef.appendChild(gl.canvas);
 
 		const camera = new Camera(gl, { fov: 45, near: 0.1, far: 1000 });
@@ -83,8 +84,8 @@
 		const handleMouseMove = (e: MouseEvent) => {
 			if (!enableMouseInteraction) return;
 			const { innerWidth, innerHeight } = window;
-			targetX = ((e.clientX / innerWidth) - 0.5) * 4;
-			targetY = ((e.clientY / innerHeight) - 0.5) * 2;
+			targetX = (e.clientX / innerWidth - 0.5) * 4;
+			targetY = (e.clientY / innerHeight - 0.5) * 2;
 		};
 
 		if (enableMouseInteraction) {
@@ -137,6 +138,7 @@
 			}
 			cancelAnimationFrame(animationFrameId);
 			if (gl.canvas.parentElement === containerRef) {
+				// eslint-disable-next-line svelte/no-dom-manipulating
 				containerRef.removeChild(gl.canvas);
 			}
 		};
@@ -145,7 +147,7 @@
 
 <div
 	bind:this={containerRef}
-	class="relative w-full h-full overflow-hidden {className}"
+	class="relative h-full w-full overflow-hidden {className}"
 	{style}
 	aria-label="Buraco Negro Gargantua"
 ></div>

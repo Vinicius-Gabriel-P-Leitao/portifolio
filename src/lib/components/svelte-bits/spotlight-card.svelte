@@ -27,10 +27,20 @@
 		posX = e.clientX - rect.left;
 		posY = e.clientY - rect.top;
 	}
-	function handleFocus() { isFocused = true; opacity = 0.6; }
-	function handleBlur() { isFocused = false; opacity = 0; }
-	function handleMouseEnter() { opacity = 0.6; }
-	function handleMouseLeave() { opacity = 0; }
+	function handleFocus() {
+		isFocused = true;
+		opacity = 0.6;
+	}
+	function handleBlur() {
+		isFocused = false;
+		opacity = 0;
+	}
+	function handleMouseEnter() {
+		opacity = 0.6;
+	}
+	function handleMouseLeave() {
+		opacity = 0;
+	}
 </script>
 
 <div
@@ -40,7 +50,7 @@
 	onblur={handleBlur}
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
-	class={`relative rounded-3xl border border-neutral-800 bg-neutral-900 overflow-hidden p-8 ${className}`}
+	class={`relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 p-8 ${className}`}
 	{...rest}
 >
 	<div

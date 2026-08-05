@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	type Props = {
 		text: string | string[];
 		typingSpeed?: number; // ms per char
@@ -35,9 +33,8 @@
 
 	$effect(() => {
 		// Reset when text changes
-		const targetText = textArray[textIndex] ?? '';
 		void text;
-		
+
 		let timeout: ReturnType<typeof setTimeout>;
 
 		const currentTarget = textArray[textIndex] ?? '';
@@ -78,9 +75,8 @@
 <span class="text-type-container {className}">
 	<span class="typed-text">{displayedText}</span>{#if showCursor}<span
 			class="type-cursor"
-			class:complete={isComplete && !loop}
-		>{cursorChar}</span
-	>{/if}
+			class:complete={isComplete && !loop}>{cursorChar}</span
+		>{/if}
 </span>
 
 <style>
@@ -108,7 +104,12 @@
 	}
 
 	@keyframes blink {
-		0%, 100% { opacity: 1; }
-		50% { opacity: 0; }
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0;
+		}
 	}
 </style>

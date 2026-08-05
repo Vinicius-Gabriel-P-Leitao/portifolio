@@ -172,10 +172,7 @@
 <!-- Fixed viewport -->
 <div class="viewport">
 	<!-- 4-panel horizontal strip -->
-	<div
-		class="h-strip"
-		style="transform: translateX(-{sectionIdx * 100}vw)"
-	>
+	<div class="h-strip" style="transform: translateX(-{sectionIdx * 100}vw)">
 		<!-- Panel 0: Hero -->
 		<div class="panel">
 			<Hero github={data.github} />
@@ -227,7 +224,10 @@
 				<button
 					class="nav-proj-pip"
 					class:nav-proj-pip-active={sectionIdx === 1 && projectIdx === i}
-					onclick={() => { goToSection(1); projectIdx = i; }}
+					onclick={() => {
+						goToSection(1);
+						projectIdx = i;
+					}}
 					title={allProjects[i].title}
 				></button>
 			{/each}
