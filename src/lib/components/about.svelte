@@ -109,9 +109,7 @@
 		letter-spacing: 0.15em;
 		text-transform: uppercase;
 		color: rgba(255, 255, 255, 0.65);
-		padding-bottom: 0.75rem;
-		margin-bottom: 0.75rem;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+		margin-bottom: 0.5rem;
 		font-weight: 700;
 	}
 
@@ -119,28 +117,21 @@
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		flex: 1;
 	}
 
 	.stack-item {
-		display: flex;
-		align-items: center;
 		font-size: 0.85rem;
-		font-weight: 500;
-		color: rgba(255, 255, 255, 0.9);
-		padding: 0.5rem 0.75rem;
-		background: rgba(255, 255, 255, 0.04);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 8px;
-		transition: background 0.2s, color 0.2s, border-color 0.2s;
+		color: rgba(255, 255, 255, 0.88);
+		padding: 0.35rem 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		transition: color 0.2s;
+	}
+
+	.stack-item:last-child {
+		border-bottom: none;
 	}
 
 	.stack-item:hover {
-		background: rgba(255, 255, 255, 0.08);
-		border-color: rgba(255, 255, 255, 0.2);
 		color: #ffffff;
 	}
 </style>
