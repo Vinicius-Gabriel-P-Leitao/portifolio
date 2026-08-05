@@ -13,7 +13,7 @@
 		"role": "Full-Stack Developer",
 		"role_backend": "Backend Engineer",
 		"role_ui": "UI Craftsman",
-		"subtitle": "Always creating new projects.",
+		"subtitle": "Full-stack web applications, backend services, and native apps.",
 		"cta_projects": "View projects"
 	},
 	"projects": {
@@ -41,7 +41,7 @@
 		"infra": "Infra"
 	},
 	"contact": {
-		"title": "Let's create together",
+		"title": "Contact",
 		"name": "Name",
 		"name_placeholder": "Your name",
 		"email": "Email",

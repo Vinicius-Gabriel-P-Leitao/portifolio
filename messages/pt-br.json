@@ -13,7 +13,7 @@
 		"role": "Desenvolvedor Full-Stack",
 		"role_backend": "Engenheiro Backend",
 		"role_ui": "Especialista em UI",
-		"subtitle": "Sempre criando novos projetos.",
+		"subtitle": "Desenvolvimento de aplicações web, serviços backend e apps nativos.",
 		"cta_projects": "Ver projetos"
 	},
 	"projects": {
@@ -41,7 +41,7 @@
 		"infra": "Infra"
 	},
 	"contact": {
-		"title": "Vamos criar juntos",
+		"title": "Contato",
 		"name": "Nome",
 		"name_placeholder": "Seu nome",
 		"email": "Email",
