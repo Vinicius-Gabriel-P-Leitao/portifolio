@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Component } from 'svelte';
+	import type { Component, ComponentType } from 'svelte';
 
 	export type NavItem = {
 		id: string;
 		label: string;
-		icon?: Component<{ size?: number; strokeWidth?: number }>;
+		icon?: ComponentType<any> | Component<any>;
 		href?: string;
 	};
 
