@@ -23,7 +23,22 @@
 <section id="about" class="px-6 py-24" use:intersect={{ section: 'about', threshold: 0.2 }}>
 	<div class="mx-auto w-full max-w-4xl">
 
-		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
+		<!-- Section Index Header -->
+		<div class="flex items-center justify-between mb-8">
+			<div class="flex items-center gap-4">
+				<span class="font-mono text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+					// 02 . SOBRE E TECH STACK
+				</span>
+				<div class="h-[1px] w-12 bg-white/20"></div>
+			</div>
+			<div class="flex items-center gap-2 font-mono text-xs text-white/90 bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+				<span class="text-white font-bold">02</span>
+				<span>/</span>
+				<span>03</span>
+			</div>
+		</div>
+
+		<FadeContent blur duration={800} threshold={0.2} class="mb-8">
 			<div class="section-header">
 				<h2 class="section-title">{m['about.title']()}</h2>
 			</div>

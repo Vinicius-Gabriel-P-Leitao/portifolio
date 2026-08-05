@@ -3,6 +3,8 @@ precision highp float;
 uniform float uTime;
 uniform vec3 uCameraPosition;
 uniform int uIterations;
+uniform float uScrollProgress;
+uniform float uVelocity;
 
 varying vec3 vWorldPosition;
 
@@ -53,7 +55,8 @@ float getDensity(vec3 samplePos) {
 
 	float angle = atan(samplePos.z, samplePos.x);
 	vec2 angleCoords = vec2(cos(angle), sin(angle));
-	vec3 noiseCoord = vec3(radius * 1.5, angleCoords.x * 4.0 + uTime * 1.5, angleCoords.y * 4.0 + height * 4.0 + uTime * 1.2);
+	float scrollWarp = uScrollProgress * 1.8 + abs(uVelocity) * 0.003;
+	vec3 noiseCoord = vec3(radius * 1.5, angleCoords.x * 4.0 + uTime * 1.5 + scrollWarp, angleCoords.y * 4.0 + height * 4.0 + uTime * 1.2);
 
 	float relativisticJets = fractalBrownianMotion(noiseCoord);
 

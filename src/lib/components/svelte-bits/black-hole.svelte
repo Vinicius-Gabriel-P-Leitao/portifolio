@@ -10,6 +10,8 @@
 		enableMouseInteraction?: boolean;
 		speed?: number;
 		iterations?: number;
+		scrollProgress?: number;
+		scrollVelocity?: number;
 	};
 
 	let {
@@ -17,7 +19,9 @@
 		style = '',
 		enableMouseInteraction = true,
 		speed = 0.4,
-		iterations = 70
+		iterations = 70,
+		scrollProgress = 0,
+		scrollVelocity = 0
 	}: Props = $props();
 
 	let containerRef: HTMLDivElement;
@@ -44,7 +48,9 @@
 		const uniforms = {
 			uTime: { value: 0 },
 			uCameraPosition: { value: camera.position },
-			uIterations: { value: iterations }
+			uIterations: { value: iterations },
+			uScrollProgress: { value: 0 },
+			uVelocity: { value: 0 }
 		};
 
 		const program = new Program(gl, {
@@ -88,24 +94,35 @@
 		let animationFrameId: number;
 		let startTime = performance.now();
 
+		let smoothScroll = 0;
+		let smoothVelocity = 0;
+
 		const update = () => {
 			const elapsed = (performance.now() - startTime) / 1000;
-			program.uniforms.uTime.value = elapsed * speed;
 
-			// Smooth camera mouse float
+			// Smooth interpolation of scroll values
+			smoothScroll += (scrollProgress - smoothScroll) * 0.08;
+			smoothVelocity += (scrollVelocity - smoothVelocity) * 0.1;
+
+			program.uniforms.uTime.value = elapsed * (speed + Math.abs(smoothVelocity) * 0.001);
+			program.uniforms.uScrollProgress.value = smoothScroll;
+			program.uniforms.uVelocity.value = smoothVelocity;
+
+			// Smooth camera position shifts with scroll
 			mouseX += (targetX - mouseX) * 0.05;
 			mouseY += (targetY - mouseY) * 0.05;
 
+			// Camera moves closer & tilts down as user scrolls towards bottom
 			camera.position.x = mouseX * 2;
-			camera.position.y = 4 + mouseY * 1.5;
-			camera.position.z = 18;
+			camera.position.y = 4 - smoothScroll * 2.5 + mouseY * 1.5;
+			camera.position.z = 18 - smoothScroll * 5.0;
 			camera.lookAt([0, 0, 0]);
 
 			// Update uCameraPosition uniform
 			program.uniforms.uCameraPosition.value.copy(camera.position);
 
-			// Gentle rotation
-			mesh.rotation.y = elapsed * 0.05;
+			// Rotation influenced by time and scroll progress
+			mesh.rotation.y = elapsed * 0.05 + smoothScroll * 1.2;
 
 			renderer.render({ scene, camera });
 			animationFrameId = requestAnimationFrame(update);

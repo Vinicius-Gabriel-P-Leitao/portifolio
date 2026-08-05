@@ -133,7 +133,8 @@
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
 		display: flex;
 		flex-direction: column;
-		height: 100%;
+		height: 380px !important;
+		min-height: 380px !important;
 		overflow: hidden;
 		transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s !important;
 	}
@@ -160,7 +161,7 @@
 		opacity: 0.95;
 	}
 	.preview-empty {
-		height: 100px;
+		height: 160px;
 		display: flex;
 		align-items: center;
 		justify-content: center;

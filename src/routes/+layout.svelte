@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+	import Lenis from 'lenis';
 	import {
 		locales,
 		localizeHref,
@@ -10,8 +12,6 @@
 		getLocale
 	} from '$lib/paraglide/runtime';
 	import type { Pathname } from '$app/types';
-	import Navbar from '$lib/components/navbar.svelte';
-	import BottomNav from '$lib/components/bottom-nav.svelte';
 	import Toast from '$lib/components/toast.svelte';
 	import BlackHole from '$lib/components/svelte-bits/black-hole.svelte';
 	import Noise from '$lib/components/svelte-bits/Noise.svelte';
@@ -21,8 +21,38 @@
 	let { children } = $props();
 	const locale = $derived(browser ? (getLocaleForUrl(page.url.href) ?? getLocale()) : getLocale());
 
+	let scrollProgress = $state(0);
+	let scrollVelocity = $state(0);
+
 	$effect(() => {
 		setLocale(locale, { reload: false });
+	});
+
+	onMount(() => {
+		const lenis = new Lenis({
+			duration: 1.2,
+			easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+			smoothWheel: true
+		});
+
+		lenis.on('scroll', (e: any) => {
+			const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+			scrollProgress = maxScroll > 0 ? e.scroll / maxScroll : 0;
+			scrollVelocity = e.velocity || 0;
+		});
+
+		let animationFrameId: number;
+		function raf(time: number) {
+			lenis.raf(time);
+			animationFrameId = requestAnimationFrame(raf);
+		}
+
+		animationFrameId = requestAnimationFrame(raf);
+
+		return () => {
+			cancelAnimationFrame(animationFrameId);
+			lenis.destroy();
+		};
 	});
 </script>
 
@@ -32,9 +62,21 @@
 	<meta name="theme-color" content="#0a0a0a" />
 </svelte:head>
 
+<!-- Slim Top Scroll Progress Indicator -->
+<div
+	class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-amber-500 via-white to-cyan-500 z-50 transition-all duration-75 pointer-events-none opacity-80"
+	style="width: {scrollProgress * 100}%"
+></div>
+
 <!-- Global Fixed Background: Buraco Negro Gargantua em OGL -->
-<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 opacity-70">
-	<BlackHole speed={0.4} iterations={90} enableMouseInteraction={true} />
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 opacity-75">
+	<BlackHole
+		speed={0.4}
+		iterations={85}
+		enableMouseInteraction={true}
+		{scrollProgress}
+		{scrollVelocity}
+	/>
 </div>
 
 <div
@@ -48,9 +90,6 @@
 </div>
 
 {#key locale}
-	<Navbar />
-	<BottomNav />
-
 	<div class="relative z-10">
 		{@render children()}
 	</div>
