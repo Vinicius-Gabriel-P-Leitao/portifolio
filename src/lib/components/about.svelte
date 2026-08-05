@@ -10,7 +10,7 @@
 		{ category: () => m['about.frontend'](), items: ['Tailwind', 'React', 'Svelte', 'Jetpack Compose'] },
 		{ category: () => m['about.backend'](), items: ['Java', 'Kotlin', 'Spring Boot', 'Node.js'] },
 		{ category: () => m['about.database'](), items: ['PostgreSQL', 'SQLite', 'MongoDB', 'Firebase'] },
-		{ category: () => m['about.infra'](), items: ['Docker', 'Git'] }
+		{ category: () => m['about.infra'](), items: ['Docker', 'Git', 'Linux', 'CI/CD'] }
 	];
 
 	const ALL_LOGOS = [
@@ -21,7 +21,7 @@
 </script>
 
 <section id="about" class="px-6 py-24" use:intersect={{ section: 'about', threshold: 0.2 }}>
-	<div class="mx-auto w-full max-w-3xl">
+	<div class="mx-auto w-full max-w-4xl">
 
 		<FadeContent blur duration={800} threshold={0.2} class="mb-12">
 			<div class="section-header">
@@ -41,7 +41,7 @@
 		<!-- Stack: SpotlightCard em cada grupo -->
 		<div class="stack-grid">
 			{#each STACK as group, i (group.category())}
-				<FadeContent duration={700} delay={i * 100} threshold={0.1}>
+				<FadeContent duration={700} delay={i * 100} threshold={0.1} class="h-full">
 					<SpotlightCard
 						class="stack-card"
 						spotlightColor="rgba(99, 102, 241, 0.12)"
@@ -80,17 +80,21 @@
 		font-size: 1rem;
 		line-height: 1.8;
 		color: rgba(255, 255, 255, 0.88);
-		max-width: 60ch;
+		max-width: 65ch;
 	}
 
 	.stack-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-		gap: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1.25rem;
+		align-items: stretch;
 	}
 
 	/* SpotlightCard override para ter visual mais limpo e alto contraste */
 	:global(.stack-card) {
+		height: 100% !important;
+		display: flex !important;
+		flex-direction: column !important;
 		padding: 1.25rem !important;
 		border-radius: 16px !important;
 		background: rgba(18, 18, 24, 0.88) !important;
@@ -116,12 +120,13 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
+		flex: 1;
 	}
 
 	.stack-item {
 		font-size: 0.85rem;
 		color: rgba(255, 255, 255, 0.9);
-		padding: 0.3rem 0;
+		padding: 0.4rem 0;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 		transition: color 0.2s;
 	}
