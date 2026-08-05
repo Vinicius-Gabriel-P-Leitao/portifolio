@@ -29,10 +29,10 @@ test('language switcher toggles between EN and PT', async ({ page }) => {
 	await page.goto('/');
 
 	// Default is PT-BR (base locale, no prefix). Switch to EN.
-	await page.getByRole('link', { name: 'EN' }).click();
+	await page.getByRole('link', { name: /English|EN/i }).first().click();
 	await expect(page).toHaveURL(/\/en(\/|$)/);
 
 	// Switch back to PT (base locale, no /pt-br/ prefix)
-	await page.getByRole('link', { name: 'PT' }).click();
+	await page.getByRole('link', { name: /Portuguese|PT/i }).first().click();
 	await expect(page).not.toHaveURL(/\/en(\/|$)/);
 });
