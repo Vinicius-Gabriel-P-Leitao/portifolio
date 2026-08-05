@@ -10,9 +10,9 @@
 
 <section
 	id="hero"
-	class="hero relative flex min-h-full flex-col items-center justify-center px-4 sm:px-6 pt-16 pb-20 text-center overflow-hidden"
+	class="hero relative flex min-h-full flex-col items-center justify-center overflow-hidden px-4 pt-16 pb-20 text-center sm:px-6"
 >
-	<div class="relative z-10 flex flex-col items-center max-w-4xl">
+	<div class="relative z-10 flex max-w-4xl flex-col items-center">
 		{#if github?.avatar_url}
 			<img
 				src={github.avatar_url}
@@ -60,7 +60,7 @@
 		<div class="scroll-hint">
 			<div class="scroll-label-pill font-mono">
 				<span>DESLIZE PARA NAVEGAR NA TRILHA 3D</span>
-				<ArrowDown size={14} class="text-white animate-bounce" />
+				<ArrowDown size={14} class="animate-bounce text-white" />
 			</div>
 		</div>
 	</div>
@@ -121,7 +121,10 @@
 	}
 
 	@media (min-width: 480px) {
-		.hero-ctas { flex-direction: row; justify-content: center; }
+		.hero-ctas {
+			flex-direction: row;
+			justify-content: center;
+		}
 	}
 
 	.btn-primary {
@@ -136,7 +139,10 @@
 		font-weight: 700;
 		text-decoration: none;
 		box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-		transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+		transition:
+			background 0.2s,
+			transform 0.15s,
+			box-shadow 0.2s;
 	}
 	.btn-primary:hover {
 		background: #f1f5f9;
@@ -158,7 +164,10 @@
 		text-decoration: none;
 		backdrop-filter: blur(12px);
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-		transition: background 0.2s, border-color 0.2s, transform 0.15s;
+		transition:
+			background 0.2s,
+			border-color 0.2s,
+			transform 0.15s;
 	}
 	.btn-github:hover {
 		background: rgba(255, 255, 255, 0.22);
@@ -190,7 +199,9 @@
 		border: 1px solid rgba(255, 255, 255, 0.25);
 		padding: 0.65rem 1.35rem;
 		border-radius: 9999px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.08);
+		box-shadow:
+			0 10px 30px rgba(0, 0, 0, 0.9),
+			0 0 20px rgba(255, 255, 255, 0.08);
 		backdrop-filter: blur(16px);
 	}
 </style>

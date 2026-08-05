@@ -33,12 +33,12 @@
 </script>
 
 <div
-	class="relative inline-flex items-center gap-1 p-1.5 rounded-full bg-[#121215]/90 backdrop-blur-xl border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.8)] {className}"
+	class="relative inline-flex items-center gap-1 rounded-full border border-white/15 bg-[#121215]/90 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.8)] backdrop-blur-xl {className}"
 	role="navigation"
 >
 	<!-- Active Pill Highlight Indicator -->
 	<div
-		class="absolute top-1.5 bottom-1.5 rounded-full bg-white/15 border border-white/20 backdrop-blur-md transition-all duration-300 ease-out pointer-events-none"
+		class="pointer-events-none absolute top-1.5 bottom-1.5 rounded-full border border-white/20 bg-white/15 backdrop-blur-md transition-all duration-300 ease-out"
 		style="left: {indicatorLeft}px; width: {indicatorWidth}px; opacity: {indicatorOpacity};"
 	></div>
 
@@ -52,8 +52,8 @@
 				e.preventDefault();
 				onSelect(item.id);
 			}}
-			class="relative z-10 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-mono tracking-wider whitespace-nowrap transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 {isActive
-				? 'text-white font-semibold'
+			class="relative z-10 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 font-mono text-xs tracking-wider whitespace-nowrap transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 {isActive
+				? 'font-semibold text-white'
 				: 'text-neutral-300 hover:text-white'}"
 			aria-current={isActive ? 'page' : undefined}
 		>

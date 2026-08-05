@@ -28,7 +28,9 @@
 		loading = false;
 		if (result.ok) {
 			toast.show(m['toast.success'](), 'success');
-			name = ''; email = ''; message = '';
+			name = '';
+			email = '';
+			message = '';
 		} else {
 			toast.show(m['toast.error'](), 'error');
 		}
@@ -37,21 +39,24 @@
 
 <section
 	id="contact"
-	class="min-h-full flex flex-col items-center justify-center px-4 sm:px-6 pt-16 pb-24"
+	class="flex min-h-full flex-col items-center justify-center px-4 pt-16 pb-24 sm:px-6"
 	bind:this={sectionEl}
 >
 	<div class="mx-auto w-full max-w-md">
-
 		<!-- Section Index Header -->
-		<div class="flex items-center justify-between mb-8">
+		<div class="mb-8 flex items-center justify-between">
 			<div class="flex items-center gap-4">
-				<span class="font-mono text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+				<span
+					class="rounded-full border border-white/20 bg-white/10 px-3.5 py-1 font-mono text-xs font-bold tracking-widest text-white/90 uppercase"
+				>
 					// 03 . CONTATO
 				</span>
 				<div class="h-[1px] w-12 bg-white/20"></div>
 			</div>
-			<div class="flex items-center gap-2 font-mono text-xs text-white/90 bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
-				<span class="text-white font-bold">03</span>
+			<div
+				class="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 font-mono text-xs text-white/90"
+			>
+				<span class="font-bold text-white">03</span>
 				<span>/</span>
 				<span>03</span>
 			</div>
@@ -68,27 +73,38 @@
 				<div class="field">
 					<label for="contact-name" class="field-label">{m['contact.name']()}</label>
 					<input
-						id="contact-name" type="text" bind:value={name}
+						id="contact-name"
+						type="text"
+						bind:value={name}
 						placeholder={m['contact.name_placeholder']()}
-						required autocomplete="name" class="field-input"
+						required
+						autocomplete="name"
+						class="field-input"
 					/>
 				</div>
 
 				<div class="field">
 					<label for="contact-email" class="field-label">{m['contact.email']()}</label>
 					<input
-						id="contact-email" type="email" bind:value={email}
+						id="contact-email"
+						type="email"
+						bind:value={email}
 						placeholder={m['contact.email_placeholder']()}
-						required autocomplete="email" class="field-input"
+						required
+						autocomplete="email"
+						class="field-input"
 					/>
 				</div>
 
 				<div class="field">
 					<label for="contact-message" class="field-label">{m['contact.message']()}</label>
 					<textarea
-						id="contact-message" bind:value={message}
+						id="contact-message"
+						bind:value={message}
 						placeholder={m['contact.message_placeholder']()}
-						required rows="5" class="field-input resize-none"
+						required
+						rows="5"
+						class="field-input resize-none"
 					></textarea>
 				</div>
 
@@ -101,7 +117,8 @@
 			<div class="contact-links">
 				<a
 					href="https://github.com/Vinicius-Gabriel-P-Leitao"
-					target="_blank" rel="noopener noreferrer"
+					target="_blank"
+					rel="noopener noreferrer"
 					class="contact-link"
 				>
 					<GithubIcon size={14} />
@@ -122,7 +139,12 @@
 		line-height: 1;
 	}
 
-	.form { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem; }
+	.form {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-bottom: 2rem;
+	}
 
 	.contact-card {
 		padding: 1.75rem;
@@ -133,7 +155,11 @@
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 	}
 
-	.field { display: flex; flex-direction: column; gap: 0.5rem; }
+	.field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
 
 	.field-label {
 		font-size: 0.7rem;
@@ -152,10 +178,14 @@
 		color: #ffffff;
 		font-size: 0.9rem;
 		font-family: inherit;
-		transition: border-color 0.2s, background 0.2s;
+		transition:
+			border-color 0.2s,
+			background 0.2s;
 		outline: none;
 	}
-	.field-input::placeholder { color: rgba(255, 255, 255, 0.45); }
+	.field-input::placeholder {
+		color: rgba(255, 255, 255, 0.45);
+	}
 	.field-input:focus {
 		border-color: rgba(255, 255, 255, 0.45);
 		background: rgba(0, 0, 0, 0.6);
@@ -175,10 +205,19 @@
 		font-family: inherit;
 		border: none;
 		cursor: pointer;
-		transition: opacity 0.2s, transform 0.2s;
+		transition:
+			opacity 0.2s,
+			transform 0.2s;
 	}
-	.btn-send:hover { opacity: 0.9; transform: translateY(-1px); }
-	.btn-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+	.btn-send:hover {
+		opacity: 0.9;
+		transform: translateY(-1px);
+	}
+	.btn-send:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+		transform: none;
+	}
 
 	.contact-links {
 		display: flex;
@@ -189,10 +228,20 @@
 		border-top: 1px solid rgba(255, 255, 255, 0.1);
 	}
 	.contact-link {
-		display: flex; align-items: center; gap: 6px;
-		font-size: 0.85rem; color: rgba(255, 255, 255, 0.85);
-		text-decoration: none; transition: color 0.2s;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.85rem;
+		color: rgba(255, 255, 255, 0.85);
+		text-decoration: none;
+		transition: color 0.2s;
 	}
-	.contact-link:hover { color: #ffffff; }
-	.contact-email { font-size: 0.8rem; color: rgba(255, 255, 255, 0.65); font-family: monospace; }
+	.contact-link:hover {
+		color: #ffffff;
+	}
+	.contact-email {
+		font-size: 0.8rem;
+		color: rgba(255, 255, 255, 0.65);
+		font-family: monospace;
+	}
 </style>

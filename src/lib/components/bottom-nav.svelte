@@ -14,7 +14,9 @@
 </script>
 
 {#if isMobile.current}
-	<aside class="fixed bottom-[max(0.85rem,env(safe-area-inset-bottom))] left-4 right-4 z-50 flex justify-center pointer-events-none">
+	<aside
+		class="pointer-events-none fixed right-4 bottom-[max(0.85rem,env(safe-area-inset-bottom))] left-4 z-50 flex justify-center"
+	>
 		<nav class="bottom-nav pointer-events-auto" aria-label="Mobile Navigation">
 			{#each ITEMS as item (item.id)}
 				{@const isActive = navigation.active === item.id}
@@ -45,7 +47,9 @@
 		backdrop-filter: blur(20px);
 		border: 1px solid rgba(255, 255, 255, 0.12);
 		border-radius: 9999px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.03);
+		box-shadow:
+			0 10px 30px rgba(0, 0, 0, 0.8),
+			0 0 20px rgba(255, 255, 255, 0.03);
 	}
 
 	.bottom-item {
@@ -57,10 +61,15 @@
 		padding: 0.35rem 0.6rem;
 		text-decoration: none;
 		color: rgba(255, 255, 255, 0.35);
-		transition: color 0.2s, background 0.2s, transform 0.2s;
+		transition:
+			color 0.2s,
+			background 0.2s,
+			transform 0.2s;
 		border-radius: 9999px;
 	}
-	.bottom-item:hover { color: rgba(255, 255, 255, 0.75); }
+	.bottom-item:hover {
+		color: rgba(255, 255, 255, 0.75);
+	}
 	.bottom-item.active {
 		color: #fff;
 		background: rgba(255, 255, 255, 0.12);

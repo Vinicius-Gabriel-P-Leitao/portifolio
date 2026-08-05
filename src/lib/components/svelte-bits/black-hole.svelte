@@ -83,8 +83,8 @@
 		const handleMouseMove = (e: MouseEvent) => {
 			if (!enableMouseInteraction) return;
 			const { innerWidth, innerHeight } = window;
-			targetX = ((e.clientX / innerWidth) - 0.5) * 4;
-			targetY = ((e.clientY / innerHeight) - 0.5) * 2;
+			targetX = (e.clientX / innerWidth - 0.5) * 4;
+			targetY = (e.clientY / innerHeight - 0.5) * 2;
 		};
 
 		if (enableMouseInteraction) {
@@ -145,7 +145,7 @@
 
 <div
 	bind:this={containerRef}
-	class="relative w-full h-full overflow-hidden {className}"
+	class="relative h-full w-full overflow-hidden {className}"
 	{style}
 	aria-label="Buraco Negro Gargantua"
 ></div>

@@ -16,32 +16,52 @@
 	});
 
 	const STACK = [
-		{ category: () => m['about.frontend'](), items: ['Tailwind', 'React', 'Svelte', 'Jetpack Compose'] },
+		{
+			category: () => m['about.frontend'](),
+			items: ['Tailwind', 'React', 'Svelte', 'Jetpack Compose']
+		},
 		{ category: () => m['about.backend'](), items: ['Java', 'Kotlin', 'Spring Boot', 'Node.js'] },
-		{ category: () => m['about.database'](), items: ['PostgreSQL', 'SQLite', 'MongoDB', 'Firebase'] },
+		{
+			category: () => m['about.database'](),
+			items: ['PostgreSQL', 'SQLite', 'MongoDB', 'Firebase']
+		},
 		{ category: () => m['about.infra'](), items: ['Docker', 'Git', 'Linux', 'CI/CD'] }
 	];
 
 	const ALL_LOGOS = [
-		{ name: 'Svelte' }, { name: 'Tailwind' }, { name: 'React' }, { name: 'Java' },
-		{ name: 'Kotlin' }, { name: 'Spring Boot' }, { name: 'Node.js' }, { name: 'PostgreSQL' },
-		{ name: 'Docker' }, { name: 'Git' }
+		{ name: 'Svelte' },
+		{ name: 'Tailwind' },
+		{ name: 'React' },
+		{ name: 'Java' },
+		{ name: 'Kotlin' },
+		{ name: 'Spring Boot' },
+		{ name: 'Node.js' },
+		{ name: 'PostgreSQL' },
+		{ name: 'Docker' },
+		{ name: 'Git' }
 	];
 </script>
 
-<section id="about" class="min-h-full flex flex-col items-center justify-center px-4 sm:px-6 pt-14 sm:pt-16 pb-20 sm:pb-24" bind:this={sectionEl}>
+<section
+	id="about"
+	class="flex min-h-full flex-col items-center justify-center px-4 pt-14 pb-20 sm:px-6 sm:pt-16 sm:pb-24"
+	bind:this={sectionEl}
+>
 	<div class="mx-auto w-full max-w-4xl">
-
 		<!-- Section Index Header -->
-		<div class="flex items-center justify-between mb-4 sm:mb-8">
+		<div class="mb-4 flex items-center justify-between sm:mb-8">
 			<div class="flex items-center gap-4">
-				<span class="font-mono text-[10px] sm:text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3 sm:px-3.5 py-1 rounded-full border border-white/20">
+				<span
+					class="rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-white/90 uppercase sm:px-3.5 sm:text-xs"
+				>
 					// 02 . SOBRE E TECH STACK
 				</span>
-				<div class="h-[1px] w-8 sm:w-12 bg-white/20"></div>
+				<div class="h-[1px] w-8 bg-white/20 sm:w-12"></div>
 			</div>
-			<div class="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-white/90 bg-white/10 px-3 sm:px-3.5 py-1 rounded-full border border-white/20">
-				<span class="text-white font-bold">02</span>
+			<div
+				class="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[10px] text-white/90 sm:px-3.5 sm:text-xs"
+			>
+				<span class="font-bold text-white">02</span>
 				<span>/</span>
 				<span>03</span>
 			</div>
@@ -66,10 +86,7 @@
 		<div class="stack-grid">
 			{#each STACK as group, i (group.category())}
 				<FadeContent duration={700} delay={i * 100} threshold={0.1} class="h-full">
-					<SpotlightCard
-						class="stack-card"
-						spotlightColor="rgba(99, 102, 241, 0.12)"
-					>
+					<SpotlightCard class="stack-card" spotlightColor="rgba(99, 102, 241, 0.12)">
 						<span class="stack-category">{group.category()}</span>
 						<ul class="stack-items">
 							{#each group.items as item (item)}

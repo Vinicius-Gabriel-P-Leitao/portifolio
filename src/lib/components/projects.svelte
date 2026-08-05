@@ -17,15 +17,19 @@
 
 <section id="projects" class="projects-section">
 	<!-- Top Section Header -->
-	<div class="projects-header mx-auto flex w-full max-w-7xl items-center justify-between px-6 mb-6">
+	<div class="projects-header mx-auto mb-6 flex w-full max-w-7xl items-center justify-between px-6">
 		<div class="flex items-center gap-4">
-			<span class="font-mono text-xs font-bold tracking-widest text-white/90 uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
+			<span
+				class="rounded-full border border-white/20 bg-white/10 px-3.5 py-1 font-mono text-xs font-bold tracking-widest text-white/90 uppercase"
+			>
 				// 01 . PROJETOS E ARQUITETURA
 			</span>
 			<div class="h-[1px] w-12 bg-white/20"></div>
 		</div>
-		<div class="flex items-center gap-2 font-mono text-xs text-white/90 bg-white/10 px-3.5 py-1 rounded-full border border-white/20">
-			<span class="text-white font-bold">01</span>
+		<div
+			class="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 font-mono text-xs text-white/90"
+		>
+			<span class="font-bold text-white">01</span>
 			<span>/</span>
 			<span>03</span>
 		</div>
@@ -74,7 +78,8 @@
 		</div>
 
 		<span class="font-mono text-xs text-white/50">
-			PROJETO {String(activeIndex + 1).padStart(2, '0')} <span class="text-white/20">/</span> {String(total).padStart(2, '0')}
+			PROJETO {String(activeIndex + 1).padStart(2, '0')} <span class="text-white/20">/</span>
+			{String(total).padStart(2, '0')}
 		</span>
 	</div>
 </section>
@@ -98,7 +103,13 @@
 		overflow: hidden;
 		position: relative;
 		padding: 1.5rem 0;
-		-webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+		-webkit-mask-image: linear-gradient(
+			to right,
+			transparent 0%,
+			black 6%,
+			black 94%,
+			transparent 100%
+		);
 		mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
 	}
 

@@ -118,8 +118,7 @@ export const PROJECTS: Project[] = [
 				title: { en: 'Storage Scanner', 'pt-br': 'Scanner de Armazenamento' },
 				body: {
 					en: 'Indexes designated storage directories and builds a searchable library without requiring manual user refreshes.',
-					'pt-br':
-						'Indexa diretórios de armazenamento e constrói a biblioteca de forma automática.'
+					'pt-br': 'Indexa diretórios de armazenamento e constrói a biblioteca de forma automática.'
 				}
 			},
 			{
@@ -134,8 +133,7 @@ export const PROJECTS: Project[] = [
 				title: { en: 'Format Processing', 'pt-br': 'Processamento de Formatos' },
 				body: {
 					en: 'Direct CBZ/CBR archive extraction and automated on-demand PDF conversion on first launch.',
-					'pt-br':
-						'Extração direta de arquivos CBZ/CBR e conversão automática sob demanda de PDF.'
+					'pt-br': 'Extração direta de arquivos CBZ/CBR e conversão automática sob demanda de PDF.'
 				}
 			},
 			{
@@ -265,7 +263,16 @@ export const PROJECTS: Project[] = [
 			'pt-br':
 				'Sistema de Retrieval-Augmented Generation para conversar com seus documentos. Busca vetorial híbrida, streaming em tempo real, suporte a múltiplos LLMs (OpenAI, Gemini, Claude, Ollama) e painel administrativo para gerenciar documentos.'
 		},
-		tech: ['Python', 'FastAPI', 'LlamaIndex', 'Qdrant', 'SvelteKit', 'Svelte 5', 'Tailwind', 'Docker'],
+		tech: [
+			'Python',
+			'FastAPI',
+			'LlamaIndex',
+			'Qdrant',
+			'SvelteKit',
+			'Svelte 5',
+			'Tailwind',
+			'Docker'
+		],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-rag',
 		preview:
 			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/chat-print.png',

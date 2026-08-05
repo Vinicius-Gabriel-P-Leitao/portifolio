@@ -33,12 +33,12 @@
 
 <!-- Slim Top Scroll Progress Indicator -->
 <div
-	class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-amber-500 via-white to-cyan-500 z-50 transition-all duration-500 pointer-events-none opacity-80"
+	class="pointer-events-none fixed top-0 left-0 z-50 h-[2px] bg-gradient-to-r from-amber-500 via-white to-cyan-500 opacity-80 transition-all duration-500"
 	style="width: {scrollState.progress * 100}%"
 ></div>
 
 <!-- Global Fixed Background: Buraco Negro Gargantua em OGL -->
-<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 opacity-75">
+<div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 opacity-75">
 	<BlackHole
 		speed={0.4}
 		iterations={85}
@@ -50,11 +50,11 @@
 
 <div
 	aria-hidden="true"
-	class="fixed inset-0 pointer-events-none z-[1]"
+	class="pointer-events-none fixed inset-0 z-[1]"
 	style="background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 20%, #0a0a0a 85%);"
 ></div>
 
-<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-[2]">
+<div aria-hidden="true" class="pointer-events-none fixed inset-0 z-[2]">
 	<Noise patternAlpha={8} patternRefreshInterval={4} />
 </div>
 

@@ -26,10 +26,14 @@
 
 	const statusLabel = $derived(() => {
 		switch (project.status) {
-			case 'done': return m['projects.status.done']();
-			case 'pre-release': return m['projects.status.pre_release']();
-			case 'in-progress': return m['projects.status.in_progress']();
-			case 'idea': return m['projects.status.idea']();
+			case 'done':
+				return m['projects.status.done']();
+			case 'pre-release':
+				return m['projects.status.pre_release']();
+			case 'in-progress':
+				return m['projects.status.in_progress']();
+			case 'idea':
+				return m['projects.status.idea']();
 		}
 	});
 </script>
@@ -52,12 +56,7 @@
 	<!-- Preview or placeholder -->
 	{#if project.preview}
 		<div class="preview">
-			<img
-				src={project.preview}
-				alt="{project.title} preview"
-				class="preview-img"
-				loading="lazy"
-			/>
+			<img src={project.preview} alt="{project.title} preview" class="preview-img" loading="lazy" />
 			<div class="preview-gradient"></div>
 		</div>
 	{:else}
@@ -138,12 +137,17 @@
 		height: 440px !important;
 		min-height: 440px !important;
 		overflow: hidden;
-		transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s !important;
+		transition:
+			border-color 0.3s,
+			transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+			box-shadow 0.3s !important;
 	}
 	:global(.project-card:hover) {
 		border-color: rgba(255, 255, 255, 0.4) !important;
 		transform: translateY(-4px) !important;
-		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.08) !important;
+		box-shadow:
+			0 20px 45px rgba(0, 0, 0, 0.9),
+			0 0 25px rgba(255, 255, 255, 0.08) !important;
 	}
 
 	.preview {
@@ -273,7 +277,9 @@
 		text-decoration: none;
 		transition: color 0.2s;
 	}
-	.action-link:hover { color: #ffffff; }
+	.action-link:hover {
+		color: #ffffff;
+	}
 
 	.action-btn-more {
 		display: flex;
@@ -287,8 +293,12 @@
 		cursor: pointer;
 		font-family: inherit;
 		padding: 0;
-		transition: color 0.2s, gap 0.2s;
+		transition:
+			color 0.2s,
+			gap 0.2s;
 	}
-	.action-btn-more:hover { color: #ffffff; gap: 6px; }
+	.action-btn-more:hover {
+		color: #ffffff;
+		gap: 6px;
+	}
 </style>
-
