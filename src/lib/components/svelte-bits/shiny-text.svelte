@@ -27,12 +27,11 @@
 		delay = 0
 	}: Props = $props();
 
-	let progress = $state(direction === 'left' ? 0 : 100);
+	let progress = $state(0);
 	let isPaused = $state(false);
 
 	$effect(() => {
 		// reset on direction change
-		void direction;
 		progress = direction === 'left' ? 0 : 100;
 	});
 
