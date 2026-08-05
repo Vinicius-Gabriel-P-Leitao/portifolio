@@ -1,14 +1,19 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 
-	type Props = {
+	type Props = HTMLAttributes<HTMLDivElement> & {
 		class?: string;
 		spotlightColor?: string;
-		role?: string;
 		children?: Snippet;
 	};
 
-	let { class: className = '', spotlightColor = 'rgba(255, 255, 255, 0.25)', role, children }: Props = $props();
+	let {
+		class: className = '',
+		spotlightColor = 'rgba(255, 255, 255, 0.25)',
+		children,
+		...rest
+	}: Props = $props();
 
 	let divRef: HTMLDivElement;
 	let isFocused = $state(false);
@@ -30,13 +35,13 @@
 
 <div
 	bind:this={divRef}
-	{role}
 	onmousemove={handleMouseMove}
 	onfocus={handleFocus}
 	onblur={handleBlur}
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
 	class={`relative rounded-3xl border border-neutral-800 bg-neutral-900 overflow-hidden p-8 ${className}`}
+	{...rest}
 >
 	<div
 		class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"

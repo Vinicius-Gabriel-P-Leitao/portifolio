@@ -34,10 +34,19 @@
 	});
 </script>
 
-<!-- SpotlightCard como wrapper: spotlight muda de cor por status -->
+<!-- SpotlightCard como wrapper interativo: todo o card é clicável -->
 <SpotlightCard
-	class="project-card"
+	class="project-card cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
 	role="article"
+	tabindex={0}
+	onclick={onSelect}
+	onkeydown={(e: KeyboardEvent) => {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			onSelect?.();
+		}
+	}}
+	aria-label="{project.title} - {m['projects.learn_more']()}"
 	spotlightColor={STATUS_COLORS[project.status]}
 >
 	<!-- Preview or placeholder -->
@@ -76,18 +85,37 @@
 		<!-- Actions -->
 		<div class="card-actions">
 			{#if project.github}
-				<a href={project.github} target="_blank" rel="noopener noreferrer" class="action-link">
+				<a
+					href={project.github}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="action-link"
+					onclick={(e) => e.stopPropagation()}
+				>
 					<GithubIcon size={12} />
 					{m['projects.github']()}
 				</a>
 			{/if}
 			{#if project.demo}
-				<a href={project.demo} target="_blank" rel="noopener noreferrer" class="action-link">
+				<a
+					href={project.demo}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="action-link"
+					onclick={(e) => e.stopPropagation()}
+				>
 					<ExternalLink size={12} />
 					{m['projects.demo']()}
 				</a>
 			{/if}
-			<button type="button" onclick={onSelect} class="action-btn-more ml-auto">
+			<button
+				type="button"
+				onclick={(e) => {
+					e.stopPropagation();
+					onSelect?.();
+				}}
+				class="action-btn-more ml-auto"
+			>
 				{m['projects.learn_more']()}
 				<ArrowUpRight size={12} />
 			</button>
