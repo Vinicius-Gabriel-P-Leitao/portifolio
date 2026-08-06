@@ -10,11 +10,12 @@
 	} from '$lib/paraglide/runtime';
 	import Navbar from '$lib/components/navbar.svelte';
 	import Toast from '$lib/components/toast.svelte';
-	import BlackHole from '$lib/components/svelte-bits/black-hole.svelte';
+	import Threads from '$lib/components/svelte-bits/threads.svelte';
 	import Noise from '$lib/components/svelte-bits/Noise.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { scrollState } from '$lib/stores/scroll.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	let { children } = $props();
 	const locale = $derived(browser ? (getLocaleForUrl(page.url.href) ?? getLocale()) : getLocale());
@@ -26,7 +27,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<meta name="description" content="Vinícius GPL — Full-Stack Developer portfolio." />
+	<meta name="description" content={m['site.description']()} />
 	<meta name="theme-color" content="#0a0a0a" />
 </svelte:head>
 
@@ -36,15 +37,9 @@
 	style="width: {scrollState.progress * 100}%"
 ></div>
 
-<!-- Global Fixed Background: Buraco Negro Gargantua em OGL -->
+<!-- Global Fixed Background: Threads em OGL -->
 <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 opacity-75">
-	<BlackHole
-		speed={0.4}
-		iterations={85}
-		enableMouseInteraction={true}
-		scrollProgress={scrollState.progress}
-		scrollVelocity={scrollState.velocity}
-	/>
+	<Threads amplitude={1.5} distance={0} enableMouseInteraction={true} color={[1, 1, 1]} />
 </div>
 
 <div

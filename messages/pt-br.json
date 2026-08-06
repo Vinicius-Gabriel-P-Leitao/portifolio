@@ -1,22 +1,27 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"site": {
-		"name": "VINICIUS-GPL.COM"
+		"name": "VINICIUS-GPL.COM",
+		"title": "Vinícius GPL — Desenvolvedor Full-Stack",
+		"description": "Portfólio de Vinícius GPL — Desenvolvedor Full-Stack."
 	},
 	"nav": {
 		"home": "Home",
 		"projects": "Projetos",
 		"about": "Sobre",
-		"contact": "Contato"
+		"contact": "Contato",
+		"navigation": "Navegação"
 	},
 	"hero": {
 		"role": "Desenvolvedor Full-Stack",
 		"role_backend": "Engenheiro Backend",
 		"role_ui": "Especialista em UI",
 		"subtitle": "Desenvolvimento de aplicações web, serviços backend e apps nativos.",
-		"cta_projects": "Ver projetos"
+		"cta_projects": "Ver projetos",
+		"scroll_hint": "DESLIZE PARA NAVEGAR NA TRILHA 3D"
 	},
 	"projects": {
+		"header_index": "// 01 . PROJETOS E ARQUITETURA",
 		"title": "Projetos",
 		"ideas_title": "Ideias Futuras",
 		"scroll_more": "Role para ver mais projetos",
@@ -26,6 +31,12 @@
 		"close": "Fechar",
 		"highlights": "Destaques",
 		"gallery": "Galeria",
+		"project_prefix": "PROJETO",
+		"zoom": "Zoom",
+		"zoom_aria": "Ampliar imagem",
+		"prev_screenshot": "Imagem anterior",
+		"next_screenshot": "Próxima imagem",
+		"close_zoom": "Fechar ampliação",
 		"status": {
 			"done": "Concluído",
 			"pre_release": "Pré-release",
@@ -34,6 +45,7 @@
 		}
 	},
 	"about": {
+		"header_index": "// 02 . SOBRE E TECH STACK",
 		"title": "Sobre",
 		"bio": "Desenvolvedor full-stack criando apps modernos. Trabalho com TypeScript, React, Node.js e Tailwind no frontend, Java, Spring Boot no backend. Atualmente expandindo para Android utilizando Kotlin e nativo com Rust.",
 		"frontend": "Frontend",
@@ -42,6 +54,7 @@
 		"infra": "Infra"
 	},
 	"contact": {
+		"header_index": "// 03 . CONTATO",
 		"title": "Contato",
 		"name": "Nome",
 		"name_placeholder": "Seu nome",

@@ -21,7 +21,7 @@
 	]);
 </script>
 
-<header class="navbar" class:scrolled aria-label="Main Navigation">
+<header class="navbar" class:scrolled aria-label={m['nav.navigation']()}>
 	<!-- Scroll progress line at bottom of header -->
 	<div
 		class="progress-line"

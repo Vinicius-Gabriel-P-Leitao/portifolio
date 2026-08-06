@@ -17,7 +17,7 @@
 	<aside
 		class="pointer-events-none fixed right-4 bottom-[max(0.85rem,env(safe-area-inset-bottom))] left-4 z-50 flex justify-center"
 	>
-		<nav class="bottom-nav pointer-events-auto" aria-label="Mobile Navigation">
+		<nav class="bottom-nav pointer-events-auto" aria-label={m['nav.navigation']()}>
 			{#each ITEMS as item (item.id)}
 				{@const isActive = navigation.active === item.id}
 				{@const Icon = item.Icon}

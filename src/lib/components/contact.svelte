@@ -49,7 +49,7 @@
 				<span
 					class="rounded-full border border-white/20 bg-white/10 px-3.5 py-1 font-mono text-xs font-bold tracking-widest text-white/90 uppercase"
 				>
-					// 03 . CONTATO
+					{m['contact.header_index']()}
 				</span>
 				<div class="h-[1px] w-12 bg-white/20"></div>
 			</div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Project } from '$lib/data/projects';
 	import ProjectCard from './project-card.svelte';
+	import * as m from '$lib/paraglide/messages';
 
 	let {
 		projects,
@@ -22,7 +23,7 @@
 			<span
 				class="rounded-full border border-white/20 bg-white/10 px-3.5 py-1 font-mono text-xs font-bold tracking-widest text-white/90 uppercase"
 			>
-				// 01 . PROJETOS E ARQUITETURA
+				{m['projects.header_index']()}
 			</span>
 			<div class="h-[1px] w-12 bg-white/20"></div>
 		</div>
@@ -53,7 +54,7 @@
 					"
 				>
 					<div class="card-meta">
-						<span class="card-index">PROJECT [{String(i + 1).padStart(2, '0')}]</span>
+						<span class="card-index">{m['projects.project_prefix']()} [{String(i + 1).padStart(2, '0')}]</span>
 						<span class="card-tech">{project.tech[0] || 'FULL-STACK'}</span>
 					</div>
 					<ProjectCard {project} onSelect={() => onSelect?.(project)} />
@@ -78,7 +79,7 @@
 		</div>
 
 		<span class="font-mono text-xs text-white/50">
-			PROJETO {String(activeIndex + 1).padStart(2, '0')} <span class="text-white/20">/</span>
+			{m['projects.project_prefix']()} {String(activeIndex + 1).padStart(2, '0')} <span class="text-white/20">/</span>
 			{String(total).padStart(2, '0')}
 		</span>
 	</div>

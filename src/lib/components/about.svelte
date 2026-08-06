@@ -54,7 +54,7 @@
 				<span
 					class="rounded-full border border-white/20 bg-white/10 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-white/90 uppercase sm:px-3.5 sm:text-xs"
 				>
-					// 02 . SOBRE E TECH STACK
+					{m['about.header_index']()}
 				</span>
 				<div class="h-[1px] w-8 bg-white/20 sm:w-12"></div>
 			</div>
