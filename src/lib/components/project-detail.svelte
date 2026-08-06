@@ -15,6 +15,13 @@
 	const locale = $derived(getLocale());
 	const images = $derived(project?.images ?? []);
 	const highlights = $derived(project?.highlights ?? []);
+	const currentImageTitle = $derived.by(() => {
+		const img = images[imageIndex];
+		if (!img) return '';
+		const t = img.title;
+		if (typeof t === 'string') return t;
+		return locale === 'pt-br' ? t['pt-br'] : t.en;
+	});
 
 	$effect(() => {
 		if (project) {
@@ -214,11 +221,11 @@
 								'w-full overflow-hidden rounded-xl',
 								!isMobile.current ? 'cursor-zoom-in' : 'cursor-default'
 							].join(' ')}
-							aria-label="Zoom screenshot"
+							aria-label={m['projects.zoom_aria']()}
 						>
 							<img
 								src={images[imageIndex].url}
-								alt={images[imageIndex].title}
+								alt={currentImageTitle}
 								class="max-h-80 w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
 								loading="lazy"
 							/>
@@ -230,7 +237,7 @@
 								class="pointer-events-none absolute top-2 right-2 flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
 							>
 								<ZoomIn size={11} class="text-white/70" />
-								<span class="text-[9px] text-white/60">Zoom</span>
+								<span class="text-[9px] text-white/60">{m['projects.zoom']()}</span>
 							</div>
 						{/if}
 
@@ -239,7 +246,7 @@
 								type="button"
 								onclick={prev}
 								class="absolute top-1/2 left-2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 text-white transition-colors hover:bg-black/80"
-								aria-label="Previous screenshot"
+								aria-label={m['projects.prev_screenshot']()}
 							>
 								<ChevronLeft size={16} />
 							</button>
@@ -247,7 +254,7 @@
 								type="button"
 								onclick={next}
 								class="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 text-white transition-colors hover:bg-black/80"
-								aria-label="Next screenshot"
+								aria-label={m['projects.next_screenshot']()}
 							>
 								<ChevronRight size={16} />
 							</button>
@@ -270,7 +277,7 @@
 						</div>
 					{/if}
 
-					<p class="mt-2 text-center text-[11px] text-white/30">{images[imageIndex].title}</p>
+					<p class="mt-2 text-center text-[11px] text-white/30">{currentImageTitle}</p>
 				</div>
 			{/if}
 		</div>
@@ -289,7 +296,7 @@
 				type="button"
 				onclick={closeZoom}
 				class="absolute top-4 right-4 rounded-full bg-white/10 p-2 text-white/60 transition-colors hover:bg-white/20 hover:text-white"
-				aria-label="Close zoom"
+				aria-label={m['projects.close_zoom']()}
 			>
 				<X size={20} />
 			</button>
@@ -306,11 +313,11 @@
 				type="button"
 				onclick={(e) => e.stopPropagation()}
 				class="cursor-default rounded-xl focus:outline-none"
-				aria-label={images[imageIndex].title}
+				aria-label={currentImageTitle}
 			>
 				<img
 					src={images[imageIndex].url}
-					alt={images[imageIndex].title}
+					alt={currentImageTitle}
 					class="max-h-[90dvh] max-w-[85vw] rounded-xl object-contain"
 				/>
 			</button>
@@ -324,7 +331,7 @@
 						prev();
 					}}
 					class="absolute top-1/2 left-6 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20"
-					aria-label="Previous screenshot"
+					aria-label={m['projects.prev_screenshot']()}
 				>
 					<ChevronLeft size={22} />
 				</button>
@@ -335,7 +342,7 @@
 						next();
 					}}
 					class="absolute top-1/2 right-6 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20"
-					aria-label="Next screenshot"
+					aria-label={m['projects.next_screenshot']()}
 				>
 					<ChevronRight size={22} />
 				</button>
@@ -343,7 +350,7 @@
 
 			<!-- Caption -->
 			<p class="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-white/30">
-				{images[imageIndex].title}
+				{currentImageTitle}
 			</p>
 		</div>
 	{/if}

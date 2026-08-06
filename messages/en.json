@@ -1,22 +1,27 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"site": {
-		"name": "VINICIUS-GPL.COM"
+		"name": "VINICIUS-GPL.COM",
+		"title": "Vinícius GPL — Full-Stack Developer",
+		"description": "Vinícius GPL — Full-Stack Developer portfolio."
 	},
 	"nav": {
 		"home": "Home",
 		"projects": "Projects",
 		"about": "About",
-		"contact": "Contact"
+		"contact": "Contact",
+		"navigation": "Navigation"
 	},
 	"hero": {
 		"role": "Full-Stack Developer",
 		"role_backend": "Backend Engineer",
 		"role_ui": "UI Craftsman",
 		"subtitle": "Full-stack web applications, backend services, and native apps.",
-		"cta_projects": "View projects"
+		"cta_projects": "View projects",
+		"scroll_hint": "SCROLL TO NAVIGATE THE 3D TRAIL"
 	},
 	"projects": {
+		"header_index": "// 01 . PROJECTS & ARCHITECTURE",
 		"title": "Projects",
 		"ideas_title": "Future Ideas",
 		"scroll_more": "Scroll to see more projects",
@@ -26,6 +31,12 @@
 		"close": "Close",
 		"highlights": "Highlights",
 		"gallery": "Gallery",
+		"project_prefix": "PROJECT",
+		"zoom": "Zoom",
+		"zoom_aria": "Zoom screenshot",
+		"prev_screenshot": "Previous screenshot",
+		"next_screenshot": "Next screenshot",
+		"close_zoom": "Close zoom",
 		"status": {
 			"done": "Shipped",
 			"pre_release": "Pre-release",
@@ -34,6 +45,7 @@
 		}
 	},
 	"about": {
+		"header_index": "// 02 . ABOUT & TECH STACK",
 		"title": "About",
 		"bio": "Full-stack developer building modern apps. I work with TypeScript, React, Node.js and Tailwind on the frontend, Java and Spring Boot on the backend. Currently expanding into Android using Kotlin and native with Rust.",
 		"frontend": "Frontend",
@@ -42,6 +54,7 @@
 		"infra": "Infra"
 	},
 	"contact": {
+		"header_index": "// 03 . CONTACT",
 		"title": "Contact",
 		"name": "Name",
 		"name_placeholder": "Your name",

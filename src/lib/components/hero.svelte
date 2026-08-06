@@ -59,7 +59,7 @@
 		<!-- High contrast Glass Scroll Prompt -->
 		<div class="scroll-hint">
 			<div class="scroll-label-pill font-mono">
-				<span>DESLIZE PARA NAVEGAR NA TRILHA 3D</span>
+				<span>{m['hero.scroll_hint']()}</span>
 				<ArrowDown size={14} class="animate-bounce text-white" />
 			</div>
 		</div>

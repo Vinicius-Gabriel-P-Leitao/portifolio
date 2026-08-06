@@ -1,5 +1,5 @@
 export type ProjectImage = {
-	title: string;
+	title: { en: string; 'pt-br': string } | string;
 	url: string;
 };
 
@@ -39,15 +39,15 @@ export const PROJECTS: Project[] = [
 			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png',
 		images: [
 			{
-				title: 'Login',
+				title: { en: 'Login', 'pt-br': 'Login' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-login.png'
 			},
 			{
-				title: 'Metadata',
+				title: { en: 'Metadata', 'pt-br': 'Metadados' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-metadata.png'
 			},
 			{
-				title: 'Admin Panel',
+				title: { en: 'Admin Panel', 'pt-br': 'Painel Administrativo' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png'
 			}
 		],
@@ -101,15 +101,15 @@ export const PROJECTS: Project[] = [
 			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/01-home.png',
 		images: [
 			{
-				title: 'Home',
+				title: { en: 'Home', 'pt-br': 'Início' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/01-home.png'
 			},
 			{
-				title: 'Reader',
+				title: { en: 'Reader', 'pt-br': 'Leitor' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/02-reader.png'
 			},
 			{
-				title: 'Customization',
+				title: { en: 'Customization', 'pt-br': 'Personalização' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-android/main/docs/banner/03-customization.png'
 			}
 		],
@@ -278,15 +278,15 @@ export const PROJECTS: Project[] = [
 			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/chat-print.png',
 		images: [
 			{
-				title: 'Chat',
+				title: { en: 'Chat', 'pt-br': 'Chat' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/chat-print.png'
 			},
 			{
-				title: 'Admin Panel',
+				title: { en: 'Admin Panel', 'pt-br': 'Painel Administrativo' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/admin-print.png'
 			},
 			{
-				title: 'History',
+				title: { en: 'History', 'pt-br': 'Histórico' },
 				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-rag/main/docs/history-print.png'
 			}
 		],

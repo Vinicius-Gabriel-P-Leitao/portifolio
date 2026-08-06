@@ -11,6 +11,7 @@
 	import { navigation } from '$lib/stores/navigation.svelte';
 	import { scrollState } from '$lib/stores/scroll.svelte';
 	import type { PageData } from './$types';
+	import * as m from '$lib/paraglide/messages';
 
 	let { data }: { data: PageData } = $props();
 
@@ -166,7 +167,7 @@
 </script>
 
 <svelte:head>
-	<title>Vinícius GPL — Full-Stack Developer</title>
+	<title>{m['site.title']()}</title>
 </svelte:head>
 
 <!-- Fixed viewport -->
@@ -204,21 +205,21 @@
 <ProjectDetail project={selectedProject} onClose={() => (selectedProject = null)} />
 
 <!-- ── RIGHT-SIDE NAVIGATION DOTS ── -->
-<nav class="side-nav" aria-label="Navegação">
+<nav class="side-nav" aria-label={m['nav.navigation']()}>
 	<!-- Home -->
 	<button
 		class="nav-item"
 		class:nav-active={sectionIdx === 0}
 		onclick={() => goToSection(0)}
-		title="Home"
+		title={m['nav.home']()}
 	>
-		<span class="nav-label">HOME</span>
+		<span class="nav-label">{m['nav.home']().toUpperCase()}</span>
 		<div class="nav-pip"></div>
 	</button>
 
 	<!-- Projects section: shows a cluster of project sub-dots -->
 	<div class="nav-projects" class:nav-active={sectionIdx === 1}>
-		<span class="nav-label nav-label-proj">PROJETOS</span>
+		<span class="nav-label nav-label-proj">{m['nav.projects']().toUpperCase()}</span>
 		<div class="nav-proj-dots">
 			{#each allProjects as _, i (i)}
 				<button
@@ -239,9 +240,9 @@
 		class="nav-item"
 		class:nav-active={sectionIdx === 2}
 		onclick={() => goToSection(2)}
-		title="Sobre"
+		title={m['nav.about']()}
 	>
-		<span class="nav-label">SOBRE</span>
+		<span class="nav-label">{m['nav.about']().toUpperCase()}</span>
 		<div class="nav-pip"></div>
 	</button>
 
@@ -250,9 +251,9 @@
 		class="nav-item"
 		class:nav-active={sectionIdx === 3}
 		onclick={() => goToSection(3)}
-		title="Contato"
+		title={m['nav.contact']()}
 	>
-		<span class="nav-label">CONTATO</span>
+		<span class="nav-label">{m['nav.contact']().toUpperCase()}</span>
 		<div class="nav-pip"></div>
 	</button>
 </nav>
