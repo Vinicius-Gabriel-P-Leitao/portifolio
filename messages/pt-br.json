@@ -76,7 +76,10 @@
 		"whatsapp_text": "Olá! Vi seu portfólio e gostaria de conversar.",
 		"invalid_email": "Por favor, insira um e-mail válido",
 		"file_read_error": "Erro ao ler arquivo",
-		"remove_attachment": "Remover anexo"
+		"remove_attachment": "Remover anexo",
+		"open_form": "Enviar mensagem",
+		"mobile_drawer_hint": "Preencha o formulário para entrar em contato",
+		"close_drawer": "Fechar formulário"
 	},
 	"toast": {
 		"success": "Email enviado com sucesso!",

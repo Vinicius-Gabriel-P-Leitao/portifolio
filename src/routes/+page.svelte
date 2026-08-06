@@ -5,6 +5,7 @@
 	import Projects from '$lib/components/projects.svelte';
 	import About from '$lib/components/about.svelte';
 	import Contact from '$lib/components/contact.svelte';
+	import ContactDrawer from '$lib/components/contact-drawer.svelte';
 	import ProjectDetail from '$lib/components/project-detail.svelte';
 	import { PROJECTS } from '$lib/data/projects';
 	import type { Project } from '$lib/data/projects';
@@ -28,6 +29,7 @@
 	let projectIdx = $state(0); // inner project carousel index
 	let busy = $state(false);
 	let selectedProject = $state<Project | null>(null);
+	let contactDrawerOpen = $state(false);
 
 	// Scroll progress for the black hole
 	$effect(() => {
@@ -43,7 +45,7 @@
 	});
 
 	function advance(dir: 1 | -1) {
-		if (busy || selectedProject) return;
+		if (busy || selectedProject || contactDrawerOpen) return;
 
 		if (sectionIdx === 1) {
 			// Inside projects: scroll through individual projects first
@@ -73,7 +75,7 @@
 	}
 
 	function goToSection(idx: number) {
-		if (busy || selectedProject) return;
+		if (busy || selectedProject || contactDrawerOpen) return;
 		sectionIdx = idx;
 		if (idx === 1) projectIdx = 0;
 		busy = true;
@@ -95,7 +97,7 @@
 		let accTimer: ReturnType<typeof setTimeout>;
 
 		const onWheel = (e: WheelEvent) => {
-			if (selectedProject) return; // Don't move carousel when project modal is open
+			if (selectedProject || contactDrawerOpen) return; // Don't move carousel when project modal or contact drawer is open
 			e.preventDefault();
 			if (busy) return;
 			acc += e.deltaY;
@@ -114,13 +116,19 @@
 
 		const onTouchStart = (e: TouchEvent) => {
 			if (e.touches.length !== 1) return;
+			const target = e.target as HTMLElement | null;
+			if (target?.closest('[role="dialog"]')) return;
+
 			startX = e.touches[0].clientX;
 			startY = e.touches[0].clientY;
 			startTime = Date.now();
 		};
 
 		const onTouchEnd = (e: TouchEvent) => {
-			if (selectedProject) return;
+			if (selectedProject || contactDrawerOpen) return;
+			const target = e.target as HTMLElement | null;
+			if (target?.closest('[role="dialog"]')) return;
+
 			if (e.changedTouches.length === 0) return;
 
 			const elapsed = Date.now() - startTime;
@@ -140,7 +148,7 @@
 
 		// Keyboard
 		const onKey = (e: KeyboardEvent) => {
-			if (selectedProject) return;
+			if (selectedProject || contactDrawerOpen) return;
 			const target = e.target as HTMLElement | null;
 			if (
 				target &&
@@ -206,13 +214,14 @@
 
 		<!-- Panel 3: Contact -->
 		<div class="panel">
-			<Contact />
+			<Contact onOpenDrawer={() => (contactDrawerOpen = true)} />
 		</div>
 	</div>
 </div>
 
-<!-- Render Project Detail Modal at root level to prevent CSS transform clipping -->
+<!-- Render Modals at root level to prevent CSS transform clipping -->
 <ProjectDetail project={selectedProject} onClose={() => (selectedProject = null)} />
+<ContactDrawer open={contactDrawerOpen} onClose={() => (contactDrawerOpen = false)} />
 
 <!-- ── RIGHT-SIDE NAVIGATION DOTS ── -->
 <nav class="side-nav" aria-label={m['nav.navigation']()}>

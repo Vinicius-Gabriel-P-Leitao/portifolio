@@ -76,7 +76,10 @@
 		"whatsapp_text": "Hello! I saw your portfolio and would like to chat.",
 		"invalid_email": "Please enter a valid email",
 		"file_read_error": "Error reading file",
-		"remove_attachment": "Remove attachment"
+		"remove_attachment": "Remove attachment",
+		"open_form": "Send a message",
+		"mobile_drawer_hint": "Fill out the form to get in touch",
+		"close_drawer": "Close form"
 	},
 	"toast": {
 		"success": "Email sent successfully!",
