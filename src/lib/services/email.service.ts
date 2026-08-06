@@ -1,7 +1,13 @@
+export type EmailAttachment = {
+	filename: string;
+	content: string; // Base64 data string
+};
+
 export type EmailData = {
 	name: string;
 	email: string;
 	message: string;
+	attachment?: EmailAttachment | null;
 };
 
 export type EmailPayload = EmailData & { time: string };

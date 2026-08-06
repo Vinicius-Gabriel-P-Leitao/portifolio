@@ -141,6 +141,16 @@
 		// Keyboard
 		const onKey = (e: KeyboardEvent) => {
 			if (selectedProject) return;
+			const target = e.target as HTMLElement | null;
+			if (
+				target &&
+				(target.tagName === 'INPUT' ||
+					target.tagName === 'TEXTAREA' ||
+					target.tagName === 'SELECT' ||
+					target.isContentEditable)
+			) {
+				return;
+			}
 			if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
 				e.preventDefault();
 				advance(1);

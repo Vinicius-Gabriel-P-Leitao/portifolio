@@ -54,7 +54,9 @@
 					"
 				>
 					<div class="card-meta">
-						<span class="card-index">{m['projects.project_prefix']()} [{String(i + 1).padStart(2, '0')}]</span>
+						<span class="card-index"
+							>{m['projects.project_prefix']()} [{String(i + 1).padStart(2, '0')}]</span
+						>
 						<span class="card-tech">{project.tech[0] || 'FULL-STACK'}</span>
 					</div>
 					<ProjectCard {project} onSelect={() => onSelect?.(project)} />
@@ -79,7 +81,8 @@
 		</div>
 
 		<span class="font-mono text-xs text-white/50">
-			{m['projects.project_prefix']()} {String(activeIndex + 1).padStart(2, '0')} <span class="text-white/20">/</span>
+			{m['projects.project_prefix']()}
+			{String(activeIndex + 1).padStart(2, '0')} <span class="text-white/20">/</span>
 			{String(total).padStart(2, '0')}
 		</span>
 	</div>
