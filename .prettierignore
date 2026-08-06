@@ -9,3 +9,5 @@ bun.lockb
 /static/
 .claude/
 project.inlang/
+*.md
+

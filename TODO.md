@@ -5,4 +5,3 @@
 - [x] Executar `npm ci`.
 - [x] Executar `npm run build`.
 - [x] Executar `npx wrangler deploy`.
-
