@@ -13,6 +13,7 @@ export function buildEmailHtml(payload: EmailPayload): string {
 	const email = escapeHtml(payload.email);
 	const message = escapeHtml(payload.message);
 	const time = escapeHtml(payload.time);
+	const attachmentName = payload.attachment ? escapeHtml(payload.attachment.filename) : null;
 
 	return `<!DOCTYPE html>
 <html lang="pt-BR">
@@ -23,7 +24,6 @@ export function buildEmailHtml(payload: EmailPayload): string {
   </head>
 
   <body style="margin:0;padding:0;background-color:#18181b;font-family:system-ui,-apple-system,Arial,sans-serif;">
-    <!-- Preview text (hidden) -->
     <span style="display:none;opacity:0;color:transparent;height:0;width:0;overflow:hidden;">
       Nova mensagem enviada pelo formulário de contato de ${name}
     </span>
@@ -52,16 +52,18 @@ export function buildEmailHtml(payload: EmailPayload): string {
             <!-- Body -->
             <tr>
               <td style="padding:32px;">
-                <!-- Sender -->
                 <p style="margin:0 0 4px 0;font-size:22px;font-weight:700;color:#e4e4e7;">${name}</p>
-
                 <p style="margin:0 0 16px 0;font-size:14px;color:#71717a;">${email}</p>
-
                 <p style="margin:0 0 24px 0;font-size:12px;color:#a1a1aa;">${time}</p>
+
+                ${
+									attachmentName
+										? `<div style="margin:0 0 20px 0;padding:10px 14px;background-color:#3f3f46;border-radius:6px;font-size:13px;color:#e4e4e7;display:inline-block;">📎 <strong>Anexo embutido:</strong> ${attachmentName}</div>`
+										: ''
+								}
 
                 <hr style="border:none;border-top:1px solid #3f3f46;margin:0 0 24px 0;" />
 
-                <!-- Message -->
                 <p style="margin:0;font-size:15px;line-height:1.6;color:#e4e4e7;white-space:pre-line;">${message}</p>
               </td>
             </tr>
