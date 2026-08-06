@@ -274,6 +274,7 @@
 		height: 100dvh;
 		width: 100vw;
 		overflow: hidden;
+		z-index: 10;
 	}
 
 	/* Outer 4-panel strip */
