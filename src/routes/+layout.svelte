@@ -23,12 +23,101 @@
 	$effect(() => {
 		setLocale(locale, { reload: false });
 	});
+
+	const jsonLd = $derived({
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'Person',
+				'@id': 'https://vinicius-gpl.com/#person',
+				name: 'Vinícius GPL',
+				alternateName: 'Vinícius Gabriel P. Leitão',
+				jobTitle: locale === 'pt-br' ? 'Desenvolvedor Full-Stack' : 'Full-Stack Developer',
+				description: m['site.description'](),
+				url: 'https://vinicius-gpl.com',
+				sameAs: [
+					'https://github.com/Vinicius-Gabriel-P-Leitao'
+				],
+				knowsAbout: [
+					'TypeScript',
+					'JavaScript',
+					'SvelteKit',
+					'Svelte',
+					'React',
+					'Java',
+					'Spring Boot',
+					'Rust',
+					'Kotlin',
+					'Python',
+					'FastAPI',
+					'Go',
+					'Docker',
+					'RAG',
+					'TailwindCSS'
+				]
+			},
+			{
+				'@type': 'WebSite',
+				'@id': 'https://vinicius-gpl.com/#website',
+				url: 'https://vinicius-gpl.com',
+				name: m['site.name'](),
+				description: m['site.description'](),
+				publisher: {
+					'@id': 'https://vinicius-gpl.com/#person'
+				},
+				inLanguage: [locale === 'pt-br' ? 'pt-BR' : 'en-US']
+			},
+			{
+				'@type': 'ProfilePage',
+				'@id': page.url.href,
+				url: page.url.href,
+				name: m['site.title'](),
+				isPartOf: {
+					'@id': 'https://vinicius-gpl.com/#website'
+				},
+				mainEntity: {
+					'@id': 'https://vinicius-gpl.com/#person'
+				}
+			}
+		]
+	});
 </script>
 
 <svelte:head>
+	<title>{m['site.title']()}</title>
 	<link rel="icon" href={favicon} />
+
+	<!-- Core SEO Meta Tags -->
 	<meta name="description" content={m['site.description']()} />
+	<meta name="keywords" content={m['site.keywords']()} />
+	<meta name="author" content="Vinícius GPL" />
+	<meta name="robots" content="index, follow" />
 	<meta name="theme-color" content="#0a0a0a" />
+
+	<!-- Canonical & Multilingual Alternate Links -->
+	<link rel="canonical" href={page.url.href} />
+	{#each locales as loc (loc)}
+		<link rel="alternate" hreflang={loc} href={localizeHref(page.url.pathname, { locale: loc })} />
+	{/each}
+	<link rel="alternate" hreflang="x-default" href={localizeHref(page.url.pathname, { locale: 'pt-br' })} />
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:site_name" content={m['site.name']()} />
+	<meta property="og:title" content={m['site.og_title']()} />
+	<meta property="og:description" content={m['site.og_description']()} />
+	<meta property="og:type" content="profile" />
+	<meta property="og:url" content={page.url.href} />
+	<meta property="og:locale" content={locale === 'pt-br' ? 'pt_BR' : 'en_US'} />
+	<meta property="og:image" content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png" />
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={m['site.og_title']()} />
+	<meta name="twitter:description" content={m['site.og_description']()} />
+	<meta name="twitter:image" content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png" />
+
+	<!-- JSON-LD Structured Data for Google & AI Engines -->
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
 </svelte:head>
 
 <!-- Slim Top Scroll Progress Indicator -->

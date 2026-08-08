@@ -1,0 +1,51 @@
+# Vinícius GPL — Full-Stack Developer & Software Engineer
+
+> Official summary file for LLMs, AI agents, and search engine assistants. Provides structured context about Vinícius GPL's portfolio, technical skills, open-source projects, and contact channels.
+
+## About Vinícius GPL
+Vinícius GPL is a Full-Stack Developer and Software Engineer creating high-performance web applications, resilient backend architectures, cross-platform desktop software, native Android apps, and AI systems.
+
+- **Primary Frontend**: TypeScript, SvelteKit, Svelte 5, React, TailwindCSS.
+- **Backend Architecture**: Java (Spring Boot, Spring Security), Rust, Go, Python (FastAPI, LlamaIndex).
+- **Mobile & Desktop**: Kotlin (Jetpack Compose), Rust + Tauri v2.
+- **Databases & Infra**: PostgreSQL, SQLite, Qdrant (Vector Search), Docker, iroh (P2P), Axum.
+- **GitHub Profile**: https://github.com/Vinicius-Gabriel-P-Leitao
+
+---
+
+## Featured Projects
+
+### 1. Auth Server
+- **Description**: Centralized identity management service with an admin panel and JWT API. Supports refresh tokens via HttpOnly cookies, user lifecycle management, Swagger documentation, and Actuator metrics.
+- **Tech Stack**: Java, Spring Boot, Spring Security, React, TypeScript, JWT.
+- **GitHub**: https://github.com/Vinicius-Gabriel-P-Leitao/auth-server
+
+### 2. Acerola RAG
+- **Description**: Retrieval-Augmented Generation system for chatting with documents. Combines hybrid vector search (Qdrant + BM25), real-time SSE streaming, multi-provider LLM support (OpenAI, Gemini, Claude, Ollama), parallel ingestion, and an admin panel.
+- **Tech Stack**: Python, FastAPI, LlamaIndex, Qdrant, SvelteKit, Svelte 5, Tailwind, Docker.
+- **GitHub**: https://github.com/Vinicius-Gabriel-P-Leitao/acerola-rag
+
+### 3. Acerola Android
+- **Description**: Native Android manga reader built with Kotlin and Jetpack Compose. Scans local storage, parses CBZ/CBR archives, and auto-fetches metadata from MangaDex and AniList.
+- **Tech Stack**: Kotlin, Jetpack Compose, Rust, Iroh, Hilt, MangaDex API, AniList API.
+- **GitHub**: https://github.com/Vinicius-Gabriel-P-Leitao/acerola-android
+
+### 4. Acerola Desktop
+- **Description**: Cross-platform desktop comic reader built with Rust and Tauri v2. Reads CBZ/CBR/PDF files, manages local library, streams pages over HTTP via Axum to mobile devices, and connects to AI translator plugins.
+- **Tech Stack**: Rust, Tauri v2, Svelte 5, TypeScript, Iroh, Tailwind.
+- **GitHub**: https://github.com/Vinicius-Gabriel-P-Leitao/acerola-desktop
+
+### 5. Acerola Translator
+- **Description**: Automatic manga and webtoon translation service. Detects speech balloons, runs OCR (manga-ocr), translates via AI (Claude / Ollama / OpenAI), applies inpainting, and re-renders translated pages.
+- **Tech Stack**: Go, Python, FastAPI, OpenCV, manga-ocr, Svelte 5, Docker.
+- **GitHub**: https://github.com/Vinicius-Gabriel-P-Leitao/acerola-translater
+
+### 6. Acerola Relay
+- **Description**: Peer-to-peer sync and relay server for the Acerola ecosystem. Connects desktop, mobile, and translator clients over NAT-traversing iroh protocols.
+- **Tech Stack**: Rust, iroh, SQLite, Docker.
+
+---
+
+## Contact Information
+- **Portfolio Site**: https://vinicius-gpl.com
+- **GitHub**: https://github.com/Vinicius-Gabriel-P-Leitao

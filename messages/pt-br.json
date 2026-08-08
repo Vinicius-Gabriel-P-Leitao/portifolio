@@ -3,7 +3,10 @@
 	"site": {
 		"name": "VINICIUS-GPL.COM",
 		"title": "Vinícius GPL — Desenvolvedor Full-Stack",
-		"description": "Portfólio de Vinícius GPL — Desenvolvedor Full-Stack."
+		"description": "Portfólio de Vinícius GPL — Desenvolvedor Full-Stack especializado em aplicações web, serviços backend, apps mobile e IA.",
+		"keywords": "Vinícius GPL, Desenvolvedor Full-Stack, SvelteKit, TypeScript, Java, Spring Boot, Rust, Kotlin, Python, FastAPI, Engenheiro de Software",
+		"og_title": "Vinícius GPL — Desenvolvedor Full-Stack & Engenheiro de Software",
+		"og_description": "Portfólio oficial de Vinícius GPL. Desenvolvedor Full-Stack criando aplicações web modernas, arquiteturas backend de alta performance, apps nativos e sistemas de IA."
 	},
 	"nav": {
 		"home": "Home",

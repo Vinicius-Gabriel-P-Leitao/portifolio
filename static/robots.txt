@@ -1,3 +1,20 @@
-# allow crawling everything by default
+# Allow crawling for all web crawlers and AI agents by default
 User-agent: *
-Disallow:
+Allow: /
+
+# Explicit rules for major LLM & AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap and LLM documentation locations
+Sitemap: https://vinicius-gpl.com/sitemap.xml
+LLMs-Txt: https://vinicius-gpl.com/llms.txt
