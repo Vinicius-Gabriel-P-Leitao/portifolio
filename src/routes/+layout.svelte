@@ -35,9 +35,7 @@
 				jobTitle: locale === 'pt-br' ? 'Desenvolvedor Full-Stack' : 'Full-Stack Developer',
 				description: m['site.description'](),
 				url: 'https://vinicius-gpl.com',
-				sameAs: [
-					'https://github.com/Vinicius-Gabriel-P-Leitao'
-				],
+				sameAs: ['https://github.com/Vinicius-Gabriel-P-Leitao'],
 				knowsAbout: [
 					'TypeScript',
 					'JavaScript',
@@ -99,7 +97,11 @@
 	{#each locales as loc (loc)}
 		<link rel="alternate" hreflang={loc} href={localizeHref(page.url.pathname, { locale: loc })} />
 	{/each}
-	<link rel="alternate" hreflang="x-default" href={localizeHref(page.url.pathname, { locale: 'pt-br' })} />
+	<link
+		rel="alternate"
+		hreflang="x-default"
+		href={localizeHref(page.url.pathname, { locale: 'pt-br' })}
+	/>
 
 	<!-- Open Graph Meta Tags -->
 	<meta property="og:site_name" content={m['site.name']()} />
@@ -108,16 +110,23 @@
 	<meta property="og:type" content="profile" />
 	<meta property="og:url" content={page.url.href} />
 	<meta property="og:locale" content={locale === 'pt-br' ? 'pt_BR' : 'en_US'} />
-	<meta property="og:image" content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png" />
+	<meta
+		property="og:image"
+		content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png"
+	/>
 
 	<!-- Twitter Card Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={m['site.og_title']()} />
 	<meta name="twitter:description" content={m['site.og_description']()} />
-	<meta name="twitter:image" content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png" />
+	<meta
+		name="twitter:image"
+		content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png"
+	/>
 
 	<!-- JSON-LD Structured Data for Google & AI Engines -->
-	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html '<script type="application/ld+json">' + JSON.stringify(jsonLd) + '</script>'}
 </svelte:head>
 
 <!-- Slim Top Scroll Progress Indicator -->

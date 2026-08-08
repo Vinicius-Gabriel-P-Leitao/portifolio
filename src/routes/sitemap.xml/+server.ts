@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
 
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async () => {
 	const siteUrl = 'https://vinicius-gpl.com';
 	const currentDate = new Date().toISOString().split('T')[0];
 
