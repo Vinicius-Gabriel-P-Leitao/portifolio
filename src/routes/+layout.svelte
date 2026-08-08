@@ -127,7 +127,7 @@
 	<meta property="og:type" content="profile" />
 	<meta property="og:url" content={page.url.href} />
 	<meta property="og:locale" content={locale === 'pt-br' ? 'pt_BR' : 'en_US'} />
-	<meta property="og:image" content="https://vinicius-gpl.com/static/social/vinicius-gpl.com.png" />
+	<meta property="og:image" content="https://vinicius-gpl.com/social/vinicius-gpl.com.png" />
 
 	<!-- Twitter Card Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -135,7 +135,7 @@
 	<meta name="twitter:description" content={m['site.og_description']()} />
 	<meta
 		name="twitter:image"
-		content="https://vinicius-gpl.com/static/social/vinicius-gpl.com.png"
+		content="https://vinicius-gpl.com/social/vinicius-gpl.com.png"
 	/>
 
 	<!-- JSON-LD Structured Data for Google & AI Engines.
