@@ -3,7 +3,7 @@
 	import { Mail, Copy, Check, ArrowUpRight, MessageSquare, Send } from 'lucide-svelte';
 	import GithubIcon from '$lib/components/github-icon.svelte';
 	import WhatsappIcon from '$lib/components/whatsapp-icon.svelte';
-	import { toast } from '$lib/stores/toast.svelte';
+	import { toast } from '$lib/store/toast.svelte';
 	import FadeContent from '$lib/components/svelte-bits/fade-content.svelte';
 	import SpotlightCard from '$lib/components/svelte-bits/spotlight-card.svelte';
 	import ContactForm from '$lib/components/contact-form.svelte';

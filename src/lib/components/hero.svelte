@@ -2,7 +2,7 @@
 	import { ChevronRight, ArrowDown } from 'lucide-svelte';
 	import GithubIcon from '$lib/components/github-icon.svelte';
 	import TextType from '$lib/components/svelte-bits/text-type.svelte';
-	import type { GitHubUser } from '$lib/services/github.service';
+	import type { GitHubUser } from '$lib/service/github.service';
 	import * as m from '$lib/paraglide/messages';
 
 	let { github }: { github: GitHubUser | null } = $props();

@@ -1,88 +1,55 @@
-import { buildEmailHtml } from '$lib/services/email/email.template';
-import { buildEmailPayload } from '$lib/services/email.service';
-import type { EmailAttachment } from '$lib/services/email.service';
+import { buildEmailHtml } from '$lib/service/email/email.template';
+import { buildEmailPayload } from '$lib/service/email.service';
+import { validateContactRequest } from '$lib/utils/contact-validation';
+import { readResendConfig, sendResendEmail } from '$lib/service/resend.service';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
-const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB limit
+const VALIDATION_ERROR_STATUS: Record<string, number> = {
+	validation_error: 400,
+	file_too_large: 400
+};
+
+async function parseJsonBody(
+	request: Request
+): Promise<{ ok: true; body: unknown } | { ok: false }> {
+	try {
+		return { ok: true, body: await request.json() };
+	} catch {
+		return { ok: false };
+	}
+}
 
 export const POST: RequestHandler = async ({ request, platform }) => {
-	const resendToken = platform?.env?.RESEND_TOKEN;
-	const fromAddress = platform?.env?.RESEND_FROM_ADDRESS;
-	const toAddress = platform?.env?.RESEND_TO_ADDRESS;
-
-	if (!resendToken || !fromAddress || !toAddress) {
+	const resendConfig = readResendConfig(platform?.env);
+	if (!resendConfig) {
 		console.error('[contact] Missing Resend environment variables');
 		return json({ ok: false, message: 'configuration_error' }, { status: 500 });
 	}
 
-	let body: unknown;
-
-	try {
-		body = await request.json();
-	} catch {
+	const parsedBody = await parseJsonBody(request);
+	if (!parsedBody.ok) {
 		return json({ error: 'validation_error' }, { status: 400 });
 	}
 
-	const { name, email, message, attachment } = body as Record<string, unknown>;
-
-	if (
-		typeof name !== 'string' ||
-		!name.trim() ||
-		typeof email !== 'string' ||
-		!email.trim() ||
-		typeof message !== 'string' ||
-		!message.trim()
-	) {
-		return json({ error: 'validation_error' }, { status: 400 });
+	const validation = validateContactRequest(parsedBody.body);
+	if (!validation.ok) {
+		const status = VALIDATION_ERROR_STATUS[validation.error] ?? 400;
+		return json({ error: validation.error }, { status });
 	}
 
-	let validAttachment: EmailAttachment | undefined = undefined;
-	if (
-		attachment &&
-		typeof attachment === 'object' &&
-		typeof (attachment as EmailAttachment).filename === 'string' &&
-		typeof (attachment as EmailAttachment).content === 'string'
-	) {
-		const att = attachment as EmailAttachment;
-		// Estimate file size in bytes from Base64 string length
-		const estimatedSizeBytes = Math.ceil((att.content.length * 3) / 4);
-		if (estimatedSizeBytes > MAX_FILE_SIZE_BYTES) {
-			return json({ error: 'file_too_large' }, { status: 400 });
-		}
-		validAttachment = att;
-	}
+	const { fields, attachment } = validation;
+	const payload = buildEmailPayload({ ...fields, attachment });
 
-	const payload = buildEmailPayload({ name, email, message, attachment: validAttachment });
-
-	const resendBody: Record<string, unknown> = {
-		from: `Portifolio <${fromAddress}>`,
-		to: toAddress,
-		reply_to: email,
-		subject: `Nova mensagem de ${name}`,
-		html: buildEmailHtml(payload)
-	};
-
-	if (validAttachment) {
-		resendBody.attachments = [
-			{
-				filename: validAttachment.filename,
-				content: validAttachment.content
-			}
-		];
-	}
-
-	const res = await fetch('https://api.resend.com/emails', {
-		method: 'POST',
-		headers: {
-			Authorization: `Bearer ${resendToken}`,
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(resendBody)
+	const sendResult = await sendResendEmail(resendConfig, {
+		replyTo: fields.email,
+		subject: `Nova mensagem de ${fields.name}`,
+		html: buildEmailHtml(payload),
+		attachment
 	});
 
-	if (!res.ok) {
-		console.error('[contact] Resend error:', res.status);
+	if (!sendResult.ok) {
+		console.error('[contact] Resend error:', sendResult.status);
 		return json({ ok: false, message: 'email_send_failed' }, { status: 502 });
 	}
 

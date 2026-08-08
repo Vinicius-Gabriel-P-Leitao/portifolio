@@ -1,4 +1,4 @@
-import type { EmailPayload } from '$lib/services/email.service';
+import type { EmailPayload } from '$lib/service/email.service';
 
 function escapeHtml(str: string): string {
 	return str

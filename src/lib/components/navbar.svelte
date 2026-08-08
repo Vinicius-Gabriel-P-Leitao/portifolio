@@ -2,13 +2,13 @@
 	import { page } from '$app/state';
 	import { locales, localizeHref, getLocale } from '$lib/paraglide/runtime';
 	import { Home, FolderOpen, User, Mail } from 'lucide-svelte';
-	import { isMobile } from '$lib/reactive/is-mobile.svelte';
-	import { navigation } from '$lib/stores/navigation.svelte';
-	import type { Section } from '$lib/stores/navigation.svelte';
+	import { isMobile } from '$lib/store/is-mobile.svelte';
+	import { navigation } from '$lib/store/navigation.svelte';
+	import type { Section } from '$lib/store/navigation.svelte';
 	import GooeyNav from '$lib/components/svelte-bits/gooey-nav.svelte';
 	import * as m from '$lib/paraglide/messages';
 
-	import { scrollState } from '$lib/stores/scroll.svelte';
+	import { scrollState } from '$lib/store/scroll.svelte';
 
 	const scrolled = $derived(scrollState.progress > 0.02);
 	const scrollProgress = $derived(scrollState.progress);
