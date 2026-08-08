@@ -133,10 +133,7 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={m['site.og_title']()} />
 	<meta name="twitter:description" content={m['site.og_description']()} />
-	<meta
-		name="twitter:image"
-		content="https://vinicius-gpl.com/social/vinicius-gpl.com.png"
-	/>
+	<meta name="twitter:image" content="https://vinicius-gpl.com/social/vinicius-gpl.com.png" />
 
 	<!-- JSON-LD Structured Data for Google & AI Engines.
 	     Literal <script> element (not {@html}), content set via the
