@@ -1,14 +1,5 @@
 <script lang="ts">
-	import {
-		Send,
-		User,
-		Mail,
-		MessageSquare,
-		Loader2,
-		Paperclip,
-		FileText,
-		X
-	} from 'lucide-svelte';
+	import { Send, User, Mail, MessageSquare, Loader2, Paperclip, FileText, X } from 'lucide-svelte';
 	import { toast } from '$lib/stores/toast.svelte';
 	import { sendEmail } from '$lib/services/email.service';
 	import * as m from '$lib/paraglide/messages';

@@ -181,8 +181,12 @@
 										<MessageSquare size={16} />
 									</div>
 									<div>
-										<span class="block text-xs font-bold text-white">{m['contact.open_form']()}</span>
-										<span class="block text-[11px] text-white/60">{m['contact.mobile_drawer_hint']()}</span>
+										<span class="block text-xs font-bold text-white"
+											>{m['contact.open_form']()}</span
+										>
+										<span class="block text-[11px] text-white/60"
+											>{m['contact.mobile_drawer_hint']()}</span
+										>
 									</div>
 								</div>
 								<div
@@ -197,7 +201,7 @@
 			</div>
 
 			<!-- Right Column: Interactive Contact Form Card (Desktop) -->
-			<div class="hidden lg:block lg:col-span-7">
+			<div class="hidden lg:col-span-7 lg:block">
 				<FadeContent blur duration={900} delay={150} threshold={0.15}>
 					<SpotlightCard class="contact-spotlight-card" spotlightColor="rgba(99, 102, 241, 0.15)">
 						<ContactForm />
