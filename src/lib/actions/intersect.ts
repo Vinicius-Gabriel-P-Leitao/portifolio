@@ -1,5 +1,5 @@
 import type { Action } from 'svelte/action';
-import type { Section } from '$lib/stores/navigation.svelte';
+import type { Section } from '$lib/store/navigation.svelte';
 
 export type IntersectOptions = {
 	section?: Section;
@@ -22,7 +22,7 @@ export const intersect: Action<HTMLElement, IntersectOptions> = (node, options =
 			}
 
 			if (section) {
-				import('$lib/stores/navigation.svelte').then(({ navigation }) => {
+				import('$lib/store/navigation.svelte').then(({ navigation }) => {
 					navigation.setActive(section);
 				});
 			}

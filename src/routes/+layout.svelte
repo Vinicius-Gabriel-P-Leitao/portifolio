@@ -14,7 +14,7 @@
 	import Noise from '$lib/components/svelte-bits/Noise.svelte';
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import { scrollState } from '$lib/stores/scroll.svelte';
+	import { scrollState } from '$lib/store/scroll.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	let { children } = $props();
@@ -79,6 +79,22 @@
 			}
 		]
 	});
+
+	/**
+	 * Writes the JSON-LD payload as the script element's textContent.
+	 * Avoids both {@html <string>} (raw-HTML injection) and interpolation
+	 * inside a nested <script> tag's text (which lint tooling that scans
+	 * for <script> boundaries textually fails to associate with `jsonLd`,
+	 * flagging it as unused).
+	 */
+	function bindJsonLd(node: HTMLScriptElement, data: Record<string, unknown>) {
+		node.textContent = JSON.stringify(data);
+		return {
+			update(newData: Record<string, unknown>) {
+				node.textContent = JSON.stringify(newData);
+			}
+		};
+	}
 </script>
 
 <svelte:head>
@@ -97,6 +113,7 @@
 	{#each locales as loc (loc)}
 		<link rel="alternate" hreflang={loc} href={localizeHref(page.url.pathname, { locale: loc })} />
 	{/each}
+
 	<link
 		rel="alternate"
 		hreflang="x-default"
@@ -110,10 +127,7 @@
 	<meta property="og:type" content="profile" />
 	<meta property="og:url" content={page.url.href} />
 	<meta property="og:locale" content={locale === 'pt-br' ? 'pt_BR' : 'en_US'} />
-	<meta
-		property="og:image"
-		content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png"
-	/>
+	<meta property="og:image" content="https://vinicius-gpl.com/static/social/vinicius-gpl.com.png" />
 
 	<!-- Twitter Card Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
@@ -121,17 +135,19 @@
 	<meta name="twitter:description" content={m['site.og_description']()} />
 	<meta
 		name="twitter:image"
-		content="https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/auth-server/main/docs/auth-panel.png"
+		content="https://vinicius-gpl.com/static/social/vinicius-gpl.com.png"
 	/>
 
-	<!-- JSON-LD Structured Data for Google & AI Engines -->
-	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-	{@html '<script type="application/ld+json">' + JSON.stringify(jsonLd) + '</script>'}
+	<!-- JSON-LD Structured Data for Google & AI Engines.
+	     Literal <script> element (not {@html}), content set via the
+	     bindJsonLd action instead of text interpolation — see bindJsonLd
+	     above for why. -->
+	<script type="application/ld+json" use:bindJsonLd={jsonLd}></script>
 </svelte:head>
 
 <!-- Slim Top Scroll Progress Indicator -->
 <div
-	class="pointer-events-none fixed top-0 left-0 z-50 h-[2px] bg-gradient-to-r from-amber-500 via-white to-cyan-500 opacity-80 transition-all duration-500"
+	class="pointer-events-none fixed top-0 left-0 z-50 h-0.5 bg-linear-to-r from-amber-500 via-white to-cyan-500 opacity-80 transition-all duration-500"
 	style="width: {scrollState.progress * 100}%"
 ></div>
 
@@ -142,11 +158,11 @@
 
 <div
 	aria-hidden="true"
-	class="pointer-events-none fixed inset-0 z-[1]"
+	class="pointer-events-none fixed inset-0 z-1"
 	style="background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 20%, #0a0a0a 85%);"
 ></div>
 
-<div aria-hidden="true" class="pointer-events-none fixed inset-0 z-[2]">
+<div aria-hidden="true" class="pointer-events-none fixed inset-0 z-2">
 	<Noise patternAlpha={8} patternRefreshInterval={4} />
 </div>
 

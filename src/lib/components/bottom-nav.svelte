@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Home, FolderOpen, User, Mail } from 'lucide-svelte';
-	import { isMobile } from '$lib/reactive/is-mobile.svelte';
-	import { navigation } from '$lib/stores/navigation.svelte';
-	import type { Section } from '$lib/stores/navigation.svelte';
+	import { isMobile } from '$lib/store/is-mobile.svelte';
+	import { navigation } from '$lib/store/navigation.svelte';
+	import type { Section } from '$lib/store/navigation.svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	const ITEMS = $derived([
