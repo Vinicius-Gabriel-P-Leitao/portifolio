@@ -157,6 +157,22 @@ export const PROJECTS: Project[] = [
 		},
 		tech: ['Rust', 'Tauri v2', 'Svelte 5', 'TypeScript', 'Iroh', 'Tailwind'],
 		github: 'https://github.com/Vinicius-Gabriel-P-Leitao/acerola-desktop',
+		preview:
+			'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-desktop/main/docs/banner/01-home.png',
+		images: [
+			{
+				title: { en: 'Home', 'pt-br': 'Início' },
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-desktop/main/docs/banner/01-home.png'
+			},
+			{
+				title: { en: 'Reader', 'pt-br': 'Leitor' },
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-desktop/main/docs/banner/02-reader.png'
+			},
+			{
+				title: { en: 'History', 'pt-br': 'Histórico' },
+				url: 'https://raw.githubusercontent.com/Vinicius-Gabriel-P-Leitao/acerola-desktop/main/docs/banner/03-history.png'
+			}
+		],
 		highlights: [
 			{
 				title: { en: 'Native Reader', 'pt-br': 'Leitor Nativo' },
